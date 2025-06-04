@@ -56,7 +56,7 @@ data class Food(
 
     @NonNull
     @ColumnInfo(name = "Kalorie")
-    val calories: Float,
+        val calories: Int,
 
     @NonNull
     @ColumnInfo(name = "Jednoduchy_popis")
@@ -85,7 +85,7 @@ data class FoodStuff(
 
     @NonNull
     @ColumnInfo(name = "Id_jedlo")
-    val Id_jedlo: Int,
+    val food: Int,
 
     @NonNull
     @ColumnInfo(name = "Surovina")
@@ -93,7 +93,7 @@ data class FoodStuff(
 
     @NonNull
     @ColumnInfo(name = "Mnozstvo")
-    val quantity: Float,
+    val quantity: Double,
 
     @NonNull
     @ColumnInfo(name = "Jednotka")

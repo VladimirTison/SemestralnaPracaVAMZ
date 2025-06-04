@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val db = AppDatabase.getInstance(applicationContext)
-        DatabaseInitializer.initFoodTypes(db)
+        DatabaseInitializer.initFoodTypes(applicationContext, db)
         setContent {
             VAMZ_TisonTheme {
                 MainScreen()

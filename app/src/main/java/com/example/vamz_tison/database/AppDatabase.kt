@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
         ListItems::class,
         FavoriteFood::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -52,8 +52,8 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "vamz_tison_db_v2" // zmenený názov databázy = čistý štart
                 )
-                    .addCallback(callback)
                     .fallbackToDestructiveMigration()
+                    .addCallback(callback)
                     .build()
 
                 instance.openHelper.writableDatabase
