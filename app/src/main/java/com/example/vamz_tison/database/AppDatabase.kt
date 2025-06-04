@@ -39,8 +39,6 @@ abstract class AppDatabase : RoomDatabase() {
                 val callback = object : RoomDatabase.Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
-
-                        // Spustíme insert iba pri vytvorení databázy
                         CoroutineScope(Dispatchers.IO).launch {
                             INSTANCE?.let { insertInitialData(it) }
                         }
