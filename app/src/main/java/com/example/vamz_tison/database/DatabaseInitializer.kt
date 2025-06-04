@@ -40,7 +40,7 @@ object DatabaseInitializer {
                             preparingTime = 10,
                             portions = 5,
                             calories = 90,
-                            description = "Talianska paradajková polievka si zaslúži miesto na stole pre svoju jednoduchosť, výraznú chuť z čerstvých surovín a schopnosť zahriať aj potešiť ako ľahké, no plnohodnotné jedlo.",
+                            description = "Talianska paradajková polievka si zaslúži miesto na stole pre svoju jednoduchosť, výraznú chuť z čerstvých surovín.",
                             image = imageBytes
                         )
                     )

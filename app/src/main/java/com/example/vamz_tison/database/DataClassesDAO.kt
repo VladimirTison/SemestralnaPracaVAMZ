@@ -20,6 +20,13 @@ interface FoodDao {
 
     @Query("""
         SELECT * FROM food
+        WHERE id = :id
+        ORDER BY Meno_jedla ASC
+    """)
+    fun getByFoodId(id: Int): Flow<List<Food>>
+
+    @Query("""
+        SELECT * FROM food
         WHERE Meno_jedla LIKE '%' || :substring || '%'
         ORDER BY Meno_jedla ASC
     """)
@@ -60,6 +67,15 @@ interface FoodStuffDao {
         ORDER BY Surovina ASC
     """)
     fun getAllDistinctIngredients(): Flow<List<String>>
+
+    @Query("""
+    SELECT *
+    FROM foodStuff
+    WHERE id_jedlo = :foodId
+    ORDER BY Surovina ASC
+""")
+    fun getAllDistinctIngredientsByFoodId(foodId: Int): Flow<List<FoodStuff>>
+
 }
 
 @Dao

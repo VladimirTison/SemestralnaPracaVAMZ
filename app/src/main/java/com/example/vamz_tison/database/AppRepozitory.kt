@@ -1,5 +1,6 @@
 package com.example.vamz_tison.database
 
+import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 class AppRepository(private val database: AppDatabase) {
@@ -7,6 +8,10 @@ class AppRepository(private val database: AppDatabase) {
     // --- FoodDao methods ---
     fun insertFoods(vararg foods: Food) {
         database.foodDao().insert(*foods)
+    }
+
+    fun getFoodsById(id: Int): Flow<List<Food>> {
+        return database.foodDao().getByFoodId(id)
     }
 
     fun deleteFood(food: Food) {
@@ -39,10 +44,9 @@ class AppRepository(private val database: AppDatabase) {
         return database.foodStuffDao().getFoodsByIngredients(ingredients, ingredientCount)
     }
 
-    fun getAllDistinctIngredients(): Flow<List<String>> {
-        return database.foodStuffDao().getAllDistinctIngredients()
+    fun getAllDistinctIngredientsByFoodId(id: Int): Flow<List<FoodStuff>> {
+        return database.foodStuffDao().getAllDistinctIngredientsByFoodId(id)
     }
-
 
     // --- ProcessDao methods ---
     fun insertProcessSteps(vararg steps: FoodProcess) {

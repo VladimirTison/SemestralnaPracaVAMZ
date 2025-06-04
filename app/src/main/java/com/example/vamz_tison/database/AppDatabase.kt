@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
         ListItems::class,
         FavoriteFood::class
     ],
-    version = 4,
+    version = 6,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
