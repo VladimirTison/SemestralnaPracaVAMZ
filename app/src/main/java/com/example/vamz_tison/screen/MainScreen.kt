@@ -1,4 +1,4 @@
-package screen
+package com.example.vamz_tison.screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -6,7 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import components.BottomMenuBar
+import com.example.vamz_tison.components.BottomMenuBar
 import screens.HomeScreen
 
 @Composable

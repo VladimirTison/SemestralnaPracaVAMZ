@@ -1,4 +1,4 @@
-package database
+package com.example.vamz_tison.database
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
@@ -7,8 +7,30 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-//tabulka jedlo
-@Entity(tableName = "food")
+// TABUĽKA: druhy jedla
+@Entity(tableName = "food_type")
+data class FoodType(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+
+    @NonNull
+    @ColumnInfo(name = "type_name")
+    val name: String
+)
+
+// TABUĽKA: jedlo
+@Entity(
+    tableName = "food",
+    foreignKeys = [
+        ForeignKey(
+            entity = FoodType::class,
+            parentColumns = ["id"],
+            childColumns = ["type_id"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ],
+    indices = [Index(value = ["type_id"])]
+)
 data class Food(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
@@ -17,9 +39,8 @@ data class Food(
     @ColumnInfo(name = "Meno_jedla")
     val name: String,
 
-    @NonNull
-    @ColumnInfo(name = "Kategoria")
-    val category: String,
+    @ColumnInfo(name = "type_id")
+    val typeId: Int,
 
     @NonNull
     @ColumnInfo(name = "Cas_varenia")
@@ -45,7 +66,7 @@ data class Food(
     val image: ByteArray? = null
 )
 
-//tabulka jedlo-surovina
+// TABUĽKA: jedlo–surovina
 @Entity(
     tableName = "foodStuff",
     foreignKeys = [
@@ -56,7 +77,7 @@ data class Food(
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [ Index(value = ["Id_jedlo"]) ]
+    indices = [Index(value = ["Id_jedlo"])]
 )
 data class FoodStuff(
     @PrimaryKey(autoGenerate = true)
@@ -79,7 +100,7 @@ data class FoodStuff(
     val unit: String
 )
 
-//tabulka jedlo-postup
+// TABUĽKA: kroky postupu pre recept (FoodProcess)
 @Entity(
     tableName = "process",
     foreignKeys = [
@@ -90,9 +111,9 @@ data class FoodStuff(
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [ Index(value = ["Id_jedlo"]) ]
+    indices = [Index(value = ["Id_jedlo"])]
 )
-data class Process(
+data class FoodProcess(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
@@ -106,10 +127,10 @@ data class Process(
 
     @NonNull
     @ColumnInfo(name = "Krok")
-    val step: Int,
+    val step: Int
 )
 
-//oblubene jedlo
+// TABUĽKA: obľúbené jedlo
 @Entity(
     tableName = "favoritefood",
     foreignKeys = [
@@ -120,7 +141,7 @@ data class Process(
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [ Index(value = ["Id_jedlo"]) ]
+    indices = [Index(value = ["Id_jedlo"])]
 )
 data class FavoriteFood(
     @PrimaryKey(autoGenerate = true)
@@ -131,30 +152,28 @@ data class FavoriteFood(
     val food: Int
 )
 
-//tabulka jedlo
+// TABUĽKA: nákupný zoznam
 @Entity(tableName = "list")
-data class List(
+data class ShoppingList(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
     @NonNull
     @ColumnInfo(name = "Meno_zoznamu")
-    val name: String,
+    val name: String
 )
 
-//položky zoznamu
+// TABUĽKA: položky v nákupnom zozname
 @Entity(
     tableName = "items",
-
     foreignKeys = [
         ForeignKey(
-            entity = List::class,
+            entity = ShoppingList::class,
             parentColumns = ["id"],
             childColumns = ["Id_zoznamu"],
             onDelete = ForeignKey.CASCADE
         )
     ],
-
     indices = [Index(value = ["Id_zoznamu"])]
 )
 data class ListItems(
@@ -171,5 +190,5 @@ data class ListItems(
 
     @NonNull
     @ColumnInfo(name = "Stav")
-    val state: Int
+    val activestate: Boolean
 )

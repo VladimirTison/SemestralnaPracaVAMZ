@@ -1,4 +1,4 @@
-package components
+package com.example.vamz_tison.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

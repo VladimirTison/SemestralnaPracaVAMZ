@@ -12,12 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.vamz_tison.ui.theme.VAMZ_TisonTheme
-import components.BottomMenuBar
-import screen.MainScreen
+import com.example.vamz_tison.components.BottomMenuBar
+import com.example.vamz_tison.database.AppDatabase
+import com.example.vamz_tison.database.FoodType
+import com.example.vamz_tison.screen.MainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val db = AppDatabase.getInstance(this)
+
         setContent {
             VAMZ_TisonTheme {
                 MainScreen()
