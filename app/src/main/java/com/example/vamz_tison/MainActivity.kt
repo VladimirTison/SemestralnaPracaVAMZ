@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.vamz_tison.ui.theme.VAMZ_TisonTheme
 import com.example.vamz_tison.components.BottomMenuBar
 import com.example.vamz_tison.database.AppDatabase
+import com.example.vamz_tison.database.AppRepository
 import com.example.vamz_tison.database.FoodType
 import com.example.vamz_tison.screen.MainScreen
 import kotlinx.coroutines.CoroutineScope
@@ -28,9 +29,10 @@ class MainActivity : ComponentActivity() {
 
         val db = AppDatabase.getInstance(applicationContext)
         DatabaseInitializer.initFoodTypes(applicationContext, db)
+        val repository = AppRepository(db)
         setContent {
             VAMZ_TisonTheme {
-                MainScreen()
+                MainScreen(repository = repository)
             }
         }
     }

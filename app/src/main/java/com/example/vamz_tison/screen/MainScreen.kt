@@ -1,5 +1,6 @@
 package com.example.vamz_tison.screen
 
+import RecipeImageScreen
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -7,11 +8,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.vamz_tison.components.BottomMenuBar
+import com.example.vamz_tison.database.AppRepository
+import com.example.vamz_tison.viewmodel.RecipeDetailViewModel
 import screens.HomeScreen
 
 @Composable
-fun MainScreen() {
+fun MainScreen(repository: AppRepository) {
     var selectedScreen by remember { mutableStateOf("home") }
+
+    // ✅ Tu vytvoríme ViewModel raz a potom ho používame
+    val recipeDetailViewModel = remember {
+        RecipeDetailViewModel(repository)
+    }
 
     Scaffold(
         bottomBar = {
@@ -31,7 +39,12 @@ fun MainScreen() {
                 "explore" -> Text("Objavovanie", modifier = Modifier.padding(16.dp))
                 "cart" -> Text("Košík", modifier = Modifier.padding(16.dp))
                 "favorites" -> Text("Obľúbené recepty", modifier = Modifier.padding(16.dp))
-                "profile" -> Text("Nastavenia používateľa", modifier = Modifier.padding(16.dp))
+                "profile" -> {
+                    RecipeImageScreen(
+                        id = 1,
+                        viewModel = recipeDetailViewModel
+                    )
+                }
             }
         }
     }
