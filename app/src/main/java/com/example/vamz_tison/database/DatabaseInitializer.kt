@@ -23,14 +23,21 @@ object DatabaseInitializer {
                     db.foodTypeDao().insert(FoodType(name = "Dezert"))
                     db.foodTypeDao().insert(FoodType(name = "Príloha"))
 
-                    val bitmap =
-                        BitmapFactory.decodeResource(
-                            context.resources,
-                            R.drawable.paradajkovapolievka
-                        )
-                    val stream = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-                    val imageBytes = stream.toByteArray()
+                    val bitmap = BitmapFactory.decodeResource(
+                        context.resources,
+                        R.drawable.paradajkovapolievka
+                    )
+
+                    var quality = 90
+                    var byteArray: ByteArray
+
+                    do {
+                        val stream = ByteArrayOutputStream()
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)
+                        byteArray = stream.toByteArray()
+                        quality -= 5
+                    } while (byteArray.size > 500_000 && quality > 10)
+
 
                     db.foodDao().insert(
                         Food(
@@ -41,7 +48,7 @@ object DatabaseInitializer {
                             portions = 5,
                             calories = 90,
                             description = "Talianska paradajková polievka si zaslúži miesto na stole pre svoju jednoduchosť, výraznú chuť z čerstvých surovín.",
-                            image = imageBytes
+                            image = byteArray
                         )
                     )
 
