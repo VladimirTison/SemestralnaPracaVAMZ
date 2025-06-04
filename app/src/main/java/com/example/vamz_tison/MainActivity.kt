@@ -1,6 +1,8 @@
 package com.example.vamz_tison
 
+import com.example.vamz_tison.database.DatabaseInitializer
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -16,12 +18,16 @@ import com.example.vamz_tison.components.BottomMenuBar
 import com.example.vamz_tison.database.AppDatabase
 import com.example.vamz_tison.database.FoodType
 import com.example.vamz_tison.screen.MainScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val db = AppDatabase.getInstance(this)
 
+        val db = AppDatabase.getInstance(applicationContext)
+        DatabaseInitializer.initFoodTypes(db)
         setContent {
             VAMZ_TisonTheme {
                 MainScreen()

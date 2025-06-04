@@ -1,9 +1,7 @@
 package com.example.vamz_tison.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +17,7 @@ import kotlinx.coroutines.launch
         ListItems::class,
         FavoriteFood::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -33,23 +31,44 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun favoriteFoodDao(): FavoriteFoodDao
 
     companion object {
-        @Volatile private var INSTANCE: AppDatabase? = null
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
+                val callback = object : RoomDatabase.Callback() {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
+
+                        // Spustíme insert iba pri vytvorení databázy
+                        CoroutineScope(Dispatchers.IO).launch {
+                            INSTANCE?.let { insertInitialData(it) }
+                        }
+                    }
+                }
+
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "vamz_tison_db"
+                    "vamz_tison_db_v2" // zmenený názov databázy = čistý štart
                 )
+                    .addCallback(callback)
+                    .fallbackToDestructiveMigration()
                     .build()
 
-                // *** Dôležitá časť: otvoríme databázu hneď, aby sa vygeneroval súbor + vytvorili tabuľky ***
                 instance.openHelper.writableDatabase
-
                 INSTANCE = instance
                 instance
             }
+        }
+
+        private suspend fun insertInitialData(db: AppDatabase) {
+            // Preddefinované dáta
+            db.foodTypeDao().insert(FoodType(name = "Polievka"))
+            db.foodTypeDao().insert(FoodType(name = "Predjedlo"))
+            db.foodTypeDao().insert(FoodType(name = "Hlavné jedlo"))
+            db.foodTypeDao().insert(FoodType(name = "Dezert"))
+            db.foodTypeDao().insert(FoodType(name = "Príloha"))
         }
     }
 }
