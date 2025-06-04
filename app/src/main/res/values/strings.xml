@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">VAMZ_Tison</string>
+    <string name="BottomMenuDomov">Domov</string>
+    <string name="BottomMenuIconDomov">Domov</string>
+    <string name="BottomMenuKosik">Košík</string>
+    <string name="BottomMenuOblubene">Obľúbené</string>
+    <string name="BottomMenuProfil">Profil</string>
+</resources>
