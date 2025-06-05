@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.example.vamz_tison.components.BottomMenuBar
 import com.example.vamz_tison.database.AppRepository
 import com.example.vamz_tison.viewmodel.RecipeDetailViewModel
+import com.example.vamz_tison.viewmodel.ShoppingListViewModel
 import screens.HomeScreen
 
 @Composable
@@ -18,6 +19,9 @@ fun MainScreen(repository: AppRepository) {
 
     val recipeDetailViewModel = remember {
         RecipeDetailViewModel(repository)
+    }
+    val shoppingListViewModel = remember {
+        ShoppingListViewModel(repository)
     }
 
     Scaffold(
@@ -36,7 +40,11 @@ fun MainScreen(repository: AppRepository) {
             when (selectedScreen) {
                 "home" -> HomeScreen()
                 "explore" -> Text("Objavovanie", modifier = Modifier.padding(16.dp))
-                "cart" -> Text("Košík", modifier = Modifier.padding(16.dp))
+                "cart" -> {
+                    ShoppingListsScreen(
+                        viewModel = shoppingListViewModel
+                    )
+                }
                 "favorites" -> Text("Obľúbené recepty", modifier = Modifier.padding(16.dp))
                 "profile" -> {
                     RecipeImageScreen(

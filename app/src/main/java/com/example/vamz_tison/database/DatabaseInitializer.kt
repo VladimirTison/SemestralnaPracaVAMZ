@@ -22,6 +22,7 @@ object DatabaseInitializer {
                     db.foodTypeDao().insert(FoodType(name = "Hlavné jedlo"))
                     db.foodTypeDao().insert(FoodType(name = "Dezert"))
                     db.foodTypeDao().insert(FoodType(name = "Príloha"))
+                    db.shoppingListDao().insert(ShoppingList(name = "Testovaci"))
 
                     val bitmap = BitmapFactory.decodeResource(
                         context.resources,

@@ -115,7 +115,7 @@ interface ShoppingListDao {
 
     @Query("""
         SELECT 
-            items.Id_zoznamu,
+            items.Id_zoznamu AS food_id,
             SUM(CASE WHEN stav = 1 THEN 1 ELSE 0 END) AS bought_count,
             COUNT(*) AS total_count
         FROM items

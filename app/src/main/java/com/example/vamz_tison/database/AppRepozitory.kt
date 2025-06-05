@@ -68,8 +68,8 @@ class AppRepository(private val database: AppDatabase) {
 
 
     // --- ShoppingListDao methods ---
-    fun insertShoppingLists(vararg lists: ShoppingList) {
-        database.shoppingListDao().insert(*lists)
+    fun insertShoppingLists(vararg list: ShoppingList) {
+        database.shoppingListDao().insert(*list)
     }
 
     fun deleteShoppingList(list: ShoppingList) {

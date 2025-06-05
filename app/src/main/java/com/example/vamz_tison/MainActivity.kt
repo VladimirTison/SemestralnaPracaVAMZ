@@ -13,11 +13,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
 import com.example.vamz_tison.ui.theme.VAMZ_TisonTheme
 import com.example.vamz_tison.components.BottomMenuBar
 import com.example.vamz_tison.database.AppDatabase
 import com.example.vamz_tison.database.AppRepository
 import com.example.vamz_tison.database.FoodType
+import com.example.vamz_tison.database.ShoppingList
 import com.example.vamz_tison.screen.MainScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +32,7 @@ class MainActivity : ComponentActivity() {
         val db = AppDatabase.getInstance(applicationContext)
         DatabaseInitializer.initFoodTypes(applicationContext, db)
         val repository = AppRepository(db)
+
         setContent {
             VAMZ_TisonTheme {
                 MainScreen(repository = repository)

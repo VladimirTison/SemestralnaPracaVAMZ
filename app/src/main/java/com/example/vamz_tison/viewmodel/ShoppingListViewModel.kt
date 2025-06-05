@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.vamz_tison.database.AppRepository
 import com.example.vamz_tison.database.FoodItemStats
 import com.example.vamz_tison.database.ShoppingList
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -46,18 +48,24 @@ class ShoppingListViewModel(
         }
     }
 
-
     fun addShoppingList(list: ShoppingList) {
-        viewModelScope.launch {
-            if (list.name.isNotBlank()) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
                 repository.insertShoppingLists(list)
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
 
+
     fun deleteShoppingList(list: ShoppingList) {
-        viewModelScope.launch {
-            repository.deleteShoppingList(list)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                repository.deleteShoppingList(list)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

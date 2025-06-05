@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
         ListItems::class,
         FavoriteFood::class
     ],
-    version = 9,
+    version = 10,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -36,37 +36,19 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
-                val callback = object : RoomDatabase.Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                        CoroutineScope(Dispatchers.IO).launch {
-                            INSTANCE?.let { insertInitialData(it) }
-                        }
-                    }
-                }
 
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "vamz_tison_db_v2" // zmenený názov databázy = čistý štart
+                    "vamz_tison_db_v2"
                 )
                     .fallbackToDestructiveMigration()
-                    .addCallback(callback)
                     .build()
 
                 instance.openHelper.writableDatabase
                 INSTANCE = instance
                 instance
             }
-        }
-
-        private suspend fun insertInitialData(db: AppDatabase) {
-            // Preddefinované dáta
-            db.foodTypeDao().insert(FoodType(name = "Polievka"))
-            db.foodTypeDao().insert(FoodType(name = "Predjedlo"))
-            db.foodTypeDao().insert(FoodType(name = "Hlavné jedlo"))
-            db.foodTypeDao().insert(FoodType(name = "Dezert"))
-            db.foodTypeDao().insert(FoodType(name = "Príloha"))
         }
     }
 }
