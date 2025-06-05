@@ -121,4 +121,8 @@ class AppRepository(private val database: AppDatabase) {
     fun getAllFavoriteFoods(): Flow<List<FavoriteFood>> {
         return database.favoriteFoodDao().getAll()
     }
+
+    fun getFoodItemStats(): Flow<List<FoodItemStats>> {
+        return database.shoppingListDao().getFoodItemStats()
+    }
 }

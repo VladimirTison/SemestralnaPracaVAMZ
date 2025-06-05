@@ -192,3 +192,10 @@ data class ListItems(
     @ColumnInfo(name = "Stav")
     val activestate: Boolean
 )
+
+data class FoodItemStats(
+    val food_id: Int,
+    val bought_count: Int,
+    val total_count: Int
+)
+

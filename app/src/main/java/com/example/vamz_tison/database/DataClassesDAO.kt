@@ -112,6 +112,16 @@ interface ShoppingListDao {
 
     @Query("SELECT * FROM `list` ORDER BY Meno_zoznamu ASC")
     fun getAll(): Flow<List<ShoppingList>>
+
+    @Query("""
+        SELECT 
+            items.Id_zoznamu,
+            SUM(CASE WHEN stav = 1 THEN 1 ELSE 0 END) AS bought_count,
+            COUNT(*) AS total_count
+        FROM items
+        GROUP BY Id_zoznamu
+    """)
+    fun getFoodItemStats(): Flow<List<FoodItemStats>>
 }
 
 @Dao
@@ -155,3 +165,7 @@ interface FavoriteFoodDao {
     @Query("SELECT * FROM favoritefood ORDER BY Id_jedlo ASC")
     fun getAll(): Flow<List<FavoriteFood>>
 }
+
+
+
+
