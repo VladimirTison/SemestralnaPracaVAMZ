@@ -157,7 +157,46 @@ fun RecipeImageScreen(
                         Divider(color = Color(0xFFDDDDDD), thickness = 1.dp)
                     }
                 }
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Text(
+                    text = "Ako postupovať...",
+                    color = Color(0xFF6A3A00),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 32.sp // 2x väčšie ako 16
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                uiState.process.sortedBy { it.step }.forEach { step ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically // zarovná číslo do stredu popisu
+                    ) {
+                        Text(
+                            text = String.format("%02d", step.step),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 18.sp,
+                            color = Color(0xFFC58A42), // svetlo hnedá
+                            modifier = Modifier
+                                .width(40.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = step.description,
+                            fontSize = 16.sp, // jemne väčší text
+                            fontWeight = FontWeight.Medium,
+                            color = Color(0xFF2B2D30),
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+
             }
+
+
         }
     }
 }
