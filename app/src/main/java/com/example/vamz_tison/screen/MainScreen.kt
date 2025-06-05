@@ -4,8 +4,8 @@ import RecipeImageScreen
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.vamz_tison.components.BottomMenuBar
 import com.example.vamz_tison.database.AppRepository
@@ -14,9 +14,8 @@ import screens.HomeScreen
 
 @Composable
 fun MainScreen(repository: AppRepository) {
-    var selectedScreen by remember { mutableStateOf("home") }
+    var selectedScreen by rememberSaveable { mutableStateOf("home") }
 
-    // ✅ Tu vytvoríme ViewModel raz a potom ho používame
     val recipeDetailViewModel = remember {
         RecipeDetailViewModel(repository)
     }
