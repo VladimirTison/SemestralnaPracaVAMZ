@@ -137,20 +137,20 @@ data class FoodProcess(
         ForeignKey(
             entity = Food::class,
             parentColumns = ["id"],
-            childColumns = ["Id_jedlo"],
+            childColumns = ["jedlo"],
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [Index(value = ["Id_jedlo"])]
+    indices = [Index(value = ["jedlo"])]
 )
 data class FavoriteFood(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
 
-    @NonNull
-    @ColumnInfo(name = "Id_jedlo")
+    @ColumnInfo(name = "jedlo")
     val food: Int
 )
+
+
 
 // TABUĽKA: nákupný zoznam
 @Entity(tableName = "list")

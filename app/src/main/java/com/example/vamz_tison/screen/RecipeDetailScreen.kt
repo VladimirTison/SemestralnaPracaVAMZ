@@ -5,7 +5,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
+import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -49,22 +52,68 @@ fun RecipeImageScreen(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        // OBRAZOK
-        bitmap?.let {
-            Image(
-                bitmap = it.asImageBitmap(),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
+        // titulny obrazok
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(300.dp)
+        ) {
+            bitmap?.let {
+                Image(
+                    bitmap = it.asImageBitmap(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            // tlacidlo oblubene
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(300.dp)
-            )
+            ) {
+                // OBRAZOK
+                bitmap?.let {
+                    Image(
+                        bitmap = it.asImageBitmap(),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
+                }
+
+                // like
+                IconButton(
+                    onClick = { viewModel.toggleFavorite() },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(12.dp)
+                        .size(60.dp)
+                        .background(
+                            color = Color.White.copy(alpha = 0.8f),
+                            shape = RoundedCornerShape(50)
+                        )
+                ) {
+                    Image(
+                        painter = painterResource(
+                            id = if (uiState.favoriteFood != null) R.drawable.like else R.drawable.unlike
+                        ),
+                        contentDescription = "Obľúbené",
+                        modifier = Modifier.size(30.dp)
+                    )
+                }
+            }
+
         }
 
-        // BIELY OBSAHOVÝ BOX
+
+        // cely blok  bOX
         Surface(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
             color = Color.White,
             shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
             elevation = 8.dp
@@ -129,7 +178,7 @@ fun RecipeImageScreen(
                     text = "Budeme potrebovať...",
                     color = Color(0xFF6A3A00),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp
+                    fontSize = 27.sp
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -163,7 +212,7 @@ fun RecipeImageScreen(
                     text = "Ako postupovať...",
                     color = Color(0xFF6A3A00),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 32.sp // 2x väčšie ako 16
+                    fontSize = 27.sp
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -173,20 +222,20 @@ fun RecipeImageScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 8.dp),
-                        verticalAlignment = Alignment.CenterVertically // zarovná číslo do stredu popisu
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
                             text = String.format("%02d", step.step),
                             fontWeight = FontWeight.Bold,
-                            fontSize = 18.sp,
-                            color = Color(0xFFC58A42), // svetlo hnedá
+                            fontSize = 30.sp,
+                            color = Color(0xFFC58A42),
                             modifier = Modifier
                                 .width(40.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = step.description,
-                            fontSize = 16.sp, // jemne väčší text
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Medium,
                             color = Color(0xFF2B2D30),
                             modifier = Modifier.weight(1f)
@@ -201,24 +250,27 @@ fun RecipeImageScreen(
     }
 }
 
-@Composable
-fun StatColumn(iconName: String, text: String) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(
-            painter = painterResource(id = when (iconName) {
-                "cookingtime" -> R.drawable.cookingtime
-                "bake" -> R.drawable.bake
-                "portion" -> R.drawable.portion
-                else -> R.drawable.caloriescalculator
-            }),
-            contentDescription = null,
-            modifier = Modifier.size(24.dp)
-        )
-        Text(
-            text = text,
-            color = Color(0xFF6A3A00),
-            fontWeight = FontWeight.Bold,
-            fontSize = 14.sp
-        )
+    @Composable
+    fun StatColumn(iconName: String, text: String) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(
+                    id = when (iconName) {
+                        "cookingtime" -> R.drawable.cookingtime
+                        "bake" -> R.drawable.bake
+                        "portion" -> R.drawable.portion
+                        else -> R.drawable.caloriescalculator
+                    }
+                ),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
+            )
+            Text(
+                text = text,
+                color = Color(0xFF6A3A00),
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp
+            )
+        }
     }
-}
+

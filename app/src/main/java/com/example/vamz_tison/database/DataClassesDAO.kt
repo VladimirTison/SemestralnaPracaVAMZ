@@ -11,14 +11,14 @@ interface FoodDao {
 
     @Delete
     fun deleteById(food : Food)
-
+/*
     @Query("""
         SELECT * FROM food
         WHERE type_id = :typeId
         ORDER BY Meno_jedla ASC
     """)
     fun getByType(typeId: Int): Flow<List<Food>>
-
+*/
     @Query("""
     SELECT food_type.type_name FROM food
     JOIN food_type ON food_type.id = food.type_id
@@ -169,8 +169,11 @@ interface FavoriteFoodDao {
     @Delete
     fun delete(favorite: FavoriteFood)
 
-    @Query("SELECT * FROM favoritefood ORDER BY Id_jedlo ASC")
+    @Query("SELECT * FROM favoritefood ORDER BY jedlo ASC")
     fun getAll(): Flow<List<FavoriteFood>>
+
+    @Query("SELECT * FROM favoritefood WHERE jedlo = :foodId LIMIT 1")
+    fun observeFavoriteByFoodId(foodId: Int): Flow<FavoriteFood?>
 }
 
 
