@@ -1,10 +1,14 @@
 package com.example.vamz_tison.viewmodel
 
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.example.vamz_tison.database.AppRepository
 import com.example.vamz_tison.database.FoodItemStats
 import com.example.vamz_tison.database.ShoppingList
+import com.example.vamz_tison.screen.ShoppingListsScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +26,7 @@ data class ShoppingListsUiState(
 )
 
 class ShoppingListViewModel(
-    private val repository: AppRepository
+    val repository: AppRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ShoppingListsUiState())

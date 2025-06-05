@@ -1,6 +1,7 @@
 package com.example.vamz_tison.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -10,22 +11,40 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.vamz_tison.database.AppDatabase
+import com.example.vamz_tison.database.AppRepository
 import com.example.vamz_tison.database.ShoppingList
+import com.example.vamz_tison.viewmodel.ShoppingListDetailViewModel
 import com.example.vamz_tison.viewmodel.ShoppingListViewModel
 
 @Composable
-fun ShoppingListsScreen(viewModel: ShoppingListViewModel = viewModel()) {
+fun ShoppingListsScreen(
+    viewModel: ShoppingListViewModel = viewModel()
+) {
     val uiState by viewModel.uiState.collectAsState()
-    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
     var showDialog by remember { mutableStateOf(false) }
     var newListTitle by remember { mutableStateOf("") }
+    var selectedListId by rememberSaveable { mutableStateOf<Int?>(null) }
+    selectedListId?.let { id ->
+        val detailViewModel = remember {
+            ShoppingListDetailViewModel(repository = viewModel.repository)
+        }
+        ShoppingListDetailScreen(
+            listId = id,
+            viewModel = detailViewModel,
+            onClose = { selectedListId = null }
+        )
+        return
+    }
 
     Scaffold(
         floatingActionButton = {
@@ -95,7 +114,10 @@ fun ShoppingListsScreen(viewModel: ShoppingListViewModel = viewModel()) {
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 16.dp, vertical = 8.dp),
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                                .clickable {
+                                    selectedListId = list.id
+                                },
                             elevation = 6.dp,
                             shape = RoundedCornerShape(12.dp)
                         ) {

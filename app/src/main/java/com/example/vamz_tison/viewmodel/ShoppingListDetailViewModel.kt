@@ -61,7 +61,7 @@ class ShoppingListDetailViewModel(
     }
 
     fun updateItemState(item: ListItems, newState: Boolean) {
-        viewModelScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val updatedItem = item.copy(activestate = newState)
                 repository.updateListItem(updatedItem)
