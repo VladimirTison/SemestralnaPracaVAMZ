@@ -6,6 +6,7 @@ import com.example.vamz_tison.database.AppRepository
 import com.example.vamz_tison.database.Food
 import com.example.vamz_tison.database.FoodProcess
 import com.example.vamz_tison.database.FoodStuff
+import com.example.vamz_tison.database.FoodType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +18,8 @@ import kotlinx.coroutines.launch
 data class RecipeDetailUiState(
     val food: Food? = null,
     val ingredients: List<FoodStuff> = emptyList(),
-    val process: List<FoodProcess> = emptyList()
+    val process: List<FoodProcess> = emptyList(),
+    val category: String = ""
 )
 
 
@@ -32,14 +34,16 @@ class RecipeDetailViewModel(
             combine(
                 repository.getFoodsById(id).map { it.firstOrNull() },
                 repository.getAllDistinctIngredientsByFoodId(id),
-                repository.getProcessByFoodId(id)
-            ) { food, ingredients, process ->
+                repository.getProcessByFoodId(id),
+                repository.getNameType(id)
+            ) { food: Food?, ingredients: List<FoodStuff>, process: List<FoodProcess>, category: String ->
                 RecipeDetailUiState(
                     food = food,
                     ingredients = ingredients,
-                    process = process
+                    process = process,
+                    category = category
                 )
-            }.collect { state ->
+            }.collect { state: RecipeDetailUiState ->
                 _uiState.value = state
             }
         }

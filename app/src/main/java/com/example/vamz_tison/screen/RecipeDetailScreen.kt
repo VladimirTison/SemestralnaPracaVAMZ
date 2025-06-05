@@ -71,7 +71,7 @@ fun RecipeImageScreen(
         ) {
             Column(modifier = Modifier.padding(24.dp)) {
                 Text(
-                    text = "Dezerty",
+                    text = uiState.category,
                     color = Color(0xFFC58A42),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp

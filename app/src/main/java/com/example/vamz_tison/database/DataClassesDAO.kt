@@ -19,6 +19,14 @@ interface FoodDao {
     fun getByType(typeId: Int): Flow<List<Food>>
 
     @Query("""
+    SELECT food_type.type_name FROM food
+    JOIN food_type ON food_type.id = food.type_id
+    WHERE food.id = :id
+""")
+    fun getNameType(id: Int): Flow<String>
+
+
+    @Query("""
         SELECT * FROM food
         WHERE id = :id
         ORDER BY Meno_jedla ASC
@@ -132,6 +140,7 @@ interface FoodTypeDao {
 
     @Query("SELECT * FROM food_type ORDER BY type_name ASC")
     fun getAll(): Flow<List<FoodType>>
+
 }
 
 //Oblubene jedla

@@ -2,12 +2,17 @@ package com.example.vamz_tison.database
 
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
+import kotlin.contracts.Returns
 
 class AppRepository(private val database: AppDatabase) {
 
     // --- FoodDao methods ---
     fun insertFoods(vararg foods: Food) {
         database.foodDao().insert(*foods)
+    }
+
+    fun getNameType( id: Int):Flow<String> {
+        return database.foodDao().getNameType(id)
     }
 
     fun getFoodsById(id: Int): Flow<List<Food>> {
@@ -102,6 +107,7 @@ class AppRepository(private val database: AppDatabase) {
     fun getAllFoodTypes(): Flow<List<FoodType>> {
         return database.foodTypeDao().getAll()
     }
+
 
     // --- FavoriteFoodDao methods ---
     fun insertFavoriteFoods(vararg favorites: FavoriteFood) {
