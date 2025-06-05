@@ -1,12 +1,14 @@
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,6 +31,7 @@ fun RecipeImageScreen(
     }
 
     val uiState by viewModel.uiState.collectAsState()
+    val scrollState = rememberScrollState()
 
     val bitmap = remember(uiState.food?.image) {
         val byteArray = uiState.food?.image
@@ -41,8 +44,11 @@ fun RecipeImageScreen(
         } else null
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
+    ) {
         // OBRAZOK
         bitmap?.let {
             Image(
@@ -51,15 +57,14 @@ fun RecipeImageScreen(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(300.dp) // výška obrázka ako na návrhu
+                    .height(300.dp)
             )
         }
 
-        // BOX
+        // BIELY OBSAHOVÝ BOX
         Surface(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 260.dp),
+                .fillMaxWidth(),
             color = Color.White,
             shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
             elevation = 8.dp
@@ -71,7 +76,9 @@ fun RecipeImageScreen(
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp
                 )
+
                 Spacer(modifier = Modifier.height(4.dp))
+
                 Text(
                     text = uiState.food?.name ?: "",
                     color = Color(0xFF6A3A00),
@@ -81,6 +88,7 @@ fun RecipeImageScreen(
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
+
                 Divider(
                     color = Color(0xFF6A3A00),
                     thickness = 2.dp,
@@ -89,68 +97,89 @@ fun RecipeImageScreen(
                         .width(80.dp)
                 )
 
+                Spacer(modifier = Modifier.height(16.dp))
+
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 16.dp),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Image(
-                            painter = painterResource(id = R.drawable.cookingtime),
-                            contentDescription = null,
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Text(
-                            text = "${uiState.food?.cookingTime ?: "-"} min",
-                            color = Color(0xFF6A3A00),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp
-                        )
-                    }
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Image(
-                            painter = painterResource(id = R.drawable.bake),
-                            contentDescription = null,
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Text(
-                            text = "${uiState.food?.preparingTime ?: "-"} min",
-                            color = Color(0xFF6A3A00),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp
-                        )
-                    }
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Image(
-                            painter = painterResource(id = R.drawable.portion),
-                            contentDescription = null,
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Text(
-                            text = "${uiState.food?.portions ?: "-"} porcií",
-                            color = Color(0xFF6A3A00),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp
-                        )
-                    }
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Image(
-                            painter = painterResource(id = R.drawable.caloriescalculator),
-                            contentDescription = null,
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Text(
-                            text = "${uiState.food?.calories ?: "-"} kcal",
-                            color = Color(0xFF6A3A00),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp
-                        )
-                    }
+                    StatColumn("cookingtime", "${uiState.food?.cookingTime ?: "-"} min")
+                    StatColumn("bake", "${uiState.food?.preparingTime ?: "-"} min")
+                    StatColumn("portion", "${uiState.food?.portions ?: "-"} porcií")
+                    StatColumn("caloriescalculator", "${uiState.food?.calories ?: "-"} kcal")
                 }
 
-            }
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp)
+                        .background(color = Color(0xFFF5E9DD), shape = RoundedCornerShape(8.dp))
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        text = uiState.food?.description ?: "",
+                        color = Color(0xFF2B2D30),
+                        fontSize = 14.sp
+                    )
+                }
 
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text(
+                    text = "Budeme potrebovať...",
+                    color = Color(0xFF6A3A00),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                uiState.ingredients.forEach { ingredient ->
+                    Column {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "${ingredient.quantity} ${ingredient.unit}",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 14.sp,
+                                color = Color(0xFF2B2D30)
+                            )
+                            Text(
+                                text = ingredient.stuff,
+                                fontSize = 14.sp,
+                                color = Color(0xFF2B2D30)
+                            )
+                        }
+                        Divider(color = Color(0xFFDDDDDD), thickness = 1.dp)
+                    }
+                }
+            }
         }
+    }
+}
+
+@Composable
+fun StatColumn(iconName: String, text: String) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            painter = painterResource(id = when (iconName) {
+                "cookingtime" -> R.drawable.cookingtime
+                "bake" -> R.drawable.bake
+                "portion" -> R.drawable.portion
+                else -> R.drawable.caloriescalculator
+            }),
+            contentDescription = null,
+            modifier = Modifier.size(24.dp)
+        )
+        Text(
+            text = text,
+            color = Color(0xFF6A3A00),
+            fontWeight = FontWeight.Bold,
+            fontSize = 14.sp
+        )
     }
 }
