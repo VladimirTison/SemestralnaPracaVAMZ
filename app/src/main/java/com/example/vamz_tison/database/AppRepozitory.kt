@@ -1,8 +1,6 @@
 package com.example.vamz_tison.database
 
-import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import kotlin.contracts.Returns
 
 class AppRepository(private val database: AppDatabase) {
 
@@ -23,9 +21,9 @@ class AppRepository(private val database: AppDatabase) {
         database.foodDao().deleteById(food)
     }
 
-    fun getFoodsByType(typeId: Int): Flow<List<Food>> {
+   /* fun getFoodsByType(typeId: Int): Flow<List<Food>> {
         return database.foodDao().getByType(typeId)
-    }
+    }*/
 
     fun searchFoodsByName(substring: String): Flow<List<Food>> {
         return database.foodDao().searchByName(substring)
@@ -72,10 +70,14 @@ class AppRepository(private val database: AppDatabase) {
         database.shoppingListDao().insert(*list)
     }
 
+    fun getShoppingListById(idList: Int): Flow<ShoppingList> {
+        return database.shoppingListDao().getShopingListById(idList)
+    }
+
     fun deleteShoppingList(list: ShoppingList) {
         database.shoppingListDao().delete(list)
     }
-
+;
     fun getAllShoppingLists(): Flow<List<ShoppingList>> {
         return database.shoppingListDao().getAll()
     }
@@ -93,6 +95,11 @@ class AppRepository(private val database: AppDatabase) {
     fun getItemsByListId(listId: Int): Flow<List<ListItems>> {
         return database.listItemsDao().getByListId(listId)
     }
+
+    fun updateListItem(item: ListItems) {
+        database.listItemsDao().update(item)
+    }
+
 
 
     // --- FoodTypeDao methods ---

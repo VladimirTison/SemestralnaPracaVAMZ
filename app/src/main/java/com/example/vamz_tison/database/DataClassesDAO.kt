@@ -1,5 +1,6 @@
 package com.example.vamz_tison.database
 
+import android.content.SharedPreferences
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
@@ -113,6 +114,9 @@ interface ShoppingListDao {
     @Query("SELECT * FROM `list` ORDER BY Meno_zoznamu ASC")
     fun getAll(): Flow<List<ShoppingList>>
 
+    @Query("SELECT * FROM list Where id = :idlist")
+    fun getShopingListById(idlist: Int): Flow<ShoppingList>
+
     @Query("""
         SELECT 
             items.Id_zoznamu AS food_id,
@@ -128,6 +132,9 @@ interface ShoppingListDao {
 interface ListItemsDao {
     @Insert
     fun insert(vararg listItem: ListItems)
+
+    @Update
+    fun update(item: ListItems)
 
     @Delete
     fun delete(listItem: ListItems)
