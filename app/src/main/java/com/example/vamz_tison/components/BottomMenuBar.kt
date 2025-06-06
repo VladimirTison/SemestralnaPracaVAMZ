@@ -30,7 +30,7 @@ fun BottomMenuBar(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp)
+                .height(65.dp)
         ) {
             MenuItem(
                 selected = selected == "home",

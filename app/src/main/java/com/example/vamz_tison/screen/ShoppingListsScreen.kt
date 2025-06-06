@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -70,15 +71,17 @@ fun ShoppingListsScreen(
                         shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp)
                     )
                     .padding(
-                        top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() + 12.dp,
+                        top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() + 16.dp,
                         start = 16.dp,
-                        bottom = 20.dp
+                        end = 16.dp,
+                        bottom = 24.dp
                     )
             ) {
                 Text(
                     text = "Nákupné zoznamy",
                     fontSize = 28.sp,
-                    color = Color.White
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold
                 )
             }
 

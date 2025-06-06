@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vamz_tison.components.BottomMenuBar
+import com.example.vamz_tison.components.FooterSection
 import com.example.vamz_tison.database.AppRepository
 import com.example.vamz_tison.viewmodel.AllRecipiesViewModel
 import com.example.vamz_tison.viewmodel.FavoritesViewModel

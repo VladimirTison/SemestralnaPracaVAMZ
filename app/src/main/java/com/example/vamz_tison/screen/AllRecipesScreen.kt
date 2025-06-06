@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
+import com.example.vamz_tison.components.FooterSection
 import com.example.vamz_tison.viewmodel.AllRecipiesViewModel
 import com.example.vamz_tison.viewmodel.RecipeDetailViewModel
 import com.example.vamz_tison.components.RecipeGrid
@@ -270,6 +271,7 @@ fun AllRecipesScreen(
                                 Text("Filtrovať")
                             }
                         }
+
                     }
                 }
             }

@@ -49,8 +49,8 @@ fun ShoppingListDetailScreen(
                         shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp)
                     )
                     .padding(
-                        top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() + 12.dp,
-                        start = 8.dp,
+                        top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() + 16.dp,
+                        start = 16.dp,
                         end = 16.dp,
                         bottom = 24.dp
                     )
