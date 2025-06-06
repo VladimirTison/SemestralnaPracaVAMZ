@@ -8,9 +8,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,6 +70,27 @@ fun RecipeImageScreen(
                     modifier = Modifier.fillMaxSize()
                 )
             }
+
+            //ikonka spat
+            IconButton(
+                onClick = { onBack() },
+                modifier = Modifier
+                    .padding(top = 30.dp, start = 16.dp)
+                    .align(Alignment.TopStart)
+                    .background(
+                        color = Color.White.copy(alpha = 0.8f),
+                        shape = RoundedCornerShape(50)
+                    )
+                    .size(48.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Späť",
+                    tint = Color(0xFF5D3A1A)
+                )
+            }
+
+
 
             // tlacidlo oblubene
             IconButton(

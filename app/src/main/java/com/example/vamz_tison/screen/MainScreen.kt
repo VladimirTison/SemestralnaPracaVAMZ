@@ -56,10 +56,7 @@ fun MainScreen(repository: AppRepository) {
                         )
                         )
                 "profile" -> {
-                    RecipeImageScreen(
-                        id = 1,
-                        viewModel = recipeDetailViewModel
-                    )
+                    
                 }
             }
         }
