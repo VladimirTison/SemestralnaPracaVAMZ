@@ -12,9 +12,10 @@ import com.example.vamz_tison.components.BottomMenuBar
 import com.example.vamz_tison.database.AppRepository
 import com.example.vamz_tison.viewmodel.AllRecipiesViewModel
 import com.example.vamz_tison.viewmodel.FavoritesViewModel
+import com.example.vamz_tison.viewmodel.HomeUiState
+import com.example.vamz_tison.viewmodel.HomeViewModel
 import com.example.vamz_tison.viewmodel.RecipeDetailViewModel
 import com.example.vamz_tison.viewmodel.ShoppingListViewModel
-import screens.HomeScreen
 
 @Composable
 fun MainScreen(repository: AppRepository) {
@@ -35,6 +36,13 @@ fun MainScreen(repository: AppRepository) {
         AllRecipiesViewModel(repository)
     }
 
+    val homeViewModel = remember {
+        HomeViewModel(repository)
+    }
+
+    var selectedCategoryId by rememberSaveable { mutableStateOf<Int?>(null) }
+
+
     Scaffold(
         bottomBar = {
             BottomMenuBar(
@@ -49,10 +57,18 @@ fun MainScreen(repository: AppRepository) {
                 .padding(padding)
         ) {
             when (selectedScreen) {
-                "home" -> HomeScreen()
+                "home" -> HomeScreen(
+                    viewModel = homeViewModel,
+                    viewModelRecepis = allRecipiesViewModel,
+                    onCategorySelected = { categoryId ->
+                        selectedCategoryId = categoryId
+                        selectedScreen = "explore"
+                    }
+                )
                 "explore" -> {
                     AllRecipesScreen(
-                        viewModel = allRecipiesViewModel
+                        viewModel = allRecipiesViewModel,
+                        selectedCategoryId
                     )
                 }
 
