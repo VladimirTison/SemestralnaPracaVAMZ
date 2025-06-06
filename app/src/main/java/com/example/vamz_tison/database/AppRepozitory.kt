@@ -1,5 +1,7 @@
 package com.example.vamz_tison.database
 
+import androidx.sqlite.db.SimpleSQLiteQuery
+import androidx.sqlite.db.SupportSQLiteQuery
 import kotlinx.coroutines.flow.Flow
 
 class AppRepository(private val database: AppDatabase) {
@@ -48,9 +50,12 @@ class AppRepository(private val database: AppDatabase) {
         database.foodStuffDao().deleteFoodStuff(item)
     }
 
-    fun getFoodsByIngredients(ingredients: List<String>, ingredientCount: Int): Flow<List<Food>> {
-        return database.foodStuffDao().getFoodsByIngredients(ingredients, ingredientCount)
+
+    suspend fun getFoodsByIngredients(ingredients: List<String>, ingredientCount: Int ): Flow<List<FoodView>> {
+        return database.foodDao().getFoodsByIngredients(ingredients, ingredientCount)
     }
+
+
 
     fun getAllDistinctIngredientsByFoodId(id: Int): Flow<List<FoodStuff>> {
         return database.foodStuffDao().getAllDistinctIngredientsByFoodId(id)
@@ -59,6 +64,20 @@ class AppRepository(private val database: AppDatabase) {
     fun getAllDistinctIngredients(): Flow<List<String>> {
         return database.foodStuffDao().getAllDistinctIngredients()
     }
+
+    suspend fun getFoodsByTypeAndIngredients(
+        typeId: Int,
+        ingredients: List<String>,
+        ingredientCount: Int
+    ): Flow<List<FoodView>> {
+        return database.foodDao().getFoodsByTypeAndIngredients(typeId, ingredients, ingredientCount)
+    }
+
+    suspend fun getByType(typeId: Int): Flow<List<FoodView>> {
+        return database.foodDao().getByType(typeId)
+    }
+
+
 
     // --- ProcessDao methods ---
     fun insertProcessSteps(vararg steps: FoodProcess) {

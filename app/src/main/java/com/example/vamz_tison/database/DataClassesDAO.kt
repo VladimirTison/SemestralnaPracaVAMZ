@@ -2,10 +2,55 @@ package com.example.vamz_tison.database
 
 import android.content.SharedPreferences
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FoodDao {
+
+    //novinka - pre ten filter
+    @Query("""
+    SELECT f.id, f.TileImage AS image, f.Meno_jedla AS name, ft.type_name AS category
+    FROM food f
+    JOIN food_type ft ON f.type_id = ft.id
+    JOIN foodStuff fs ON f.id = fs.Id_jedlo
+    WHERE fs.Surovina IN (:ingredients)
+    GROUP BY f.id
+    HAVING COUNT(DISTINCT fs.Surovina) = :ingredientCount
+""")
+    fun getFoodsByIngredients(
+        ingredients: List<String>,
+        ingredientCount: Int
+    ): Flow<List<FoodView>>
+
+    @Query("""
+    SELECT f.id, f.TileImage AS image, f.Meno_jedla AS name, ft.type_name AS category
+    FROM food f
+    JOIN food_type ft ON f.type_id = ft.id
+    WHERE f.type_id = :typeId
+    ORDER BY f.Meno_jedla ASC
+""")
+    fun getByType(typeId: Int): Flow<List<FoodView>>
+
+
+    //prienik oboch
+    @Query("""
+    SELECT f.id, f.TileImage AS image, f.Meno_jedla AS name, ft.type_name AS category
+    FROM food f
+    JOIN food_type ft ON f.type_id = ft.id
+    JOIN foodStuff fs ON f.id = fs.Id_jedlo
+    WHERE f.type_id = :typeId
+      AND fs.Surovina IN (:ingredients)
+    GROUP BY f.id
+    HAVING COUNT(DISTINCT fs.Surovina) = :ingredientCount
+""")
+    fun getFoodsByTypeAndIngredients(
+        typeId: Int,
+        ingredients: List<String>,
+        ingredientCount: Int
+    ): Flow<List<FoodView>>
+
+
     @Insert
     fun insert(vararg food: Food)
 
@@ -19,6 +64,7 @@ interface FoodDao {
     """)
     fun getByType(typeId: Int): Flow<List<Food>>
 */
+
     @Query("""
         SELECT * FROM food
     """)
@@ -129,14 +175,16 @@ interface ShoppingListDao {
     @Query("SELECT * FROM list Where id = :idlist")
     fun getShopingListById(idlist: Int): Flow<ShoppingList>
 
-    @Query("""
+    @Query(
+        """
         SELECT 
             items.Id_zoznamu AS food_id,
             SUM(CASE WHEN stav = 1 THEN 1 ELSE 0 END) AS bought_count,
             COUNT(*) AS total_count
         FROM items
         GROUP BY Id_zoznamu
-    """)
+    """
+    )
     fun getFoodItemStats(): Flow<List<FoodItemStats>>
 }
 

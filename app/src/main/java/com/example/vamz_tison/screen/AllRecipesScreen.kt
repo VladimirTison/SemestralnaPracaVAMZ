@@ -1,15 +1,19 @@
 package com.example.vamz_tison.screen
 
 import RecipeImageScreen
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.*
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.material.Checkbox
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
+import androidx.compose.material.RadioButton
+import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -28,7 +32,8 @@ import com.example.vamz_tison.components.RecipeGrid
 
 @Composable
 fun AllRecipesScreen(
-    viewModel: AllRecipiesViewModel
+    viewModel: AllRecipiesViewModel,
+    initialCategoryId: Int? = null
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val currentLimit by viewModel.currentLimit
@@ -36,12 +41,15 @@ fun AllRecipesScreen(
 
     var selectedListId by rememberSaveable { mutableStateOf<Int?>(null) }
     var menuVisible by remember { mutableStateOf(false) }
-    var selectedCategories by remember { mutableStateOf(listOf<String>()) }
-    var selectedIngredients by remember { mutableStateOf(listOf<String>()) }
-    var showAllIngredients by remember { mutableStateOf(false) }
+    var selectedCategoryId by rememberSaveable { mutableStateOf(initialCategoryId) }
+    var selectedIngredients by rememberSaveable { mutableStateOf(listOf<String>()) }
+    var showAllIngredients by rememberSaveable { mutableStateOf(false) }
+    var showAllCategories by rememberSaveable { mutableStateOf(false) }
+    var appliedCategoryId by rememberSaveable { mutableStateOf<Int?>(initialCategoryId) }
+    var appliedIngredients by rememberSaveable { mutableStateOf(listOf<String>()) }
 
     LaunchedEffect(Unit) {
-        viewModel.loadFiltredRecepies()
+        viewModel.applyFilter(appliedCategoryId, appliedIngredients)
     }
 
     if (selectedListId != null) {
@@ -55,7 +63,9 @@ fun AllRecipesScreen(
         Box(modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .verticalScroll(rememberScrollState())
                     .background(Color.White)
             ) {
                 Box(
@@ -75,12 +85,32 @@ fun AllRecipesScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(
-                            text = "Recepty",
-                            fontSize = 28.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
+                        Column {
+                            Text(
+                                text = "Recepty",
+                                fontSize = 28.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
+
+                            if (appliedCategoryId != null || appliedIngredients.isNotEmpty()) {
+                                Spacer(modifier = Modifier.height(4.dp))
+                                Text(
+                                    text = buildString {
+                                        if (appliedCategoryId != null) {
+                                            val category = uiState.category.find { it.id == appliedCategoryId }
+                                            if (category != null) append("Kategória: ${category.name}")
+                                        }
+                                        if (appliedIngredients.isNotEmpty()) {
+                                            if (isNotEmpty()) append(" | ")
+                                            append("Ingrediencie: ${appliedIngredients.joinToString(", ")}")
+                                        }
+                                    },
+                                    fontSize = 14.sp,
+                                    color = Color.White
+                                )
+                            }
+                        }
 
                         IconButton(onClick = { menuVisible = true }) {
                             Icon(
@@ -92,22 +122,28 @@ fun AllRecipesScreen(
                     }
                 }
 
-                RecipeGrid(
-                    foods = visibleFoods,
-                    onRecipeClick = { selectedFood ->
-                        selectedListId = selectedFood.id
+                if (visibleFoods.isEmpty()) {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Text("Nenašli sa žiadne výsledky", color = Color.Gray, fontSize = 16.sp)
                     }
-                )
+                } else {
+                    RecipeGrid(
+                        foods = visibleFoods,
+                        onRecipeClick = { selectedFood ->
+                            selectedListId = selectedFood.id
+                        }
+                    )
 
-                if (uiState.foods.size > visibleFoods.size) {
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Button(
-                        onClick = { viewModel.loadMore() },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                    ) {
-                        Text("Zobraziť ďalšie")
+                    if (uiState.foods.size > visibleFoods.size) {
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Button(
+                            onClick = { viewModel.loadMore() },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp)
+                        ) {
+                            Text("Zobraziť ďalšie")
+                        }
                     }
                 }
             }
@@ -150,24 +186,30 @@ fun AllRecipesScreen(
                             Text("Kategória", fontWeight = FontWeight.Bold, color = Color(0xFF5D3A1A))
                             Spacer(modifier = Modifier.height(8.dp))
 
-                            uiState.category.map { it.name }.forEach { category ->
+                            val categoriesToShow = if (showAllCategories) uiState.category else uiState.category.take(2)
+                            categoriesToShow.forEach { category ->
                                 Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Checkbox(
-                                        checked = selectedCategories.contains(category),
-                                        onCheckedChange = {
-                                            selectedCategories = if (it) {
-                                                selectedCategories + category
-                                            } else {
-                                                selectedCategories - category
-                                            }
+                                    RadioButton(
+                                        selected = selectedCategoryId == category.id,
+                                        onClick = {
+                                            selectedCategoryId = if (selectedCategoryId == category.id) null else category.id
                                         },
-                                        colors = CheckboxDefaults.colors(
-                                            checkedColor = Color(0xFFA9713B),
-                                            uncheckedColor = Color.Gray
+                                        colors = RadioButtonDefaults.colors(
+                                            selectedColor = Color(0xFFA9713B),
+                                            unselectedColor = Color.Gray
                                         )
                                     )
-                                    Text(category, color = Color(0xFF5D3A1A))
+                                    Text(category.name, color = Color(0xFF5D3A1A))
                                 }
+                            }
+                            if (uiState.category.size > 2) {
+                                Text(
+                                    text = if (showAllCategories) "Zobraziť menej" else "Zobraziť viac",
+                                    color = Color(0xFFA9713B),
+                                    modifier = Modifier
+                                        .padding(vertical = 8.dp)
+                                        .clickable { showAllCategories = !showAllCategories }
+                                )
                             }
 
                             Spacer(modifier = Modifier.height(16.dp))
@@ -175,11 +217,7 @@ fun AllRecipesScreen(
                             Text("Ingrediencie", fontWeight = FontWeight.Bold, color = Color(0xFF5D3A1A))
                             Spacer(modifier = Modifier.height(8.dp))
 
-                            val ingredientsToShow = if (showAllIngredients) {
-                                uiState.ingredience
-                            } else {
-                                uiState.ingredience.take(3)
-                            }
+                            val ingredientsToShow = if (showAllIngredients) uiState.ingredience else uiState.ingredience.take(2)
 
                             ingredientsToShow.forEach { ingredient ->
                                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -201,7 +239,7 @@ fun AllRecipesScreen(
                                 }
                             }
 
-                            if (uiState.ingredience.size > 3) {
+                            if (uiState.ingredience.size > 2) {
                                 Text(
                                     text = if (showAllIngredients) "Zobraziť menej" else "Zobraziť viac",
                                     color = Color(0xFFA9713B),
@@ -215,11 +253,13 @@ fun AllRecipesScreen(
 
                             Button(
                                 onClick = {
-                                    /*viewModel.applyFilter(
-                                        selectedCategories,
-                                        selectedIngredients
+                                    appliedCategoryId = selectedCategoryId
+                                    appliedIngredients = selectedIngredients
+                                    viewModel.applyFilter(
+                                        selectedTypeId = selectedCategoryId,
+                                        selectedIngredients = selectedIngredients
                                     )
-                                    menuVisible = false*/
+                                    menuVisible = false
                                 },
                                 colors = ButtonDefaults.buttonColors(
                                     backgroundColor = Color(0xFFA9713B),

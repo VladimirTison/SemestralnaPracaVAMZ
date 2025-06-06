@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 data class AllRecipiesUiState(
@@ -50,4 +51,66 @@ class AllRecipiesViewModel(
     fun loadMore() {
         _currentLimit.value += 10
     }
+
+    fun applyFilter(
+        selectedTypeId: Int?,
+        selectedIngredients: List<String>
+    ) {
+        // Ak nie je vybraná ani kategória ani ingrediencie - nacita vsetko
+        if (selectedTypeId == null && selectedIngredients.isEmpty()) {
+            loadFiltredRecepies()
+            return
+        } else if (selectedTypeId != null && selectedIngredients.isEmpty()) {
+            viewModelScope.launch {
+                combine(
+                    repository.getAllFoodTypes(),
+                    repository.getAllDistinctIngredients(),
+                    repository.getByType(selectedTypeId)
+                ) { foodTypes, ingredients, foods ->
+                    AllRecipiesUiState(
+                        category = foodTypes,
+                        ingredience = ingredients,
+                        foods = foods
+                    )
+                }.collect { uiStateCombined ->
+                    _uiState.value = uiStateCombined
+                }
+            }
+        } else if (selectedTypeId == null && !selectedIngredients.isEmpty()) {
+            viewModelScope.launch {
+                combine(
+                    repository.getAllFoodTypes(),
+                    repository.getAllDistinctIngredients(),
+                    repository.getFoodsByIngredients(selectedIngredients, selectedIngredients.size)
+                ) { foodTypes, ingredients, foods ->
+                    AllRecipiesUiState(
+                        category = foodTypes,
+                        ingredience = ingredients,
+                        foods = foods
+                    )
+                }.collect { uiStateCombined ->
+                    _uiState.value = uiStateCombined
+                }
+            }
+        } else if (selectedTypeId != null && !selectedIngredients.isEmpty()) {
+            viewModelScope.launch {
+                combine(
+                    repository.getAllFoodTypes(),
+                    repository.getAllDistinctIngredients(),
+                    repository.getFoodsByTypeAndIngredients(selectedTypeId ,selectedIngredients, selectedIngredients.size)
+                ) { foodTypes, ingredients, foods ->
+                    AllRecipiesUiState(
+                        category = foodTypes,
+                        ingredience = ingredients,
+                        foods = foods
+                    )
+                }.collect { uiStateCombined ->
+                    _uiState.value = uiStateCombined
+                }
+            }
+        }
+    }
 }
+
+
+

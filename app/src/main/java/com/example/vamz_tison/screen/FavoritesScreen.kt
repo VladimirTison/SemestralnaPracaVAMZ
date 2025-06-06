@@ -4,7 +4,9 @@ import RecipeImageScreen
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -44,6 +46,8 @@ fun FavoritesScreen(viewModel: FavoritesViewModel = viewModel()) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .wrapContentHeight()
+                    .verticalScroll(rememberScrollState())
                     .background(
                         color = Color(0xFFA9713B),
                         shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp)
