@@ -27,7 +27,8 @@ import com.example.vamz_tison.viewmodel.RecipeDetailViewModel
 @Composable
 fun RecipeImageScreen(
     id: Int,
-    viewModel: RecipeDetailViewModel
+    viewModel: RecipeDetailViewModel,
+    onBack: () -> Unit
 ) {
     LaunchedEffect(id) {
         viewModel.loadData(id)
@@ -68,186 +69,166 @@ fun RecipeImageScreen(
             }
 
             // tlacidlo oblubene
-            Box(
+            IconButton(
+                onClick = { viewModel.toggleFavorite() },
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(300.dp)
+                    .align(Alignment.BottomEnd)
+                    .padding(12.dp)
+                    .background(
+                        color = Color.White.copy(alpha = 0.8f),
+                        shape = RoundedCornerShape(50)
+                    )
+                    .size(60.dp)
             ) {
-                // OBRAZOK
-                bitmap?.let {
-                    Image(
-                        bitmap = it.asImageBitmap(),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxSize()
-                    )
-                }
-
-                // like
-                IconButton(
-                    onClick = { viewModel.toggleFavorite() },
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(12.dp)
-                        .size(60.dp)
-                        .background(
-                            color = Color.White.copy(alpha = 0.8f),
-                            shape = RoundedCornerShape(50)
-                        )
-                ) {
-                    Image(
-                        painter = painterResource(
-                            id = if (uiState.favoriteFood != null) R.drawable.like else R.drawable.unlike
-                        ),
-                        contentDescription = "Obľúbené",
-                        modifier = Modifier.size(30.dp)
-                    )
-                }
+                Image(
+                    painter = painterResource(
+                        id = if (uiState.favoriteFood != null) R.drawable.like else R.drawable.unlike
+                    ),
+                    contentDescription = "Obľúbené",
+                    modifier = Modifier.size(30.dp)
+                )
             }
-
         }
 
-
-        // cely blok  bOX
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            color = Color.White,
-            shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-            elevation = 8.dp
-        ) {
-            Column(modifier = Modifier.padding(24.dp)) {
-                Text(
-                    text = uiState.category,
-                    color = Color(0xFFC58A42),
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 14.sp
-                )
-
-                Spacer(modifier = Modifier.height(4.dp))
-
-                Text(
-                    text = uiState.food?.name ?: "",
-                    color = Color(0xFF6A3A00),
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold,
-                    lineHeight = 32.sp
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Divider(
-                    color = Color(0xFF6A3A00),
-                    thickness = 2.dp,
-                    modifier = Modifier
-                        .padding(top = 8.dp)
-                        .width(80.dp)
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    StatColumn("cookingtime", "${uiState.food?.cookingTime ?: "-"} min")
-                    StatColumn("bake", "${uiState.food?.preparingTime ?: "-"} min")
-                    StatColumn("portion", "${uiState.food?.portions ?: "-"} porcií")
-                    StatColumn("caloriescalculator", "${uiState.food?.calories ?: "-"} kcal")
-                }
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 16.dp)
-                        .background(color = Color(0xFFF5E9DD), shape = RoundedCornerShape(8.dp))
-                        .padding(16.dp)
-                ) {
+            // cely blok  bOX
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                color = Color.White,
+                shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
+                elevation = 8.dp
+            ) {
+                Column(modifier = Modifier.padding(24.dp)) {
                     Text(
-                        text = uiState.food?.description ?: "",
-                        color = Color(0xFF2B2D30),
+                        text = uiState.category,
+                        color = Color(0xFFC58A42),
+                        fontWeight = FontWeight.SemiBold,
                         fontSize = 14.sp
                     )
-                }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(4.dp))
 
-                Text(
-                    text = "Budeme potrebovať...",
-                    color = Color(0xFF6A3A00),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 27.sp
-                )
+                    Text(
+                        text = uiState.food?.name ?: "",
+                        color = Color(0xFF6A3A00),
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold,
+                        lineHeight = 32.sp
+                    )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
-                uiState.ingredients.forEach { ingredient ->
-                    Column {
+                    Divider(
+                        color = Color(0xFF6A3A00),
+                        thickness = 2.dp,
+                        modifier = Modifier
+                            .padding(top = 8.dp)
+                            .width(80.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        StatColumn("cookingtime", "${uiState.food?.cookingTime ?: "-"} min")
+                        StatColumn("bake", "${uiState.food?.preparingTime ?: "-"} min")
+                        StatColumn("portion", "${uiState.food?.portions ?: "-"} porcií")
+                        StatColumn("caloriescalculator", "${uiState.food?.calories ?: "-"} kcal")
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 16.dp)
+                            .background(color = Color(0xFFF5E9DD), shape = RoundedCornerShape(8.dp))
+                            .padding(16.dp)
+                    ) {
+                        Text(
+                            text = uiState.food?.description ?: "",
+                            color = Color(0xFF2B2D30),
+                            fontSize = 14.sp
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Text(
+                        text = "Budeme potrebovať...",
+                        color = Color(0xFF6A3A00),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 27.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    uiState.ingredients.forEach { ingredient ->
+                        Column {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 4.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(
+                                    text = "${ingredient.quantity} ${ingredient.unit}",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 14.sp,
+                                    color = Color(0xFF2B2D30)
+                                )
+                                Text(
+                                    text = ingredient.stuff,
+                                    fontSize = 14.sp,
+                                    color = Color(0xFF2B2D30)
+                                )
+                            }
+                            Divider(color = Color(0xFFDDDDDD), thickness = 1.dp)
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    Text(
+                        text = "Ako postupovať...",
+                        color = Color(0xFF6A3A00),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 27.sp // 2x väčšie ako 16
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    uiState.process.sortedBy { it.step }.forEach { step ->
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(vertical = 4.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                                .padding(vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "${ingredient.quantity} ${ingredient.unit}",
+                                text = String.format("%02d", step.step),
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 14.sp,
-                                color = Color(0xFF2B2D30)
+                                fontSize = 30.sp,
+                                color = Color(0xFFC58A42),
+                                modifier = Modifier
+                                    .width(40.dp)
                             )
+                            Spacer(modifier = Modifier.width(8.dp))
                             Text(
-                                text = ingredient.stuff,
-                                fontSize = 14.sp,
-                                color = Color(0xFF2B2D30)
+                                text = step.description,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = Color(0xFF2B2D30),
+                                modifier = Modifier.weight(1f)
                             )
                         }
-                        Divider(color = Color(0xFFDDDDDD), thickness = 1.dp)
                     }
+
                 }
-                Spacer(modifier = Modifier.height(24.dp))
 
-                Text(
-                    text = "Ako postupovať...",
-                    color = Color(0xFF6A3A00),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 27.sp
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                uiState.process.sortedBy { it.step }.forEach { step ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = String.format("%02d", step.step),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 30.sp,
-                            color = Color(0xFFC58A42),
-                            modifier = Modifier
-                                .width(40.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = step.description,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = Color(0xFF2B2D30),
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                }
 
             }
-
-
         }
-    }
 }
 
     @Composable

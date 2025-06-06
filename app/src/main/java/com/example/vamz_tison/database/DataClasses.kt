@@ -199,3 +199,9 @@ data class FoodItemStats(
     val total_count: Int
 )
 
+data class FoodView(
+    val id: Int,
+    val image: ByteArray? = null,
+    val name: String,
+    val category: String
+)

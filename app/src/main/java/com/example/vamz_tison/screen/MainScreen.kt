@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.vamz_tison.components.BottomMenuBar
 import com.example.vamz_tison.database.AppRepository
+import com.example.vamz_tison.viewmodel.FavoritesViewModel
 import com.example.vamz_tison.viewmodel.RecipeDetailViewModel
 import com.example.vamz_tison.viewmodel.ShoppingListViewModel
 import screens.HomeScreen
@@ -22,6 +23,10 @@ fun MainScreen(repository: AppRepository) {
     }
     val shoppingListViewModel = remember {
         ShoppingListViewModel(repository)
+    }
+
+    val favoritesViewModel = remember {
+        FavoritesViewModel(repository)
     }
 
     Scaffold(
@@ -45,7 +50,11 @@ fun MainScreen(repository: AppRepository) {
                         viewModel = shoppingListViewModel
                     )
                 }
-                "favorites" -> Text("Obľúbené recepty", modifier = Modifier.padding(16.dp))
+                "favorites" -> (
+                        FavoritesScreen(
+                            viewModel = favoritesViewModel
+                        )
+                        )
                 "profile" -> {
                     RecipeImageScreen(
                         id = 1,

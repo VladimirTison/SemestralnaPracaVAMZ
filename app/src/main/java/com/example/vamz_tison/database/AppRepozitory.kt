@@ -137,5 +137,7 @@ class AppRepository(private val database: AppDatabase) {
         return database.favoriteFoodDao().observeFavoriteByFoodId(foodId)
     }
 
-
+    fun getFavoriteFoods(): Flow<List<FoodView>> {
+        return database.favoriteFoodDao().getFavoriteFoods()
+    }
 }

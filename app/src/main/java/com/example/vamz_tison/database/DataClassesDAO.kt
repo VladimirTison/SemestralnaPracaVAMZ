@@ -174,7 +174,18 @@ interface FavoriteFoodDao {
 
     @Query("SELECT * FROM favoritefood WHERE jedlo = :foodId LIMIT 1")
     fun observeFavoriteByFoodId(foodId: Int): Flow<FavoriteFood?>
+
+    @Query("""
+    SELECT f.id, f.TileImage AS image, f.Meno_jedla AS name, ft.type_name AS category
+    FROM food f
+    JOIN favoritefood ff ON ff.jedlo = f.id
+    JOIN food_type ft ON f.type_id = ft.id
+""")
+    fun getFavoriteFoods(): Flow<List<FoodView>>
+
 }
+
+
 
 
 
