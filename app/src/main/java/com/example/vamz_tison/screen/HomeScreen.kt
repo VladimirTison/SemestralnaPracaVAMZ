@@ -227,7 +227,7 @@ fun HomeScreen(
                     )
                 } else {
                     RecipeGrid(
-                        foods = uiState.favorites,
+                        foods = uiState.favorites.take(7),
                         onRecipeClick = { selectedDetailId = it.id }
                     )
                 }
@@ -243,7 +243,7 @@ fun HomeScreen(
                 )
 
                 RecipeGrid(
-                    foods = uiState.foods,
+                    foods = uiState.foods.take(7),
                     onRecipeClick = { selectedDetailId = it.id }
                 )
 

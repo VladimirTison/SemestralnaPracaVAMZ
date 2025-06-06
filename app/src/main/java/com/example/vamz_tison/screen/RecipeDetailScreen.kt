@@ -189,6 +189,11 @@ fun RecipeImageScreen(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 uiState.ingredients.forEach { ingredient ->
+                    val quantityText = if (ingredient.quantity % 1.0 == 0.0) {
+                        ingredient.quantity.toInt().toString()
+                    } else {
+                        ingredient.quantity.toString()
+                    }
                     Column {
                         Row(
                             modifier = Modifier
@@ -197,7 +202,7 @@ fun RecipeImageScreen(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
-                                text = "${ingredient.quantity} ${ingredient.unit}",
+                                text = "$quantityText ${ingredient.unit}",
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 14.sp,
                                 color = Color(0xFF2B2D30)

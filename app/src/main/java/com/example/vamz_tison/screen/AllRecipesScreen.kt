@@ -156,14 +156,13 @@ fun AllRecipesScreen(
                         .background(Color.Black.copy(alpha = 0.4f))
                         .clickable { menuVisible = false }
                 )
-
                 AnimatedVisibility(
                     visible = true,
                     enter = slideInHorizontally(initialOffsetX = { it }, animationSpec = tween(300)),
                     exit = slideOutHorizontally(targetOffsetX = { it }, animationSpec = tween(300)),
                     modifier = Modifier
                         .fillMaxHeight()
-                        .fillMaxWidth(0.5f)
+                        .fillMaxWidth(0.6f)
                         .align(Alignment.TopEnd)
                 ) {
                     Box(
