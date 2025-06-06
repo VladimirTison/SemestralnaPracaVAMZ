@@ -1,5 +1,7 @@
 package com.example.vamz_tison.viewmodel
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vamz_tison.database.AppRepository
@@ -24,6 +26,8 @@ class AllRecipiesViewModel(
 
     private val _uiState = MutableStateFlow(AllRecipiesUiState())
     val uiState: StateFlow<AllRecipiesUiState> = _uiState.asStateFlow()
+    private val _currentLimit = mutableStateOf(10)
+    val currentLimit: State<Int> = _currentLimit
 
     fun loadFiltredRecepies() {
         viewModelScope.launch {
@@ -41,5 +45,9 @@ class AllRecipiesViewModel(
                 _uiState.value = uiStateCombined
             }
         }
+    }
+
+    fun loadMore() {
+        _currentLimit.value += 10
     }
 }

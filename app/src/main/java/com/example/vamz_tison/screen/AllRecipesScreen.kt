@@ -31,6 +31,9 @@ fun AllRecipesScreen(
     viewModel: AllRecipiesViewModel
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val currentLimit by viewModel.currentLimit
+    val visibleFoods = uiState.foods.take(currentLimit)
+
     var selectedListId by rememberSaveable { mutableStateOf<Int?>(null) }
     var menuVisible by remember { mutableStateOf(false) }
     var selectedCategories by remember { mutableStateOf(listOf<String>()) }
@@ -90,11 +93,23 @@ fun AllRecipesScreen(
                 }
 
                 RecipeGrid(
-                    foods = uiState.foods,
+                    foods = visibleFoods,
                     onRecipeClick = { selectedFood ->
                         selectedListId = selectedFood.id
                     }
                 )
+
+                if (uiState.foods.size > visibleFoods.size) {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Button(
+                        onClick = { viewModel.loadMore() },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                    ) {
+                        Text("Zobraziť ďalšie")
+                    }
+                }
             }
 
             if (menuVisible) {
@@ -200,7 +215,11 @@ fun AllRecipesScreen(
 
                             Button(
                                 onClick = {
-
+                                    /*viewModel.applyFilter(
+                                        selectedCategories,
+                                        selectedIngredients
+                                    )
+                                    menuVisible = false*/
                                 },
                                 colors = ButtonDefaults.buttonColors(
                                     backgroundColor = Color(0xFFA9713B),
