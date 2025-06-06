@@ -1,0 +1,86 @@
+package com.example.vamz_tison.components
+
+import android.graphics.BitmapFactory
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.vamz_tison.database.FoodView
+
+@Composable
+fun RecipeGrid(
+    foods: List<FoodView>,
+    onRecipeClick: (FoodView) -> Unit
+) {
+    val columns = if (LocalConfiguration.current.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT) 2 else 3
+
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(columns),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        items(foods) { food ->
+            RecipeCard(food = food) {
+                onRecipeClick(food)
+            }
+        }
+    }
+}
+
+@Composable
+fun RecipeCard(food: FoodView, onClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color(0xFFF8F4EF), shape = RoundedCornerShape(12.dp))
+            .padding(12.dp)
+            .clickable { onClick() }
+    ) {
+        food.image?.let {
+            val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+            bitmap?.let { bmp ->
+                Image(
+                    bitmap = bmp.asImageBitmap(),
+                    contentDescription = food.name,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(160.dp),
+                    contentScale = ContentScale.Crop
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = food.category,
+            fontSize = 12.sp,
+            color = Color(0xFF8C5C2F)
+        )
+
+        Text(
+            text = food.name,
+            fontSize = 18.sp,
+            color = Color(0xFF5D3A1A),
+            fontWeight = FontWeight.Bold
+        )
+    }
+}

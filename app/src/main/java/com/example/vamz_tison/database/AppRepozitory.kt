@@ -9,6 +9,11 @@ class AppRepository(private val database: AppDatabase) {
         database.foodDao().insert(*foods)
     }
 
+    fun getAllFood(): Flow<List<Food>> {
+        return database.foodDao().getAllFood()
+    }
+
+
     fun getNameType( id: Int):Flow<String> {
         return database.foodDao().getNameType(id)
     }
@@ -49,6 +54,10 @@ class AppRepository(private val database: AppDatabase) {
 
     fun getAllDistinctIngredientsByFoodId(id: Int): Flow<List<FoodStuff>> {
         return database.foodStuffDao().getAllDistinctIngredientsByFoodId(id)
+    }
+
+    fun getAllDistinctIngredients(): Flow<List<String>> {
+        return database.foodStuffDao().getAllDistinctIngredients()
     }
 
     // --- ProcessDao methods ---
@@ -139,5 +148,9 @@ class AppRepository(private val database: AppDatabase) {
 
     fun getFavoriteFoods(): Flow<List<FoodView>> {
         return database.favoriteFoodDao().getFavoriteFoods()
+    }
+
+    fun getAllFoodView(): Flow<List<FoodView>> {
+        return database.foodDao().getAllFoodView()
     }
 }

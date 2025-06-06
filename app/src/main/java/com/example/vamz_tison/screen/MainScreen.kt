@@ -7,8 +7,10 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vamz_tison.components.BottomMenuBar
 import com.example.vamz_tison.database.AppRepository
+import com.example.vamz_tison.viewmodel.AllRecipiesViewModel
 import com.example.vamz_tison.viewmodel.FavoritesViewModel
 import com.example.vamz_tison.viewmodel.RecipeDetailViewModel
 import com.example.vamz_tison.viewmodel.ShoppingListViewModel
@@ -29,6 +31,10 @@ fun MainScreen(repository: AppRepository) {
         FavoritesViewModel(repository)
     }
 
+    val allRecipiesViewModel = remember {
+        AllRecipiesViewModel(repository)
+    }
+
     Scaffold(
         bottomBar = {
             BottomMenuBar(
@@ -44,7 +50,11 @@ fun MainScreen(repository: AppRepository) {
         ) {
             when (selectedScreen) {
                 "home" -> HomeScreen()
-                "explore" -> Text("Objavovanie", modifier = Modifier.padding(16.dp))
+                "explore" -> {
+                    AllRecipesScreen(
+                        viewModel = allRecipiesViewModel
+                    )
+                }
                 "cart" -> {
                     ShoppingListsScreen(
                         viewModel = shoppingListViewModel
@@ -56,7 +66,7 @@ fun MainScreen(repository: AppRepository) {
                         )
                         )
                 "profile" -> {
-                    
+
                 }
             }
         }

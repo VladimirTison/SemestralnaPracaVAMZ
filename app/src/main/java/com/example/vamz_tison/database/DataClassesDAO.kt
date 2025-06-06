@@ -20,6 +20,18 @@ interface FoodDao {
     fun getByType(typeId: Int): Flow<List<Food>>
 */
     @Query("""
+        SELECT * FROM food
+    """)
+    fun getAllFood(): Flow<List<Food>>
+
+    @Query("""
+    SELECT f.id, f.TileImage AS image, f.Meno_jedla AS name, ft.type_name AS category
+    FROM food f
+    JOIN food_type ft ON f.type_id = ft.id
+""")
+    fun getAllFoodView(): Flow<List<FoodView>>
+
+    @Query("""
     SELECT food_type.type_name FROM food
     JOIN food_type ON food_type.id = food.type_id
     WHERE food.id = :id
