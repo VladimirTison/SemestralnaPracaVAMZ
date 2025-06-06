@@ -56,12 +56,6 @@ fun BottomMenuBar(
                 icon = Icons.Default.Favorite,
                 description = stringResource(R.string.BottomMenuOblubene)
             )
-            MenuItem(
-                selected = selected == "profile",
-                onClick = { onItemSelected("profile") },
-                icon = Icons.Default.Person,
-                description = stringResource(R.string.BottomMenuProfil)
-            )
         }
     }
 }

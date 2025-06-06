@@ -55,18 +55,17 @@ fun MainScreen(repository: AppRepository) {
                         viewModel = allRecipiesViewModel
                     )
                 }
+
                 "cart" -> {
                     ShoppingListsScreen(
                         viewModel = shoppingListViewModel
                     )
                 }
-                "favorites" -> (
-                        FavoritesScreen(
-                            viewModel = favoritesViewModel
-                        )
-                        )
-                "profile" -> {
 
+                "favorites" -> {
+                    FavoritesScreen(
+                        viewModel = favoritesViewModel
+                    )
                 }
             }
         }
