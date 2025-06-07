@@ -52,6 +52,7 @@ import com.example.vamz_tison.viewmodel.RecipeDetailViewModel
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.material.TextFieldDefaults
 
 
 @Composable
@@ -169,7 +170,10 @@ fun HomeScreen(
                                 contentDescription = "Hľadať",
                                 tint = Color(0xFF5D3A1A)
                             )
-                        }
+                        },
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            focusedBorderColor = Color(0xFF5D3A1A)
+                        )
                     )
                 }
 

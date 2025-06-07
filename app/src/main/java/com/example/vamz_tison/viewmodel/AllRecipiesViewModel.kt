@@ -109,6 +109,7 @@ class AllRecipiesViewModel(
                 }
             }
         }
+
     }
 }
 

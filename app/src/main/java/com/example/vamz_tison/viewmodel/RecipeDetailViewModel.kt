@@ -1,5 +1,6 @@
 package com.example.vamz_tison.viewmodel
 
+import android.graphics.pdf.models.ListItem
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vamz_tison.database.AppRepository
@@ -8,6 +9,8 @@ import com.example.vamz_tison.database.Food
 import com.example.vamz_tison.database.FoodProcess
 import com.example.vamz_tison.database.FoodStuff
 import com.example.vamz_tison.database.FoodType
+import com.example.vamz_tison.database.ListItems
+import com.example.vamz_tison.database.ShoppingList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,7 +29,8 @@ data class RecipeDetailUiState(
     val ingredients: List<FoodStuff> = emptyList(),
     val process: List<FoodProcess> = emptyList(),
     val category: String = "",
-    val favoriteFood: FavoriteFood? = null
+    val favoriteFood: FavoriteFood? = null,
+    val shoppingList: List<ShoppingList> = emptyList()
 )
 
 
@@ -43,20 +47,27 @@ class RecipeDetailViewModel(
                 repository.getAllDistinctIngredientsByFoodId(id),
                 repository.getProcessByFoodId(id),
                 repository.getNameType(id),
-                repository.observeFavoriteByFoodId(id)  // <- toto
+                repository.observeFavoriteByFoodId(id)
             ) { food, ingredients, process, category, favoriteFood ->
                 RecipeDetailUiState(
                     food = food,
                     ingredients = ingredients,
                     process = process,
                     category = category,
-                    favoriteFood = favoriteFood
+                    favoriteFood = favoriteFood,
+                    shoppingList = emptyList() // placeholder, doplníme neskôr
                 )
-            }.collect {
-                _uiState.value = it
+            }.collect { partialState ->
+                // dodatočne načítaj shoppingList
+                val shoppingList = repository.getAllShoppingLists().first()
+
+                _uiState.value = partialState.copy(
+                    shoppingList = shoppingList
+                )
             }
         }
     }
+
 
     fun insertFavorite(foodId: Int) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -91,6 +102,19 @@ class RecipeDetailViewModel(
             }
         }
     }
+
+    fun insertShoppingItems(items: List<ListItems>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                items.forEach { item ->
+                    repository.insertListItems(item)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
 
 }
 
