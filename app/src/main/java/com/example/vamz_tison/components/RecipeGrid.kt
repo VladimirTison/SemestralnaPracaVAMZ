@@ -21,6 +21,10 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.style.TextOverflow
+import android.content.res.Configuration
+import androidx.compose.ui.platform.LocalConfiguration
+
 import com.example.vamz_tison.database.FoodView
 
 @Composable
@@ -49,6 +53,8 @@ fun RecipeGrid(
 
 @Composable
 fun RecipeCard(food: FoodView, onClick: () -> Unit) {
+    val orientation = LocalConfiguration.current.orientation
+    val maxLines = if (orientation == Configuration.ORIENTATION_PORTRAIT) 3 else 2
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -83,7 +89,10 @@ fun RecipeCard(food: FoodView, onClick: () -> Unit) {
             text = food.name,
             fontSize = 18.sp,
             color = Color(0xFF5D3A1A),
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            maxLines = maxLines,
+            minLines =  maxLines,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }

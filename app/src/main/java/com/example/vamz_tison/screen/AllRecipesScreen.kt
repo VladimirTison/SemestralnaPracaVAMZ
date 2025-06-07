@@ -113,7 +113,11 @@ fun AllRecipesScreen(
                             }
                         }
 
-                        IconButton(onClick = { menuVisible = true }) {
+                        IconButton(onClick = {
+                            menuVisible = true
+                            showAllCategories = false
+                            showAllIngredients = false
+                        }) {
                             Icon(
                                 imageVector = Icons.Default.Menu,
                                 contentDescription = "Menu",
@@ -141,7 +145,11 @@ fun AllRecipesScreen(
                             onClick = { viewModel.loadMore() },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 16.dp)
+                                .padding(horizontal = 16.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = Color(0xFFA9713B),
+                                contentColor = Color.White
+                            ),
                         ) {
                             Text("Zobraziť ďalšie")
                         }
@@ -150,130 +158,141 @@ fun AllRecipesScreen(
             }
 
             if (menuVisible) {
-                Box(
+                Row(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(Color.Black.copy(alpha = 0.4f))
-                        .clickable { menuVisible = false }
-                )
-                AnimatedVisibility(
-                    visible = true,
-                    enter = slideInHorizontally(initialOffsetX = { it }, animationSpec = tween(300)),
-                    exit = slideOutHorizontally(targetOffsetX = { it }, animationSpec = tween(300)),
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .fillMaxWidth(0.6f)
-                        .align(Alignment.TopEnd)
                 ) {
+                    // ĽAVÁ 40 % klikateľná plocha na zatvorenie
                     Box(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color(0xFFF8F4EF))
-                            .padding(16.dp)
+                            .fillMaxHeight()
+                            .weight(0.4f)
+                            .clickable { menuVisible = false }
+                    )
+
+                    // PRAVÁ 60 % – filter panel
+                    AnimatedVisibility(
+                        visible = true,
+                        enter = slideInHorizontally(initialOffsetX = { it }, animationSpec = tween(300)),
+                        exit = slideOutHorizontally(targetOffsetX = { it }, animationSpec = tween(300)),
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .weight(0.6f)
                     ) {
-                        Column(
-                            modifier = Modifier.verticalScroll(rememberScrollState())
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Color(0xFFF8F4EF))
+                                .padding(16.dp)
                         ) {
-                            Text(
-                                "Filtrovanie",
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color(0xFF5D3A1A)
-                            )
-
-                            Spacer(modifier = Modifier.height(16.dp))
-
-                            Text("Kategória", fontWeight = FontWeight.Bold, color = Color(0xFF5D3A1A))
-                            Spacer(modifier = Modifier.height(8.dp))
-
-                            val categoriesToShow = if (showAllCategories) uiState.category else uiState.category.take(2)
-                            categoriesToShow.forEach { category ->
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    RadioButton(
-                                        selected = selectedCategoryId == category.id,
-                                        onClick = {
-                                            selectedCategoryId = if (selectedCategoryId == category.id) null else category.id
-                                        },
-                                        colors = RadioButtonDefaults.colors(
-                                            selectedColor = Color(0xFFA9713B),
-                                            unselectedColor = Color.Gray
-                                        )
-                                    )
-                                    Text(category.name, color = Color(0xFF5D3A1A))
-                                }
-                            }
-                            if (uiState.category.size > 2) {
-                                Text(
-                                    text = if (showAllCategories) "Zobraziť menej" else "Zobraziť viac",
-                                    color = Color(0xFFA9713B),
-                                    modifier = Modifier
-                                        .padding(vertical = 8.dp)
-                                        .clickable { showAllCategories = !showAllCategories }
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.height(16.dp))
-
-                            Text("Ingrediencie", fontWeight = FontWeight.Bold, color = Color(0xFF5D3A1A))
-                            Spacer(modifier = Modifier.height(8.dp))
-
-                            val ingredientsToShow = if (showAllIngredients) uiState.ingredience else uiState.ingredience.take(2)
-
-                            ingredientsToShow.forEach { ingredient ->
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Checkbox(
-                                        checked = selectedIngredients.contains(ingredient),
-                                        onCheckedChange = {
-                                            selectedIngredients = if (it) {
-                                                selectedIngredients + ingredient
-                                            } else {
-                                                selectedIngredients - ingredient
-                                            }
-                                        },
-                                        colors = CheckboxDefaults.colors(
-                                            checkedColor = Color(0xFFA9713B),
-                                            uncheckedColor = Color.Gray
-                                        )
-                                    )
-                                    Text(ingredient, color = Color(0xFF5D3A1A))
-                                }
-                            }
-
-                            if (uiState.ingredience.size > 2) {
-                                Text(
-                                    text = if (showAllIngredients) "Zobraziť menej" else "Zobraziť viac",
-                                    color = Color(0xFFA9713B),
-                                    modifier = Modifier
-                                        .padding(vertical = 8.dp)
-                                        .clickable { showAllIngredients = !showAllIngredients }
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.height(24.dp))
-
-                            Button(
-                                onClick = {
-                                    appliedCategoryId = selectedCategoryId
-                                    appliedIngredients = selectedIngredients
-                                    viewModel.applyFilter(
-                                        selectedTypeId = selectedCategoryId,
-                                        selectedIngredients = selectedIngredients
-                                    )
-                                    menuVisible = false
-                                },
-                                colors = ButtonDefaults.buttonColors(
-                                    backgroundColor = Color(0xFFA9713B),
-                                    contentColor = Color.White
-                                ),
-                                modifier = Modifier.align(Alignment.CenterHorizontally)
+                            Column(
+                                modifier = Modifier.verticalScroll(rememberScrollState())
                             ) {
-                                Text("Filtrovať")
+                                Text(
+                                    "Filtrovanie",
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color(0xFF5D3A1A),
+                                    modifier = Modifier.padding(top = 30.dp)
+                                )
+
+                                Spacer(modifier = Modifier.height(16.dp))
+
+                                Text("Kategória", fontWeight = FontWeight.Bold, color = Color(0xFF5D3A1A))
+                                Spacer(modifier = Modifier.height(8.dp))
+
+                                val categoriesToShow = if (showAllCategories) uiState.category else uiState.category.take(2)
+                                categoriesToShow.forEach { category ->
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        RadioButton(
+                                            selected = selectedCategoryId == category.id,
+                                            onClick = {
+                                                selectedCategoryId = if (selectedCategoryId == category.id) null else category.id
+                                            },
+                                            colors = RadioButtonDefaults.colors(
+                                                selectedColor = Color(0xFFA9713B),
+                                                unselectedColor = Color.Gray
+                                            )
+                                        )
+                                        Text(category.name, color = Color(0xFF5D3A1A))
+                                    }
+                                }
+
+                                if (uiState.category.size > 2) {
+                                    Text(
+                                        text = if (showAllCategories) "Zobraziť menej" else "Zobraziť viac",
+                                        color = Color(0xFFA9713B),
+                                        modifier = Modifier
+                                            .padding(vertical = 8.dp)
+                                            .clickable { showAllCategories = !showAllCategories }
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.height(16.dp))
+
+                                Text("Ingrediencie", fontWeight = FontWeight.Bold, color = Color(0xFF5D3A1A))
+                                Spacer(modifier = Modifier.height(8.dp))
+
+                                val ingredientsToShow = if (showAllIngredients) uiState.ingredience else uiState.ingredience.take(2)
+                                ingredientsToShow.forEach { ingredient ->
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Checkbox(
+                                            checked = selectedIngredients.contains(ingredient),
+                                            onCheckedChange = {
+                                                selectedIngredients = if (it) {
+                                                    selectedIngredients + ingredient
+                                                } else {
+                                                    selectedIngredients - ingredient
+                                                }
+                                            },
+                                            colors = CheckboxDefaults.colors(
+                                                checkedColor = Color(0xFFA9713B),
+                                                uncheckedColor = Color.Gray
+                                            )
+                                        )
+                                        Text(ingredient, color = Color(0xFF5D3A1A))
+                                    }
+                                }
+
+                                if (uiState.ingredience.size > 2) {
+                                    Text(
+                                        text = if (showAllIngredients) "Zobraziť menej" else "Zobraziť viac",
+                                        color = Color(0xFFA9713B),
+                                        modifier = Modifier
+                                            .padding(vertical = 8.dp)
+                                            .clickable { showAllIngredients = !showAllIngredients }
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.height(48.dp))
+
+                                Button(
+                                    onClick = {
+                                        appliedCategoryId = selectedCategoryId
+                                        appliedIngredients = selectedIngredients
+                                        viewModel.applyFilter(
+                                            selectedTypeId = selectedCategoryId,
+                                            selectedIngredients = selectedIngredients
+                                        )
+                                        menuVisible = false
+                                    },
+                                    colors = ButtonDefaults.buttonColors(
+                                        backgroundColor = Color(0xFFA9713B),
+                                        contentColor = Color.White
+                                    ),
+                                    modifier = Modifier
+                                        .align(Alignment.CenterHorizontally)
+                                        .padding(bottom = 24.dp)
+                                ) {
+                                    Text("Filtrovať")
+                                }
                             }
                         }
-
                     }
                 }
             }
+
         }
     }
 }

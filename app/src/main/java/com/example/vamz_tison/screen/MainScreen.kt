@@ -64,7 +64,13 @@ fun MainScreen(repository: AppRepository) {
                     onCategorySelected = { categoryId ->
                         selectedCategoryId = categoryId
                         selectedScreen = "explore"
-                    }
+                    },
+                    onNavigateToFavorites = {
+        selectedScreen = "favorites"
+    },
+    onNavigateToAllRecipes = {
+        selectedScreen = "explore"
+    }
                 )
                 "explore" -> {
                     AllRecipesScreen(
