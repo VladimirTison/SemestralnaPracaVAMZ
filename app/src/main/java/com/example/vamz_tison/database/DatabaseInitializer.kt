@@ -10,8 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
-import java.io.File
 object DatabaseInitializer {
+
     fun initFoodTypes(context: Context, db: AppDatabase) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -20,9 +20,9 @@ object DatabaseInitializer {
                     db.foodTypeDao().insert(FoodType(name = context.getString(R.string.polievka)))
                     db.foodTypeDao().insert(FoodType(name = context.getString(R.string.predjedlo)))
                     db.foodTypeDao().insert(FoodType(name = context.getString(R.string.hlavn_jedlo)))
-                    db.foodTypeDao().insert(FoodType(name = "Dezert"))
-                    db.foodTypeDao().insert(FoodType(name = "Príloha"))
-                    db.shoppingListDao().insert(ShoppingList(name = "Nákupný zoznam"))
+                    db.foodTypeDao().insert(FoodType(name = context.getString(R.string.dezert)))
+                    db.foodTypeDao().insert(FoodType(name = context.getString(R.string.pr_loha)))
+                    db.shoppingListDao().insert(ShoppingList(name = context.getString(R.string.n_kupn_zoznam)))
 
                     //Prve jedlo
                     val bitmap = BitmapFactory.decodeResource(
@@ -43,13 +43,13 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
-                            name = "Talianska paradajková polievka",
+                            name = context.getString(R.string.talianska_paradajkov_polievka),
                             typeId = 1,
                             cookingTime = 30,
                             preparingTime = 10,
                             portions = 5,
                             calories = 90,
-                            description = "Talianska paradajková polievka si zaslúži miesto na stole pre svoju jednoduchosť, výraznú chuť z čerstvých surovín.",
+                            description = context.getString(R.string.parpolievka),
                             image = byteArray
                         )
                     )
@@ -57,1018 +57,2797 @@ object DatabaseInitializer {
                     db.foodStuffDao().insertFoodStuff(
                         FoodStuff(
                             food = 1,
-                            stuff = "paradajky drvené",
+                            stuff = context.getString(R.string.paradajkovapolievkaingredience1),
                             quantity = 400.0,
-                            unit = "g"
+                            unit = context.getString(R.string.unit_gram)
                         )
                     )
                     db.foodStuffDao().insertFoodStuff(
                         FoodStuff(
                             food = 1,
-                            stuff = "korenie talianske",
+                            stuff = context.getString(R.string.paradajkovapolievkaingredience2),
                             quantity = 1.0,
-                            unit = "čl"
+                            unit = context.getString(R.string.unit_teaspoon)
                         )
                     )
                     db.foodStuffDao().insertFoodStuff(
                         FoodStuff(
                             food = 1,
-                            stuff = "olej",
+                            stuff = context.getString(R.string.paradajkovapolievkaingredience3),
                             quantity = 1.0,
-                            unit = "PL"
+                            unit = context.getString(R.string.unit_tablespoon)
                         )
                     )
                     db.foodStuffDao().insertFoodStuff(
                         FoodStuff(
                             food = 1,
-                            stuff = "cibuľka jarná",
+                            stuff = context.getString(R.string.paradajkovapolievkaingredience4),
                             quantity = 1.0,
-                            unit = "ks"
+                            unit = context.getString(R.string.unit_piece)
                         )
                     )
                     db.foodStuffDao().insertFoodStuff(
                         FoodStuff(
                             food = 1,
-                            stuff = "voda",
+                            stuff = context.getString(R.string.paradajkovapolievkaingredience5),
                             quantity = 250.0,
-                            unit = "ml"
+                            unit = context.getString(R.string.unit_milliliter)
                         )
                     )
                     db.foodStuffDao().insertFoodStuff(
                         FoodStuff(
                             food = 1,
-                            stuff = "soľ",
+                            stuff = context.getString(R.string.paradajkovapolievkaingredience6),
                             quantity = 0.5,
-                            unit = "čl"
+                            unit = context.getString(R.string.unit_teaspoon)
                         )
                     )
                     db.foodStuffDao().insertFoodStuff(
                         FoodStuff(
                             food = 1,
-                            stuff = "jogurt biely",
+                            stuff = context.getString(R.string.paradajkovapolievkaingredience7),
                             quantity = 2.0,
-                            unit = "PL"
+                            unit = context.getString(R.string.unit_tablespoon)
                         )
                     )
                     db.foodStuffDao().insertFoodStuff(
                         FoodStuff(
                             food = 1,
-                            stuff = "korenie čierne mleté",
+                            stuff = context.getString(R.string.paradajkovapolievkaingredience8),
                             quantity = 0.3,
-                            unit = "čl"
+                            unit = context.getString(R.string.unit_teaspoon)
                         )
                     )
                     db.foodStuffDao().insertFoodStuff(
                         FoodStuff(
                             food = 1,
-                            stuff = "omáčka sójová",
+                            stuff = context.getString(R.string.paradajkovapolievkaingredience9),
                             quantity = 1.0,
-                            unit = "čl"
+                            unit = context.getString(R.string.unit_teaspoon)
                         )
                     )
                     db.foodStuffDao().insertFoodStuff(
                         FoodStuff(
                             food = 1,
-                            stuff = "vločky ovsené",
+                            stuff = context.getString(R.string.paradajkovapolievkaingredience10),
                             quantity = 30.0,
-                            unit = "g"
+                            unit = context.getString(R.string.unit_gram)
                         )
                     )
 
                     db.processDao().insert(
                         FoodProcess(
                             food = 1,
-                            description = "Na horúcom oleji orestujeme nakrájanú cibuľku, potom drvené paradajky. Zalejeme vodou, osolíme, okoreníme talianskym korením, vsypeme vločky a občas premiešavame.",
+                            description = context.getString(R.string.paradajkovapolievkapopis1),
                             step = 1
                         )
                     )
                     db.processDao().insert(
                         FoodProcess(
                             food = 1,
-                            description = "Keď je všetko uvarené, môžeme rozmixovať. Vrátime na oheň a podľa vlastnej chuti pridáme cukor, sójovú omáčku, mleté čierne korenie a necháme prevrieť.",
+                            description = context.getString(R.string.paradajkovapolievkapopis2),
                             step = 2
                         )
                     )
                     db.processDao().insert(
                         FoodProcess(
                             food = 1,
-                            description = "Biely jogurt na zjemnenie si do polievky dáme až na tanieri. Kto chce, môže si nastrúhať aj tvrdý syr.",
+                            description = context.getString(R.string.paradajkovapolievkapopis3),
                             step = 3
                         )
                     )
+                    /* ---------------------------------------------------------
+                       SEED: vloženie *jedál* (Food) – verzia, ktorá VŠADE používa
+                       string‑resources (názov + popis) namiesto natvrdo
+                       zapísaných reťazcov.
+                       --------------------------------------------------------- */
 
-                    //druhe jedlo
-                    val bitmap1 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.brokolicovapolievka
-                    )
-
-                    var quality1 = 90
-                    var byteArray1: ByteArray
-
+                    /* 16 ▸ Pór s hrozienkami */
+                    val bitmap16_1 = BitmapFactory.decodeResource(context.resources, R.drawable.porshrozienkami)
+                    var quality16_1 = 90
+                    lateinit var bytes16_1: ByteArray
                     do {
-                        val stream1 = ByteArrayOutputStream()
-                        bitmap1.compress(Bitmap.CompressFormat.JPEG, quality1, stream1)
-                        byteArray1 = stream1.toByteArray()
-                        quality1 -= 5
-                    } while (byteArray1.size > 500_000 && quality1 > 10)
+                        val s = ByteArrayOutputStream()
+                        bitmap16_1.compress(Bitmap.CompressFormat.JPEG, quality16_1, s)
+                        bytes16_1 = s.toByteArray()
+                        quality16_1 -= 5
+                    } while (bytes16_1.size > 500_000 && quality16_1 > 10)
 
                     db.foodDao().insert(
                         Food(
-                            name = "Brokolicová polievka s guľôčkami",
-                            typeId = 1,
-                            cookingTime = 30,
-                            preparingTime = 10,
-                            portions = 4,
-                            calories = 222,
-                            description = "Výborná krémová brokolicová polievka, inú už nerobím.",
-                            image = byteArray1
+                            name            = context.getString(R.string.sestnastejedlonazov),
+                            typeId          = 5,
+                            cookingTime     = 15,
+                            preparingTime   = 10,
+                            portions        = 2,
+                            calories        = 130,
+                            description     = context.getString(R.string.sestnastejedlopopis),
+                            image           = bytes16_1
                         )
                     )
 
-                    val foodId1 = 2
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId1, stuff = "brokolica", quantity = 250.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId1, stuff = "zemiaky", quantity = 400.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId1, stuff = "smotana na varenie", quantity = 200.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId1, stuff = "cesnak", quantity = 4.0, unit = "strúčiky"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId1, stuff = "cibuľa", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId1, stuff = "bujón zeleninový", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId1, stuff = "soľ", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId1, stuff = "korenie čierne mleté", quantity = 0.3, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId1, stuff = "olej", quantity = 1.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId1, stuff = "guľôčky do polievky", quantity = 100.0, unit = "g"))
+                    /* 17 ▸ Zemiaky s kyslými uhorkami */
+                    val bitmap17_1 = BitmapFactory.decodeResource(context.resources, R.drawable.zemiakysuhormai)
+                    var quality17_1 = 90
+                    lateinit var bytes17_1: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap17_1.compress(Bitmap.CompressFormat.JPEG, quality17_1, s)
+                        bytes17_1 = s.toByteArray()
+                        quality17_1 -= 5
+                    } while (bytes17_1.size > 500_000 && quality17_1 > 10)
 
-                    db.processDao().insert(FoodProcess(food = foodId1, step = 1, description = "Vezmeme si polovicu brokolice, umyjeme ju a rozdelíme na ružičky. Ošúpeme, nakrájame cibuľu na drobno a zemiaky na malé kocky."))
-                    db.processDao().insert(FoodProcess(food = foodId1, step = 2, description = "Cibuľu orestujeme na oleji. Pridáme zemiaky a ružičky brokolice. Smažíme 5–10 minút, troška môžeme podliať vodou."))
-                    db.processDao().insert(FoodProcess(food = foodId1, step = 3, description = "Pridáme pretlačený cesnak a smažíme všetko spolu. Zalejeme vodou, cca 1 liter. Pridáme soľ, čierne korenie, zeleninový bujón."))
-                    db.processDao().insert(FoodProcess(food = foodId1, step = 4, description = "Varíme do zmäknutia zemiakov a brokolice. Keď je všetko mäkké, rozmixujeme všetko ponorným mixérom."))
-                    db.processDao().insert(FoodProcess(food = foodId1, step = 5, description = "Pridáme smotanu na varenie a necháme ešte prevariť. Dochutíme podľa potreby a odstavíme zo sporáka."))
-                    db.processDao().insert(FoodProcess(food = foodId1, step = 6, description = "Podávame s kúpenými guľôčkami do polievky. Dobrú chuť."))
+                    db.foodDao().insert(
+                        Food(
+                            name            = context.getString(R.string.sedemnastejedlonazov),
+                            typeId          = 5,
+                            cookingTime     = 20,
+                            preparingTime   = 10,
+                            portions        = 3,
+                            calories        = 160,
+                            description     = context.getString(R.string.sedemnastejedlopopis),
+                            image           = bytes17_1
+                        )
+                    )
+
+
+                    /* 18 ▸ Omáčka Mojo Rocho */
+                    val bitmap18_1 = BitmapFactory.decodeResource(context.resources, R.drawable.mojorocho)
+                    var quality18_1 = 90
+                    lateinit var bytes18_1: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap18_1.compress(Bitmap.CompressFormat.JPEG, quality18_1, s)
+                        bytes18_1 = s.toByteArray()
+                        quality18_1 -= 5
+                    } while (bytes18_1.size > 500_000 && quality18_1 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name            = context.getString(R.string.osemnastejedlonazov),
+                            typeId          = 5,
+                            cookingTime     = 0,
+                            preparingTime   = 10,
+                            portions        = 6,
+                            calories        = 90,
+                            description     = context.getString(R.string.osemnastejedlopopis),
+                            image           = bytes18_1
+                        )
+                    )
+
+
+                    /* 19 ▸ Zapekané cestoviny so syrom a semienkami */
+                    val bitmap19_1 = BitmapFactory.decodeResource(context.resources, R.drawable.zapekanecestoviny)
+                    var quality19_1 = 90
+                    lateinit var bytes19_1: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap19_1.compress(Bitmap.CompressFormat.JPEG, quality19_1, s)
+                        bytes19_1 = s.toByteArray()
+                        quality19_1 -= 5
+                    } while (bytes19_1.size > 500_000 && quality19_1 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name            = context.getString(R.string.devatnastejedlonazov),
+                            typeId          = 3,
+                            cookingTime     = 25,
+                            preparingTime   = 20,
+                            portions        = 4,
+                            calories        = 450,
+                            description     = context.getString(R.string.devatnastejedlopopis),
+                            image           = bytes19_1
+                        )
+                    )
+
+
+                    /* 20 ▸ Čokoládové brownie */
+                    val bitmap20_1 = BitmapFactory.decodeResource(context.resources, R.drawable.brownies)
+                    var quality20_1 = 90
+                    lateinit var bytes20_1: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap20_1.compress(Bitmap.CompressFormat.JPEG, quality20_1, s)
+                        bytes20_1 = s.toByteArray()
+                        quality20_1 -= 5
+                    } while (bytes20_1.size > 500_000 && quality20_1 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name            = context.getString(R.string.dvadsatejedlonazov),
+                            typeId          = 4,
+                            cookingTime     = 30,
+                            preparingTime   = 15,
+                            portions        = 12,
+                            calories        = 450,
+                            description     = context.getString(R.string.dvadsatejedlopopis),
+                            image           = bytes20_1
+                        )
+                    )
+                    /* 2 ▸ Brokolicová polievka s guľôčkami */
+                    val bitmap1  = BitmapFactory.decodeResource(context.resources, R.drawable.brokolicovapolievka)
+                    var quality1 = 90
+                    lateinit var bytes1: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap1.compress(Bitmap.CompressFormat.JPEG, quality1, s)
+                        bytes1 = s.toByteArray()
+                        quality1 -= 5
+                    } while (bytes1.size > 500_000 && quality1 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.druhejjedlonazov),
+                            typeId        = 1,
+                            cookingTime   = 30,
+                            preparingTime = 10,
+                            portions      = 4,
+                            calories      = 222,
+                            description   = context.getString(R.string.druhejjedlopopis),
+                            image         = bytes1
+                        )
+                    )
+
+
+                    /* 3 ▸ Šošovicová polievka s párkom */
+                    val bitmap2  = BitmapFactory.decodeResource(context.resources, R.drawable.sosovicovapolievka)
+                    var quality2 = 90
+                    lateinit var bytes2: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap2.compress(Bitmap.CompressFormat.JPEG, quality2, s)
+                        bytes2 = s.toByteArray()
+                        quality2 -= 5
+                    } while (bytes2.size > 500_000 && quality2 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.tretiejedlonazov),
+                            typeId        = 1,
+                            cookingTime   = 40,
+                            preparingTime = 15,
+                            portions      = 4,
+                            calories      = 250,
+                            description   = context.getString(R.string.tretiejedlopopis),
+                            image         = bytes2
+                        )
+                    )
+
+
+                    /* 4 ▸ Glazované kura s broskyňou a zázvorom */
+                    val bitmap3  = BitmapFactory.decodeResource(context.resources, R.drawable.kurasbroskynou)
+                    var quality3 = 90
+                    lateinit var bytes3: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap3.compress(Bitmap.CompressFormat.JPEG, quality3, s)
+                        bytes3 = s.toByteArray()
+                        quality3 -= 5
+                    } while (bytes3.size > 500_000 && quality3 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.stvrtejjedlonazov),
+                            typeId        = 3,
+                            cookingTime   = 30,
+                            preparingTime = 15,
+                            portions      = 4,
+                            calories      = 350,
+                            description   = context.getString(R.string.stvrtejjedlopopis),
+                            image         = bytes3
+                        )
+                    )
+
+
+                    /* 5 ▸ Kuracie plátky v marináde */
+                    val bitmap4  = BitmapFactory.decodeResource(context.resources, R.drawable.kuracieplatkynamarinade)
+                    var quality4 = 90
+                    lateinit var bytes4: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap4.compress(Bitmap.CompressFormat.JPEG, quality4, s)
+                        bytes4 = s.toByteArray()
+                        quality4 -= 5
+                    } while (bytes4.size > 500_000 && quality4 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.piatejedlonazov),
+                            typeId        = 3,
+                            cookingTime   = 6,
+                            preparingTime = 10,
+                            portions      = 4,
+                            calories      = 300,
+                            description   = context.getString(R.string.piatejedlopopis),
+                            image         = bytes4
+                        )
+                    )
+
+
+                    /* 6 ▸ Pečené bataty plnené fazuľou */
+                    val bitmap5  = BitmapFactory.decodeResource(context.resources, R.drawable.pecenebataty)
+                    var quality5 = 90
+                    lateinit var bytes5: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap5.compress(Bitmap.CompressFormat.JPEG, quality5, s)
+                        bytes5 = s.toByteArray()
+                        quality5 -= 5
+                    } while (bytes5.size > 500_000 && quality5 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.siestejedlonazov),
+                            typeId        = 3,
+                            cookingTime   = 40,
+                            preparingTime = 15,
+                            portions      = 4,
+                            calories      = 350,
+                            description   = context.getString(R.string.siestejedlopopis),
+                            image         = bytes5
+                        )
+                    )
+
+
+                    /* 7 ▸ Pasta alla Norma */
+                    val bitmap6  = BitmapFactory.decodeResource(context.resources, R.drawable.pastaalla)
+                    var quality6 = 90
+                    lateinit var bytes6: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap6.compress(Bitmap.CompressFormat.JPEG, quality6, s)
+                        bytes6 = s.toByteArray()
+                        quality6 -= 5
+                    } while (bytes6.size > 500_000 && quality6 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.siedmejedlonazov),
+                            typeId        = 3,
+                            cookingTime   = 20,
+                            preparingTime = 30,
+                            portions      = 4,
+                            calories      = 400,
+                            description   = context.getString(R.string.siedmejedlopopis),
+                            image         = bytes6
+                        )
+                    )
+
+
+                    /* 8 ▸ Sicílska caponata */
+                    val bitmap7  = BitmapFactory.decodeResource(context.resources, R.drawable.sicilskacaponata)
+                    var quality7 = 90
+                    lateinit var bytes7: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap7.compress(Bitmap.CompressFormat.JPEG, quality7, s)
+                        bytes7 = s.toByteArray()
+                        quality7 -= 5
+                    } while (bytes7.size > 500_000 && quality7 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.osmejedlonazov),
+                            typeId        = 2,
+                            cookingTime   = 45,
+                            preparingTime = 15,
+                            portions      = 4,
+                            calories      = 250,
+                            description   = context.getString(R.string.osmejedlopopis),
+                            image         = bytes7
+                        )
+                    )
+
+
+                    /* 9 ▸ Kačacia pečeň s cibuľovým čatní */
+                    val bitmap8  = BitmapFactory.decodeResource(context.resources, R.drawable.kacaciapecen)
+                    var quality8 = 90
+                    lateinit var bytes8: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap8.compress(Bitmap.CompressFormat.JPEG, quality8, s)
+                        bytes8 = s.toByteArray()
+                        quality8 -= 5
+                    } while (bytes8.size > 500_000 && quality8 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.deviatejedlonazov),
+                            typeId        = 2,
+                            cookingTime   = 30,
+                            preparingTime = 15,
+                            portions      = 4,
+                            calories      = 350,
+                            description   = context.getString(R.string.deviatejedlopopis),
+                            image         = bytes8
+                        )
+                    )
+
+
+                    /* 10 ▸ Zapekané figy s kozím syrom */
+                    val bitmap9  = BitmapFactory.decodeResource(context.resources, R.drawable.zapekanefigy)
+                    var quality9 = 90
+                    lateinit var bytes9: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap9.compress(Bitmap.CompressFormat.JPEG, quality9, s)
+                        bytes9 = s.toByteArray()
+                        quality9 -= 5
+                    } while (bytes9.size > 500_000 && quality9 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.desiatejedlonazov),
+                            typeId        = 2,
+                            cookingTime   = 8,
+                            preparingTime = 10,
+                            portions      = 4,
+                            calories      = 200,
+                            description   = context.getString(R.string.desiatejedlopopis),
+                            image         = bytes9
+                        )
+                    )
+
+
+                    /* 11 ▸ Výborný tvarožník */
+                    val bitmap10  = BitmapFactory.decodeResource(context.resources, R.drawable.tvarohoznik)
+                    var quality10 = 90
+                    lateinit var bytes10: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap10.compress(Bitmap.CompressFormat.JPEG, quality10, s)
+                        bytes10 = s.toByteArray()
+                        quality10 -= 5
+                    } while (bytes10.size > 500_000 && quality10 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.jedenastejedlonazov),
+                            typeId        = 4,
+                            cookingTime   = 35,
+                            preparingTime = 15,
+                            portions      = 9,
+                            calories      = 250,
+                            description   = context.getString(R.string.jedenastejedlopopis),
+                            image         = bytes10
+                        )
+                    )
+
+
+                    /* 12 ▸ Citrónovo‑makové makrónky */
+                    val bitmap11  = BitmapFactory.decodeResource(context.resources, R.drawable.makronky)
+                    var quality11 = 90
+                    lateinit var bytes11: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap11.compress(Bitmap.CompressFormat.JPEG, quality11, s)
+                        bytes11 = s.toByteArray()
+                        quality11 -= 5
+                    } while (bytes11.size > 500_000 && quality11 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.dvanastejedlonazov),
+                            typeId        = 4,
+                            cookingTime   = 18,
+                            preparingTime = 30,
+                            portions      = 25,
+                            calories      = 120,
+                            description   = context.getString(R.string.dvanastejedlopopis),
+                            image         = bytes11
+                        )
+                    )
+
+
+                    /* 13 ▸ Mrkvový koláč bez lepku */
+                    val bitmap12  = BitmapFactory.decodeResource(context.resources, R.drawable.mrkvovykolac)
+                    var quality12 = 90
+                    lateinit var bytes12: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap12.compress(Bitmap.CompressFormat.JPEG, quality12, s)
+                        bytes12 = s.toByteArray()
+                        quality12 -= 5
+                    } while (bytes12.size > 500_000 && quality12 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.trinastejedlonazov),
+                            typeId        = 4,
+                            cookingTime   = 30,
+                            preparingTime = 20,
+                            portions      = 15,
+                            calories      = 220,
+                            description   = context.getString(R.string.trinastejedlopopis),
+                            image         = bytes12
+                        )
+                    )
+
+
+                    /* 14 ▸ Orechovo‑vanilkové rezy */
+                    val bitmap13  = BitmapFactory.decodeResource(context.resources, R.drawable.orechovy)
+                    var quality13 = 90
+                    lateinit var bytes13: ByteArray
+                    do {
+                        val s = ByteArrayOutputStream()
+                        bitmap13.compress(Bitmap.CompressFormat.JPEG, quality13, s)
+                        bytes13 = s.toByteArray()
+                        quality13 -= 5
+                    } while (bytes13.size > 500_000 && quality13 > 10)
+
+                    db.foodDao().insert(
+                        Food(
+                            name          = context.getString(R.string.strnastejedlonazov),
+                            typeId        = 4,
+                            cookingTime   = 30,
+                            preparingTime = 40,
+                            portions      = 60,
+                            calories      = 300,
+                            description   = context.getString(R.string.strnastejedlopopis),
+                            image         = bytes13
+                        )
+                    )
+
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 2,
+                            stuff = context.getString(R.string.druhejedloingredience1),
+                            quantity = 250.0,
+                            unit = context.getString(R.string.druhejedlojednotka1)
+                        )
+                    )
+
+
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 2,
+                            stuff = context.getString(R.string.druhejedloingredience2),
+                            quantity = 400.0,
+                            unit = context.getString(R.string.druhejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 2,
+                            stuff = context.getString(R.string.druhejedloingredience3),
+                            quantity = 200.0,
+                            unit = context.getString(R.string.druhejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 2,
+                            stuff = context.getString(R.string.druhejedloingredience4),
+                            quantity = 4.0,
+                            unit = context.getString(R.string.druhejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 2,
+                            stuff = context.getString(R.string.druhejedloingredience5),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.druhejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 2,
+                            stuff = context.getString(R.string.druhejedloingredience6),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.druhejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 2,
+                            stuff = context.getString(R.string.druhejedloingredience7),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.druhejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 2,
+                            stuff = context.getString(R.string.druhejedloingredience8),
+                            quantity = 0.3,
+                            unit = context.getString(R.string.druhejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 2,
+                            stuff = context.getString(R.string.druhejedloingredience9),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.druhejedlojednotka9)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 2,
+                            stuff = context.getString(R.string.druhejedloingredience10),
+                            quantity = 100.0,
+                            unit = context.getString(R.string.druhejedlojednotka10)
+                        )
+                    )
+
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 2,
+                            description = context.getString(R.string.druhejedlopopis1),
+                            step = 1
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 2,
+                            description = context.getString(R.string.druhejedlopopis2),
+                            step = 2
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 2,
+                            description = context.getString(R.string.druhejedlopopis3),
+                            step = 3
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 2,
+                            description = context.getString(R.string.druhejedlopopis4),
+                            step = 4
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 2,
+                            description = context.getString(R.string.druhejedlopopis5),
+                            step = 5
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 2,
+                            description = context.getString(R.string.druhejedlopopis6),
+                            step = 6
+                        )
+                    )
 
                     //tretie jedlo
-                    val bitmap2 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.sosovicovapolievka
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience1),
+                            quantity = 250.0,
+                            unit = context.getString(R.string.tretiejedlojednotka1)
+                        )
                     )
-
-                    var quality2 = 90
-                    var byteArray2: ByteArray
-
-                    do {
-                        val stream2 = ByteArrayOutputStream()
-                        bitmap2.compress(Bitmap.CompressFormat.JPEG, quality2, stream2)
-                        byteArray2 = stream2.toByteArray()
-                        quality2 -= 5
-                    } while (byteArray2.size > 500_000 && quality2 > 10)
-
-                    val foodId2 = 3
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Šošovicová polievka s párkom",
-                            typeId = 1,
-                            cookingTime = 40,
-                            preparingTime = 15,
-                            portions = 4,
-                            calories = 250,
-                            description = "Klasická šošovicová polievka s párkom, hustá a výdatná, ideálna na chladné dni.",
-                            image = byteArray2
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience2),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.tretiejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience3),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.tretiejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience4),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.tretiejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience5),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.tretiejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience6),
+                            quantity = 4.0,
+                            unit = context.getString(R.string.tretiejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience7),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.tretiejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience8),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.tretiejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience9),
+                            quantity = 0.3,
+                            unit = context.getString(R.string.tretiejedlojednotka9)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience10),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.tretiejedlojednotka10)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience11),
+                            quantity = 2000.0,
+                            unit = context.getString(R.string.tretiejedlojednotka11)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience12),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.tretiejedlojednotka12)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 3,
+                            stuff = context.getString(R.string.tretiejedloingredience13),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.tretiejedlojednotka13)
                         )
                     )
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "šošovica", quantity = 250.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "mrkva", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "cibuľa", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "maslo", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "múka hladká", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "cesnak", quantity = 4.0, unit = "strúčiky"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "bobkový list", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "paprika červená sladká mletá", quantity = 1.0, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "korenie čierne mleté", quantity = 0.3, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "soľ", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "vývar zeleninový", quantity = 2000.0, unit = "ml"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "majorán", quantity = 1.0, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId2, stuff = "párky", quantity = 3.0, unit = "ks"))
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 3,
+                            step = 1,
+                            description = context.getString(R.string.tretiejedlopopis1)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 3,
+                            step = 2,
+                            description = context.getString(R.string.tretiejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 3,
+                            step = 3,
+                            description = context.getString(R.string.tretiejedlopopis3)
+                        )
+                    )
 
-                    db.processDao().insert(FoodProcess(food = foodId2, step = 1, description = "Šošovicu prepláchneme a namočíme na hodinu do vody. Cibuľu nakrájame nadrobno a orestujeme na masle do sklovita. Pridáme múku a pripravíme zápražku. Do hotovej zápražky pridáme mletú červenú papriku, dávame pozor, aby neprihorela."))
-                    db.processDao().insert(FoodProcess(food = foodId2, step = 2, description = "Zápražku pomaly zalievame vývarom a miešame metličkou, aby nevznikli hrudky. Pridáme namočenú šošovicu, nakrájanú mrkvu, bobkový list, čierne korenie a 2 strúčiky cesnaku. Varíme, občas premiešame."))
-                    db.processDao().insert(FoodProcess(food = foodId2, step = 3, description = "Keď je šošovica mäkká, osolíme, pridáme majoránku, nakrájané párky a zvyšné 2 strúčiky cesnaku. Chvíľu povaríme a odstavíme."))
 
                     //4 jedlo
-                    val bitmap3 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.kurasbroskynou
+                    // FoodStuff – Glazované kura s broskyňou a zázvorom (food = 4)
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience1),
+                            quantity = 500.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka1)
+                        )
                     )
-
-                    var quality3 = 90
-                    var byteArray3: ByteArray
-
-                    do {
-                        val stream3 = ByteArrayOutputStream()
-                        bitmap3.compress(Bitmap.CompressFormat.JPEG, quality3, stream3)
-                        byteArray3 = stream3.toByteArray()
-                        quality3 -= 5
-                    } while (byteArray3.size > 500_000 && quality3 > 10)
-
-                    val foodId3 = 4
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Glazované kura s broskyňou a zázvorom",
-                            typeId = 3,
-                            cookingTime = 30,
-                            preparingTime = 15,
-                            portions = 4,
-                            calories = 350,
-                            description = "Rýchle a chutné ázijské jedlo s kombináciou sladkých broskýň a pikantného zázvoru.",
-                            image = byteArray3
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience2),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.stvrtejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience3),
+                            quantity = 0.3,
+                            unit = context.getString(R.string.stvrtejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience4),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience5),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience6),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience7),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience8),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience9),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka9)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience10),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka10)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience11),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka11)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience12),
+                            quantity = 200.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka12)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience13),
+                            quantity = 150.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka13)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience14),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.stvrtejedlojednotka14)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience15),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka15)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience16),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka16)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience17),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka17)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience18),
+                            quantity = 1.5,
+                            unit = context.getString(R.string.stvrtejedlojednotka18)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 4,
+                            stuff = context.getString(R.string.stvrtejedloingredience19),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.stvrtejedlojednotka19)
                         )
                     )
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "kuracie prsia", quantity = 500.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "soľ", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "korenie čierne mleté", quantity = 0.3, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "škrob kukuričný", quantity = 1.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "múka hladká", quantity = 1.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "olej rastlinný", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "zázvor čerstvý", quantity = 2.0, unit = "cm"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "cesnak", quantity = 2.0, unit = "strúčiky"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "broskyne v náleve", quantity = 3.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "omáčka sójová", quantity = 3.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "džem broskyňový", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "vývar zeleninový", quantity = 200.0, unit = "ml"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "nálev z broskýň", quantity = 150.0, unit = "ml"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "čili (voliteľné)", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "cibuľka jarná", quantity = 2.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "sezam", quantity = 1.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "ryža jazmínová", quantity = 1.0, unit = "hrnček"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "voda", quantity = 1.5, unit = "hrnček"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId3, stuff = "list bobkový", quantity = 1.0, unit = "ks"))
-
-                    db.processDao().insert(FoodProcess(food = foodId3, step = 1, description = "Kuracie prsia nakrájame na kocky, osolíme, okoreníme a obalíme v zmesi škrobu a múky."))
-                    db.processDao().insert(FoodProcess(food = foodId3, step = 2, description = "Na panvici rozohrejeme olej a mäso opečieme dozlatista. Opečené mäso odložíme bokom."))
-                    db.processDao().insert(FoodProcess(food = foodId3, step = 3, description = "Na tej istej panvici orestujeme nastrúhaný zázvor a pretlačený cesnak. Pridáme na plátky nakrájané broskyne, sójovú omáčku, džem, vývar a nálev z broskýň."))
-                    db.processDao().insert(FoodProcess(food = foodId3, step = 4, description = "Omáčku krátko povaríme, vrátime mäso do panvice a necháme niekoľko minút variť, kým omáčka nezhustne a mäso nebude obalené lesklou glazúrou."))
-                    db.processDao().insert(FoodProcess(food = foodId3, step = 5, description = "Ryžu dôkladne prepláchneme a necháme odkvapkať."))
-                    db.processDao().insert(FoodProcess(food = foodId3, step = 6, description = "V hrnci vhodnom do rúry rozohrejeme olej, pridáme ryžu a krátko opečieme. Zalejeme vodou, pridáme soľ a bobkový list."))
-                    db.processDao().insert(FoodProcess(food = foodId3, step = 7, description = "Varíme, kým sa voda takmer neodparí. Potom hrniec prikryjeme a vložíme do predhriatej rúry na 180 °C na 12 minút."))
-                    db.processDao().insert(FoodProcess(food = foodId3, step = 8, description = "Podávame glazované kura s ryžou, posypané nasekanou jarnou cibuľkou a sezamom."))
-
-                    //5 jedlo
-                    val bitmap4 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.kuracieplatkynamarinade
+// FoodProcess – kroky prípravy
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 4,
+                            step = 1,
+                            description = context.getString(R.string.stvrtejedlopopis1)
+                        )
                     )
-
-                    var quality4 = 90
-                    var byteArray4: ByteArray
-
-                    do {
-                        val stream4 = ByteArrayOutputStream()
-                        bitmap4.compress(Bitmap.CompressFormat.JPEG, quality4, stream4)
-                        byteArray4 = stream4.toByteArray()
-                        quality4 -= 5
-                    } while (byteArray4.size > 500_000 && quality4 > 10)
-
-                    val foodId4 = 5
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Kuracie plátky v marináde",
-                            typeId = 3,
-                            cookingTime = 6,
-                            preparingTime = 10,
-                            portions = 4,
-                            calories = 300,
-                            description = "Rýchle a chutné kuracie plátky marinované v zmesi vajíčka, korenín a worcesterskej omáčky.",
-                            image = byteArray4
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 4,
+                            step = 2,
+                            description = context.getString(R.string.stvrtejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 4,
+                            step = 3,
+                            description = context.getString(R.string.stvrtejedlopopis3)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 4,
+                            step = 4,
+                            description = context.getString(R.string.stvrtejedlopopis4)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 4,
+                            step = 5,
+                            description = context.getString(R.string.stvrtejedlopopis5)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 4,
+                            step = 6,
+                            description = context.getString(R.string.stvrtejedlopopis6)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 4,
+                            step = 7,
+                            description = context.getString(R.string.stvrtejedlopopis7)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 4,
+                            step = 8,
+                            description = context.getString(R.string.stvrtejedlopopis8)
                         )
                     )
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId4, stuff = "kuracie prsia", quantity = 4.0, unit = "plátky"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId4, stuff = "vajce", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId4, stuff = "korenie karí", quantity = 1.0, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId4, stuff = "korenie biele mleté", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId4, stuff = "omáčka worcesterská", quantity = 1.0, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId4, stuff = "soľ", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId4, stuff = "olej", quantity = 2.0, unit = "PL"))
-
-                    db.processDao().insert(FoodProcess(food = foodId4, step = 1, description = "Všetky prísady na marinádu dáme do misky a prešľaháme."))
-                    db.processDao().insert(FoodProcess(food = foodId4, step = 2, description = "Do tejto marinády vložíme plátky mäsa a necháme marinovať 2–3 hodiny."))
-                    db.processDao().insert(FoodProcess(food = foodId4, step = 3, description = "Potom ich na oleji na panvici opekáme z oboch strán asi po 3 minúty. Dlhšie netreba."))
-                    db.processDao().insert(FoodProcess(food = foodId4, step = 4, description = "Podávame s ryžou, ktorú prelejeme trochou výpeku (ale nemusíme), a zeleninovým šalátom."))
-
-                    //6 jedlo
-                    val bitmap5 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.pecenebataty
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 5,
+                            stuff = context.getString(R.string.piatejedloingredience1),
+                            quantity = 4.0,
+                            unit = context.getString(R.string.piatejedlojednotka1)
+                        )
                     )
-
-                    var quality5 = 90
-                    var byteArray5: ByteArray
-
-                    do {
-                        val stream5 = ByteArrayOutputStream()
-                        bitmap5.compress(Bitmap.CompressFormat.JPEG, quality5, stream5)
-                        byteArray5 = stream5.toByteArray()
-                        quality5 -= 5
-                    } while (byteArray5.size > 500_000 && quality5 > 10)
-
-                    val foodId5 = 6
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Pečené bataty plnené fazuľou",
-                            typeId = 3,
-                            cookingTime = 40,
-                            preparingTime = 15,
-                            portions = 4,
-                            calories = 350,
-                            description = "Pečené sladké zemiaky sú dobré samy osebe. My sme k nim pridali fazuľu v paradajkovej omáčke. Vznikla tak výživná a chutná kombinácia.",
-                            image = byteArray5
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 5,
+                            stuff = context.getString(R.string.piatejedloingredience2),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.piatejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 5,
+                            stuff = context.getString(R.string.piatejedloingredience3),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.piatejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 5,
+                            stuff = context.getString(R.string.piatejedloingredience4),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.piatejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 5,
+                            stuff = context.getString(R.string.piatejedloingredience5),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.piatejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 5,
+                            stuff = context.getString(R.string.piatejedloingredience6),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.piatejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 5,
+                            stuff = context.getString(R.string.piatejedloingredience7),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.piatejedlojednotka7)
                         )
                     )
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "bataty", quantity = 4.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "fazuľa sterilizovaná", quantity = 400.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "paradajky lúpané krájané", quantity = 400.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "olej", quantity = 3.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "cibuľa", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "cesnak", quantity = 4.0, unit = "strúčiky"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "smotana kyslá", quantity = 4.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "špenát baby", quantity = 1.0, unit = "hrsť"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "vňať petržlenová", quantity = 1.0, unit = "hrsť"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "paprička jalapeno", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "soľ", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId5, stuff = "korenie čierne mleté", quantity = 0.3, unit = "čl"))
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 5,
+                            step = 1,
+                            description = context.getString(R.string.piatejedlopopis1)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 5,
+                            step = 2,
+                            description = context.getString(R.string.piatejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 5,
+                            step = 3,
+                            description = context.getString(R.string.piatejedlopopis3)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 5,
+                            step = 4,
+                            description = context.getString(R.string.piatejedlopopis4)
+                        )
+                    )
 
-                    db.processDao().insert(FoodProcess(food = foodId5, step = 1, description = "Umyté bataty rozložíme na plech, pokvapkáme 1 PL oleja a osolíme. Vložíme do rúry vyhriatej na 220 °C a pečieme 40 minút domäkka."))
-                    db.processDao().insert(FoodProcess(food = foodId5, step = 2, description = "Medzitým ošúpeme cibuľu a cesnak, nakrájame ich nadrobno a restujeme na zvyšnom oleji, kým zosklovatejú. Potom pridáme lúpané krájané paradajky a prepláchnutú sterilizovanú fazuľu. Osolíme, okoreníme a varíme do zhustnutia."))
-                    db.processDao().insert(FoodProcess(food = foodId5, step = 3, description = "Pečené bataty rozkrojíme a naplníme fazuľovou zmesou. Pridáme kyslú smotanu, špenát s petržlenovou vňaťou a kolieska papričky."))
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience1),
+                            quantity = 4.0,
+                            unit = context.getString(R.string.siestejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience2),
+                            quantity = 400.0,
+                            unit = context.getString(R.string.siestejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience3),
+                            quantity = 400.0,
+                            unit = context.getString(R.string.siestejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience4),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.siestejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience5),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.siestejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience6),
+                            quantity = 4.0,
+                            unit = context.getString(R.string.siestejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience7),
+                            quantity = 4.0,
+                            unit = context.getString(R.string.siestejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience8),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.siestejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience9),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.siestejedlojednotka9)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience10),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.siestejedlojednotka10)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience11),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.siestejedlojednotka11)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = 6,
+                            stuff = context.getString(R.string.siestejedloingredience12),
+                            quantity = 0.3,
+                            unit = context.getString(R.string.siestejedlojednotka12)
+                        )
+                    )
+
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 6,
+                            step = 1,
+                            description = context.getString(R.string.siestejedlopopis1)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 6,
+                            step = 2,
+                            description = context.getString(R.string.siestejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = 6,
+                            step = 3,
+                            description = context.getString(R.string.siestejedlopopis3)
+                        )
+                    )
 
                     //6.jedlo
-                    val bitmap6 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.paradajkovapolievka
-                    )
-
-                    var quality6 = 90
-                    var byteArray6: ByteArray
-
-                    do {
-                        val stream6 = ByteArrayOutputStream()
-                        bitmap6.compress(Bitmap.CompressFormat.JPEG, quality6, stream6)
-                        byteArray6 = stream6.toByteArray()
-                        quality6 -= 5
-                    } while (byteArray6.size > 500_000 && quality6 > 10)
-
+                    // 7. Pasta alla Norma
                     val foodId6 = 7
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Pasta alla Norma",
-                            typeId = 3,
-                            cookingTime = 20,
-                            preparingTime = 30,
-                            portions = 4,
-                            calories = 400,
-                            description = "Jedna zo sicílskych kulinárskych klasík. Názov dostala po rodákovi z Catanie, Vinzenzovi Bellinim, ktorý zložil operu Norma.",
-                            image = byteArray6
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience1),
+                            quantity = 750.0,
+                            unit = context.getString(R.string.siedmejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience2),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.siedmejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience3),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.siedmejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience4),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.siedmejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience5),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.siedmejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience6),
+                            quantity = 700.0,
+                            unit = context.getString(R.string.siedmejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience7),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.siedmejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience8),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.siedmejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience9),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.siedmejedlojednotka9)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience10),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.siedmejedlojednotka10)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience11),
+                            quantity = 500.0,
+                            unit = context.getString(R.string.siedmejedlojednotka11)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId6,
+                            stuff = context.getString(R.string.siedmejedloingredience12),
+                            quantity = 150.0,
+                            unit = context.getString(R.string.siedmejedlojednotka12)
                         )
                     )
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "baklažán", quantity = 750.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "soľ", quantity = 1.0, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "cesnak", quantity = 2.0, unit = "strúčiky"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "tymian", quantity = 3.0, unit = "vetvičky"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "olej olivový", quantity = 3.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "passata paradajková", quantity = 700.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "korenie čierne mleté", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "cukor", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "vločky čili", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "bazalka", quantity = 0.5, unit = "zväzok"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "cestoviny rigatoni alebo penne", quantity = 500.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId6, stuff = "ricotta salata alebo pecorino", quantity = 150.0, unit = "g"))
-
-                    db.processDao().insert(FoodProcess(food = foodId6, step = 1, description = "Baklažány umyjeme, necháme odkvapkať a nakrájame na hrubé kocky. Kocky baklažánu dáme do sitka, bohato posypeme soľou a necháme asi 20 minút pustiť šťavu."))
-                    db.processDao().insert(FoodProcess(food = foodId6, step = 2, description = "Cesnak ošúpeme a jemne nasekáme. Umyjeme tymian, osušíme a otrháme lístky zo stoniek. Rozohrejeme olivový olej v hrnci a cesnak spolu s tymianovými lístkami v ňom restujeme asi 2 minúty na nízkom až strednom ohni."))
-                    db.processDao().insert(FoodProcess(food = foodId6, step = 3, description = "Zalejeme paradajkovou passatou a opatrne dochutíme štipkou soli, korenia a cukru. Prípadne pridáme čili. Umyjeme bazalku, osušíme, asi polovicu z nej aj so stonkami pridáme do paradajkovej zmesi a varíme v otvorenom hrnci asi 20–25 minút za občasného miešania."))
-                    db.processDao().insert(FoodProcess(food = foodId6, step = 4, description = "Kocky baklažánu krátko opláchneme a osušíme kuchynskou utierkou. V panvici rozohrejeme dostatok olivového oleja na vyprážanie a baklažán v ňom po častiach 5–7 minút opekáme do chrumkava. Dochutíme štipkou soli a opekáme ďalšie 2–3 minúty. Opečené kocky baklažánu vyberieme z panvice a necháme odkvapkať na kuchynskom papieri."))
-                    db.processDao().insert(FoodProcess(food = foodId6, step = 5, description = "Keď paradajková omáčka zhustne, pridáme do nej kocky baklažánu, všetko premiešame a ešte raz dochutíme soľou, korením a podľa chuti cukrom. Všetko spolu povaríme ďalších 5 minút."))
-                    db.processDao().insert(FoodProcess(food = foodId6, step = 6, description = "Medzitým uvaríme cestoviny v osolenej vode al dente. Zvyšnú bazalku nasekáme na ozdobu a ricottu nahrubo nastrúhame. Keď sú cestoviny uvarené, scedíme ich, dáme priamo do baklažánovo-paradajkovej omáčky a všetko premiešame. Rozdelíme na taniere, ozdobíme strúhaným syrom ricotta a bazalkou a podávame."))
-
-                    //7 jedlo
-                    val bitmap7 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.sicilskacaponata
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId6,
+                            step = 1,
+                            description = context.getString(R.string.siedmejedlopopis1)
+                        )
                     )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId6,
+                            step = 2,
+                            description = context.getString(R.string.siedmejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId6,
+                            step = 3,
+                            description = context.getString(R.string.siedmejedlopopis3)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId6,
+                            step = 4,
+                            description = context.getString(R.string.siedmejedlopopis4)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId6,
+                            step = 5,
+                            description = context.getString(R.string.siedmejedlopopis5)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId6,
+                            step = 6,
+                            description = context.getString(R.string.siedmejedlopopis6)
+                        )
+                    )
+val foodId7 = 8
 
-                    var quality7 = 90
-                    var byteArray7: ByteArray
-
-                    do {
-                        val stream7 = ByteArrayOutputStream()
-                        bitmap7.compress(Bitmap.CompressFormat.JPEG, quality7, stream7)
-                        byteArray7 = stream7.toByteArray()
-                        quality7 -= 5
-                    } while (byteArray7.size > 500_000 && quality7 > 10)
-
-                    val foodId7 = 8
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Sicílska caponata",
-                            typeId = 2,
-                            cookingTime = 45,
-                            preparingTime = 15,
-                            portions = 4,
-                            calories = 250,
-                            description = "Caponata sa na talianskom ostrove Sicília podáva ako zeleninové predjedlo alebo ako príloha k mäsu aj rybám.",
-                            image = byteArray7
+// 8. Sicílska caponata
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience1),
+                            quantity = 400.0,
+                            unit = context.getString(R.string.osmejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience2),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.osmejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience3),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.osmejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience4),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.osmejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience5),
+                            quantity = 300.0,
+                            unit = context.getString(R.string.osmejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience6),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.osmejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience7),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.osmejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience8),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.osmejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience9),
+                            quantity = 2.5,
+                            unit = context.getString(R.string.osmejedlojednotka9)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience10),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.osmejedlojednotka10)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience11),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.osmejedlojednotka11)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience12),
+                            quantity = 6.0,
+                            unit = context.getString(R.string.osmejedlojednotka12)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience13),
+                            quantity = 0.3,
+                            unit = context.getString(R.string.osmejedlojednotka13)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId7,
+                            stuff = context.getString(R.string.osmejedloingredience14),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.osmejedlojednotka14)
                         )
                     )
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "baklažán", quantity = 400.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "zeler stonkový", quantity = 3.0, unit = "stonky"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "cibuľa červená", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "cesnak", quantity = 2.0, unit = "strúčiky"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "paradajky koktailové", quantity = 300.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "olivy čierne", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "kapary", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "bazalka", quantity = 0.5, unit = "hrnček"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "ocot vínny", quantity = 2.5, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "cukor", quantity = 0.5, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "oriešky píniové", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "olej olivový", quantity = 6.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "korenie čierne mleté", quantity = 0.3, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId7, stuff = "soľ", quantity = 0.5, unit = "čl"))
-
-                    db.processDao().insert(FoodProcess(food = foodId7, step = 1, description = "Zeler umyjeme, odrežeme horné a dolné konce a nakrájame na jemné pásiky. Olúpanú cibuľu a cesnak nakrájame nadrobno. Baklažán umyjeme, nakrájame na tenké plátky a rozrežeme na osminky. Paradajky nakrájame na malé kocky."))
-                    db.processDao().insert(FoodProcess(food = foodId7, step = 2, description = "Baklažány opečieme vo dvoch dávkach vždy na 2 PL olivového oleja. Vyberieme ich z panvice, rozohrejeme zvyšné 2 PL oleja, krátko opečieme cibuľu a cesnak, pridáme zeler, paradajky a baklažány, osolíme a okoreníme a na miernom ohni budeme dusiť 5 minút zakryté pokrievkou."))
-                    db.processDao().insert(FoodProcess(food = foodId7, step = 3, description = "Tento čas využijeme na rozpolenie olív, nasekanie bazalky a opláchnutie kapár. Pridáme tieto prísady, ako aj ocot a cukor a budeme variť ďalších 15 minút, občas premiešame. Na malej panvici nasucho opražíme píniové oriešky a pred podávaním nimi jedlo posypeme. Podávame s bielym chlebom."))
-
-
-                    //8. jedlo
-                    val bitmap8 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.kacaciapecen
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId7,
+                            step = 1,
+                            description = context.getString(R.string.osmejedlopopis1)
+                        )
                     )
-
-                    var quality8 = 90
-                    var byteArray8: ByteArray
-
-                    do {
-                        val stream8 = ByteArrayOutputStream()
-                        bitmap8.compress(Bitmap.CompressFormat.JPEG, quality8, stream8)
-                        byteArray8 = stream8.toByteArray()
-                        quality8 -= 5
-                    } while (byteArray8.size > 500_000 && quality8 > 10)
-
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId7,
+                            step = 2,
+                            description = context.getString(R.string.osmejedlopopis2)
+                        )
+                    )
                     val foodId8 = 9
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Kačacia pečeň s cibuľovým čatní",
-                            typeId = 2,
-                            cookingTime = 30,
-                            preparingTime = 15,
-                            portions = 4,
-                            calories = 350,
-                            description = "Kačacia pečeň s cibuľovým čatní je lahodné predjedlo, ktoré kombinuje bohatú chuť pečene s výrazným sladkokyslým čatní.",
-                            image = byteArray8
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId7,
+                            step = 3,
+                            description = context.getString(R.string.osmejedlopopis3)
                         )
                     )
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId8, stuff = "pečeň kačacia", quantity = 300.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId8, stuff = "korenie čierne mleté", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId8, stuff = "soľ", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId8, stuff = "cibuľa červená", quantity = 2.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId8, stuff = "ocot balzamikový", quantity = 100.0, unit = "ml"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId8, stuff = "víno červené", quantity = 300.0, unit = "ml"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId8, stuff = "omáčka worcesterská", quantity = 1.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId8, stuff = "med", quantity = 50.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId8, stuff = "olej", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId8, stuff = "bageta", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId8, stuff = "poľníček", quantity = 1.0, unit = "hrsť"))
-
-                    db.processDao().insert(FoodProcess(food = foodId8, step = 1, description = "Kačaciu pečeň nakrájame na centimetrové plátky, na silnom ohni prudko nasucho opečieme z oboch strán asi 2 minúty. Dochutíme soľou a korením."))
-                    db.processDao().insert(FoodProcess(food = foodId8, step = 2, description = "Červenú cibuľu nakrájame na väčšie kusy a zľahka orestujeme na oleji. Podlejeme balzamikovým octom, vínom, pridáme med a worcesterskú omáčku. Zredukujeme tekutinu na minimum, až kým nedostaneme husté sladkokyslé čatní."))
-                    db.processDao().insert(FoodProcess(food = foodId8, step = 3, description = "Bagetu nakrájame na plátky a nasucho ich opečieme. Na každý tanier dáme dva plátky bagety, kačaciu pečeň a pokvapkáme výpekom z nej."))
-                    db.processDao().insert(FoodProcess(food = foodId8, step = 4, description = "Servírujeme s cibuľovým čatní a lístkami poľníčka."))
-
-                    //9. jedlo
-                    val bitmap9 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.zapekanefigy
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId8,
+                            stuff = context.getString(R.string.deviatejedloingredience1),
+                            quantity = 300.0,
+                            unit = context.getString(R.string.deviatejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId8,
+                            stuff = context.getString(R.string.deviatejedloingredience2),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.deviatejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId8,
+                            stuff = context.getString(R.string.deviatejedloingredience3),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.deviatejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId8,
+                            stuff = context.getString(R.string.deviatejedloingredience4),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.deviatejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId8,
+                            stuff = context.getString(R.string.deviatejedloingredience5),
+                            quantity = 100.0,
+                            unit = context.getString(R.string.deviatejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId8,
+                            stuff = context.getString(R.string.deviatejedloingredience6),
+                            quantity = 300.0,
+                            unit = context.getString(R.string.deviatejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId8,
+                            stuff = context.getString(R.string.deviatejedloingredience7),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.deviatejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId8,
+                            stuff = context.getString(R.string.deviatejedloingredience8),
+                            quantity = 50.0,
+                            unit = context.getString(R.string.deviatejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId8,
+                            stuff = context.getString(R.string.deviatejedloingredience9),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.deviatejedlojednotka9)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId8,
+                            stuff = context.getString(R.string.deviatejedloingredience10),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.deviatejedlojednotka10)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId8,
+                            stuff = context.getString(R.string.deviatejedloingredience11),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.deviatejedlojednotka11)
+                        )
                     )
 
-                    var quality9 = 90
-                    var byteArray9: ByteArray
-
-                    do {
-                        val stream9 = ByteArrayOutputStream()
-                        bitmap9.compress(Bitmap.CompressFormat.JPEG, quality9, stream9)
-                        byteArray9 = stream9.toByteArray()
-                        quality9 -= 5
-                    } while (byteArray9.size > 500_000 && quality9 > 10)
-
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId8,
+                            step = 1,
+                            description = context.getString(R.string.deviatejedlopopis1)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId8,
+                            step = 2,
+                            description = context.getString(R.string.deviatejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId8,
+                            step = 3,
+                            description = context.getString(R.string.deviatejedlopopis3)
+                        )
+                    )
                     val foodId9 = 10
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Zapekané figy s medom, pistáciami a kozím syrom",
-                            typeId = 2,
-                            cookingTime = 8,
-                            preparingTime = 10,
-                            portions = 4,
-                            calories = 200,
-                            description = "Jednoduchý a chutný recept na zapekané figy plnené kozím syrom, posypané pistáciami a pokvapkané medom.",
-                            image = byteArray9
-                        )
-                    )
-
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId9, stuff = "figy čerstvé", quantity = 8.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId9, stuff = "syr kozí (Lučina)", quantity = 100.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId9, stuff = "med", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId9, stuff = "pistácie", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId9, stuff = "soľ", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId9, stuff = "korenie čierne mleté", quantity = 0.3, unit = "čl"))
-
-                    db.processDao().insert(FoodProcess(food = foodId9, step = 1, description = "Čerstvé figy umyjeme, osušíme a narežeme do kríža alebo prerežeme po dĺžke na polovicu. Uložíme ich na pekáč vystlaný papierom na pečenie."))
-                    db.processDao().insert(FoodProcess(food = foodId9, step = 2, description = "Do každej figy vložíme trošku kozieho syra, posypeme nasekanými pistáciami, pokvapkáme medom a zľahka ochutíme soľou a čiernym korením."))
-                    db.processDao().insert(FoodProcess(food = foodId9, step = 3, description = "V rúre s funkciou gril zapekáme na najvyššom stupni približne 5–8 minút. Po upečení môžeme ešte jemne posypať soľou a korením a opäť pokvapkať medom."))
-                    db.processDao().insert(FoodProcess(food = foodId9, step = 4, description = "Podávame s nasucho opečeným domácim kváskovým chlebom."))
-
-
-                    //10
-                    val bitmap10 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.tvarohoznik
-                    )
-
-                    var quality10 = 90
-                    var byteArray10: ByteArray
-
-                    do {
-                        val stream10 = ByteArrayOutputStream()
-                        bitmap10.compress(Bitmap.CompressFormat.JPEG, quality10, stream10)
-                        byteArray10 = stream10.toByteArray()
-                        quality10 -= 5
-                    } while (byteArray10.size > 500_000 && quality10 > 10)
-
                     val foodId10 = 11
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Výborný tvarožník",
-                            typeId = 4,
-                            cookingTime = 35,
-                            preparingTime = 15,
-                            portions = 9,
-                            calories = 250,
-                            description = "Jemný šťavnatý tvarohový koláč, ktorý sa oplatí upiecť. Zmizol rýchlosťou blesku...",
-                            image = byteArray10
-                        )
-                    )
-
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId10, stuff = "tvaroh tučný hrudkovitý", quantity = 600.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId10, stuff = "vajcia", quantity = 3.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId10, stuff = "cukor kryštálový jemný", quantity = 3.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId10, stuff = "cukor vanilkový", quantity = 3.0, unit = "KL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId10, stuff = "krupica detská", quantity = 3.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId10, stuff = "kôra citrónová nastrúhaná", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId10, stuff = "soľ", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId10, stuff = "smotana kyslá 16%", quantity = 3.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId10, stuff = "hrozienka", quantity = 3.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId10, stuff = "cukor práškový", quantity = 1.0, unit = "PL"))
-
-                    db.processDao().insert(FoodProcess(food = foodId10, step = 1, description = "Hrozienka zalejeme vriacou vodou a necháme 5–10 minút napučať. Potom scedíme a osušíme."))
-                    db.processDao().insert(FoodProcess(food = foodId10, step = 2, description = "Oddelíme žĺtky od bielkov. Z bielkov a štipky soli vyšľaháme tuhý sneh."))
-                    db.processDao().insert(FoodProcess(food = foodId10, step = 3, description = "V miske vymiešame tvaroh, žĺtky, soľ, cukry, krupicu, smotanu a citrónovú kôru."))
-                    db.processDao().insert(FoodProcess(food = foodId10, step = 4, description = "Do tvarohovej masy primiešame hrozienka a následne opatrne vmiešame sneh."))
-                    db.processDao().insert(FoodProcess(food = foodId10, step = 5, description = "Cesto rozotrieme do formy 21×21 cm vystlanej papierom na pečenie."))
-                    db.processDao().insert(FoodProcess(food = foodId10, step = 6, description = "Pečieme v predhriatej rúre na 175–180 °C približne 35 minút."))
-                    db.processDao().insert(FoodProcess(food = foodId10, step = 7, description = "Po vychladnutí posypeme práškovým cukrom a podávame."))
-
-
-                    //11
-                    val bitmap11 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.makronky
-                    )
-
-                    var quality11 = 90
-                    var byteArray11: ByteArray
-
-                    do {
-                        val stream11 = ByteArrayOutputStream()
-                        bitmap11.compress(Bitmap.CompressFormat.JPEG, quality11, stream11)
-                        byteArray11 = stream11.toByteArray()
-                        quality11 -= 5
-                    } while (byteArray11.size > 500_000 && quality11 > 10)
-
                     val foodId11 = 12
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Citrónovo - makové makrónky",
-                            typeId = 4,
-                            cookingTime = 18,
-                            preparingTime = 30,
-                            portions = 25,
-                            calories = 120,
-                            description = "Makrónky s jemnou citrónovou plnkou a makovým korpusom pripravené talianskou metódou s cukrovým rozvarom.",
-                            image = byteArray11
-                        )
-                    )
-
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "mandľová múka", quantity = 85.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "mak mletý", quantity = 10.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "cukor práškový", quantity = 95.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "cukor kryštálový", quantity = 95.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "voda", quantity = 35.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "bielky", quantity = 70.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "soľ", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "mascarpone", quantity = 120.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "čokoláda biela", quantity = 90.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "lemon curd", quantity = 1.5, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "žĺtky", quantity = 6.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "cukor krupicový", quantity = 105.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "šťava citrónová", quantity = 100.0, unit = "ml"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "maslo", quantity = 75.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId11, stuff = "kôra citrónová", quantity = 2.0, unit = "ks"))
-
-                    db.processDao().insert(FoodProcess(food = foodId11, step = 1, description = "Pripravíme lemon curd: všetky suroviny zmiešame a nad parou šľaháme do zhustnutia. Trvá to približne 45 minút."))
-                    db.processDao().insert(FoodProcess(food = foodId11, step = 2, description = "Mandľovú múku preosejeme s práškovým cukrom a mletým makom. Pridáme 35 g nevyšľahaného bielka a premiešame na hustú pastu."))
-                    db.processDao().insert(FoodProcess(food = foodId11, step = 3, description = "Kryštálový cukor varíme s vodou, kým zmes nedosiahne 116 °C."))
-                    db.processDao().insert(FoodProcess(food = foodId11, step = 4, description = "Druhý bielok (35 g) so štipkou soli vyšľaháme na penu. Za stáleho šľahania pomaly prilievame horúci cukrový sirup a vyšľaháme na tuhý sneh."))
-                    db.processDao().insert(FoodProcess(food = foodId11, step = 5, description = "Sneh na trikrát vmiešame do mandľovej pasty, kým zmes nesteká plynulo zo stierky."))
-                    db.processDao().insert(FoodProcess(food = foodId11, step = 6, description = "Zmes naplníme do cukrárskeho vrecka a nastriekame na podložku."))
-                    db.processDao().insert(FoodProcess(food = foodId11, step = 7, description = "Pečieme v rúre predhriatej na 140 °C (ventilátor) približne 18 minút."))
-                    db.processDao().insert(FoodProcess(food = foodId11, step = 8, description = "Na plnku roztopíme bielu čokoládu, necháme vychladnúť a postupne zašľaháme do mascarpone. Pridáme lemon curd a krátko premixujeme."))
-                    db.processDao().insert(FoodProcess(food = foodId11, step = 9, description = "Krém necháme zatuhnúť v chladničke, potom naplníme do vrecka a plníme makrónky."))
-                    db.processDao().insert(FoodProcess(food = foodId11, step = 10, description = "Makrónky môžeme ozdobiť rozpustenou bielou čokoládou, lyofilizovanými malinami a makom."))
-
-                    //12
-                    val bitmap12 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.mrkvovykolac
-                    )
-
-                    var quality12 = 90
-                    var byteArray12: ByteArray
-
-                    do {
-                        val stream12 = ByteArrayOutputStream()
-                        bitmap12.compress(Bitmap.CompressFormat.JPEG, quality12, stream12)
-                        byteArray12 = stream12.toByteArray()
-                        quality12 -= 5
-                    } while (byteArray12.size > 500_000 && quality12 > 10)
-
                     val foodId12 = 13
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Mrkvový koláč bez lepku so smotanou a orechmi",
-                            typeId = 4,
-                            cookingTime = 30,
-                            preparingTime = 20,
-                            portions = 15,
-                            calories = 220,
-                            description = "Bezlepkový mrkvový koláč s gréckym jogurtom, jablkovým pyré a škoricou, ozdobený smotanovým krémom, orechmi a pomarančovou kôrou.",
-                            image = byteArray12
-                        )
-                    )
-
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "múka bezgluténová Promix PK", quantity = 140.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "vajcia", quantity = 4.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "orechy vlašské", quantity = 30.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "jogurt grécky biely", quantity = 160.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "pyré jablkové", quantity = 60.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "mrkva", quantity = 120.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "cukor trstinový", quantity = 85.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "škorica mletá", quantity = 1.0, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "prášok kypriaci bez lepku", quantity = 2.0, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "smotana kyslá", quantity = 300.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "med", quantity = 3.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "kôra pomarančová", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId12, stuff = "mäta", quantity = 1.0, unit = "hrsť"))
-
-                    db.processDao().insert(FoodProcess(food = foodId12, step = 1, description = "Vo väčšej mise vyšľaháme spolu vajcia s cukrom do nadýchanej peny. Pridáme jogurt a jablkové pyré a prešľaháme."))
-                    db.processDao().insert(FoodProcess(food = foodId12, step = 2, description = "Pridáme postrúhanú mrkvu a nasekané orechy."))
-                    db.processDao().insert(FoodProcess(food = foodId12, step = 3, description = "Do zmesi zapracujeme preosiatu múku zmiešanú so škoricou a kypriacim práškom bez lepku."))
-                    db.processDao().insert(FoodProcess(food = foodId12, step = 4, description = "Cesto vylejeme na plech vystlaný papierom na pečenie s rozmermi asi 25x30 cm."))
-                    db.processDao().insert(FoodProcess(food = foodId12, step = 5, description = "Pečieme v predhriatej rúre na 180 °C približne 25–30 minút."))
-                    db.processDao().insert(FoodProcess(food = foodId12, step = 6, description = "Po upečení necháme vychladnúť a potom naň rovnomerne rozotrieme kyslú smotanu vymiešanú s medom."))
-                    db.processDao().insert(FoodProcess(food = foodId12, step = 7, description = "Vložíme do chladničky a necháme trochu stuhnúť."))
-                    db.processDao().insert(FoodProcess(food = foodId12, step = 8, description = "Pred podávaním posypeme po stranách posekanými vlašskými orechmi a pomarančovou kôrou. Ozdobíme lístkami čerstvej mäty."))
-
-                    //13
-                    val bitmap13 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.orechovy
-                    )
-
-                    var quality13 = 90
-                    var byteArray13: ByteArray
-
-                    do {
-                        val stream13 = ByteArrayOutputStream()
-                        bitmap13.compress(Bitmap.CompressFormat.JPEG, quality13, stream13)
-                        byteArray13 = stream13.toByteArray()
-                        quality13 -= 5
-                    } while (byteArray13.size > 500_000 && quality13 > 10)
-
                     val foodId13 = 14
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Orechovo - vanilkové rezy",
-                            typeId = 4,
-                            cookingTime = 30,
-                            preparingTime = 40,
-                            portions = 60,
-                            calories = 300,
-                            description = "Slávnostný orechový zákusok na Veľkú noc s kombináciou vanilkových a orechových plátov, plnený vanilkovým krémom a čučoriedkovým džemom, zakončený čokoládovou polevou.",
-                            image = byteArray13
+                    val foodId14 = 15
+                    val foodId15 = 16
+                    val foodId16 = 17
+                    val foodId17 = 18
+                    val foodId18 = 19
+                    val foodId19 = 20
+                    //9. jedlo
+                    /* ----------------------------- 10. Zapekané figy ----------------------------- */
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId9,
+                            stuff = context.getString(R.string.desiatejedloingredience1),
+                            quantity = 8.0,
+                            unit = context.getString(R.string.desiatejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId9,
+                            stuff = context.getString(R.string.desiatejedloingredience2),
+                            quantity = 100.0,
+                            unit = context.getString(R.string.desiatejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId9,
+                            stuff = context.getString(R.string.desiatejedloingredience3),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.desiatejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId9,
+                            stuff = context.getString(R.string.desiatejedloingredience4),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.desiatejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId9,
+                            stuff = context.getString(R.string.desiatejedloingredience5),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.desiatejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId9,
+                            stuff = context.getString(R.string.desiatejedloingredience6),
+                            quantity = 0.3,
+                            unit = context.getString(R.string.desiatejedlojednotka6)
                         )
                     )
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "vajce", quantity = 12.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "cukor kryštálový", quantity = 9.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "cukor vanilkový", quantity = 2.0, unit = "bal"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "olej", quantity = 12.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "voda", quantity = 10.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "múka polohrubá", quantity = 15.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "prášok do pečiva", quantity = 3.0, unit = "ČL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "orechy mleté", quantity = 5.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "mlieko", quantity = 1000.0, unit = "ml"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "Zlatý klas", quantity = 4.0, unit = "bal"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "maslo", quantity = 500.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "likér vaječný", quantity = 50.0, unit = "ml"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "džem čučoriedkový", quantity = 1.0, unit = "podľa potreby"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "čokoláda", quantity = 200.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "Cera", quantity = 80.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId13, stuff = "orechy na ozdobu", quantity = 1.0, unit = "podľa potreby"))
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId9,
+                            step = 1,
+                            description = context.getString(R.string.desiatejedlopopis1)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId9,
+                            step = 2,
+                            description = context.getString(R.string.desiatejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId9,
+                            step = 3,
+                            description = context.getString(R.string.desiatejedlopopis3)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId9,
+                            step = 4,
+                            description = context.getString(R.string.desiatejedlopopis4)
+                        )
+                    )
 
-                    db.processDao().insert(FoodProcess(food = foodId13, step = 1, description = "Pripravíme si dve vanilkové piškóty: Vajíčka vyšľaháme s kryštálovým a vanilkovým cukrom do hustej peny, pridáme vodu, olej, múku s práškom do pečiva. Cesto rozotrieme na plech s papierom na pečenie a upečieme piškótu. Tak isto upečieme druhú piškótu."))
-                    db.processDao().insert(FoodProcess(food = foodId13, step = 2, description = "Pripravíme orechový plát: Vajíčka vyšľaháme s cukrom do hustej peny, pridáme vodu, olej, múku s práškom do pečiva a pomleté orechy. Cesto rozotrieme na plech s papierom na pečenie a upečieme piškótu."))
-                    db.processDao().insert(FoodProcess(food = foodId13, step = 3, description = "Krém: Časť mlieka odoberieme a rozmiešame v ňom Zlatý klas. Zvyšné mlieko s cukrom a mletou vanilkou dáme variť. Prilejeme v mlieku rozmiešaný pudingový prášok. Uvaríme hustý puding. Necháme vychladiť za občasného miešania. Nakoniec do pudingu zašľaháme po častiach maslo a vaječný likér. Vyšľaháme hladký krém."))
-                    db.processDao().insert(FoodProcess(food = foodId13, step = 4, description = "Skladanie rezu: Z krému odoberieme 3 PL a odložíme bokom. Zbytok krému rozdelíme na dve rovnaké časti. Jeden vanilkový prvý plát potrieme jednou polovicou krému. Orechový plát po upečení necháme na papieri na pečenie, potrieme ho čučoriedkovým džemom a pomocou papiera preklopíme na krém. Papier na pečenie stiahneme z orechového plátu a plát potrieme znova čučoriedkovým džemom. Na džem navrstvíme druhú časť krému. Na krém položíme druhý vanilkový plát. Zaťažíme a odložíme do chladu."))
-                    db.processDao().insert(FoodProcess(food = foodId13, step = 5, description = "Dokončenie: Kým zákusok tuhne pripravíme si polevu. Čokoládu s Cerou roztopíme spolu nad parou. Vrch zákusku potrieme jemne krémom, ktorý sme si odložili (3 polievkové lyžice). Robíme to preto, aby sa čokoládová poleva nevpila do korpusu. Takto pripravený rez polejeme čokoládovou polevou."))
-                    db.processDao().insert(FoodProcess(food = foodId13, step = 6, description = "Po stuhnutí nakrájame horúcim nožom na rezy. Ozdobíme orechom."))
 
-                    //14
-                    val bitmap14 = BitmapFactory.decodeResource(context.resources, R.drawable.zapecenezemiakystekvicou)
-                    var quality14 = 90
-                    var byteArray14: ByteArray
+                    /* ------------------------- 11. Výborný tvarožník ------------------------- */
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId10,
+                            stuff = context.getString(R.string.jedenastejedloingredience1),
+                            quantity = 600.0,
+                            unit = context.getString(R.string.jedenastejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId10,
+                            stuff = context.getString(R.string.jedenastejedloingredience2),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.jedenastejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId10,
+                            stuff = context.getString(R.string.jedenastejedloingredience3),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.jedenastejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId10,
+                            stuff = context.getString(R.string.jedenastejedloingredience4),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.jedenastejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId10,
+                            stuff = context.getString(R.string.jedenastejedloingredience5),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.jedenastejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId10,
+                            stuff = context.getString(R.string.jedenastejedloingredience6),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.jedenastejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId10,
+                            stuff = context.getString(R.string.jedenastejedloingredience7),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.jedenastejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId10,
+                            stuff = context.getString(R.string.jedenastejedloingredience8),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.jedenastejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId10,
+                            stuff = context.getString(R.string.jedenastejedloingredience9),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.jedenastejedlojednotka9)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId10,
+                            stuff = context.getString(R.string.jedenastejedloingredience10),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.jedenastejedlojednotka10)
+                        )
+                    )
 
-                    do {
-                        val stream14 = ByteArrayOutputStream()
-                        bitmap14.compress(Bitmap.CompressFormat.JPEG, quality14, stream14)
-                        byteArray14 = stream14.toByteArray()
-                        quality14 -= 5
-                    } while (byteArray14.size > 500_000 && quality14 > 10)
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId10,
+                            step = 1,
+                            description = context.getString(R.string.jedenastejedlopopis1)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId10,
+                            step = 2,
+                            description = context.getString(R.string.jedenastejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId10,
+                            step = 3,
+                            description = context.getString(R.string.jedenastejedlopopis3)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId10,
+                            step = 4,
+                            description = context.getString(R.string.jedenastejedlopopis4)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId10,
+                            step = 5,
+                            description = context.getString(R.string.jedenastejedlopopis5)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId10,
+                            step = 6,
+                            description = context.getString(R.string.jedenastejedlopopis6)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId10,
+                            step = 7,
+                            description = context.getString(R.string.jedenastejedlopopis7)
+                        )
+                    )
 
-                    val foodId14 = 15
 
-                    db.foodDao().insert(Food(
-                        name = "Zemiaky pečené s tekvicou",
-                        typeId = 5,
-                        cookingTime = 40,
-                        preparingTime = 10,
-                        portions = 4,
-                        calories = 180,
-                        description = "Jednoduchá a chutná príloha z pečených zemiakov a tekvice.",
-                        image = byteArray14
-                    ))
+                    /* -------------------- 12. Citrónovo‑makové makrónky -------------------- */
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience1),
+                            quantity = 85.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience2),
+                            quantity = 10.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience3),
+                            quantity = 95.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience4),
+                            quantity = 95.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience5),
+                            quantity = 35.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience6),
+                            quantity = 70.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience7),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.dvanastejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience8),
+                            quantity = 120.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience9),
+                            quantity = 90.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka9)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience10),
+                            quantity = 1.5,
+                            unit = context.getString(R.string.dvanastejedlojednotka10)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience11),
+                            quantity = 6.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka11)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience12),
+                            quantity = 105.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka12)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience13),
+                            quantity = 100.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka13)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience14),
+                            quantity = 75.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka14)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId11,
+                            stuff = context.getString(R.string.dvanastejedloingredience15),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.dvanastejedlojednotka15)
+                        )
+                    )
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId14, stuff = "zemiaky", quantity = 600.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId14, stuff = "tekvica hokkaido", quantity = 400.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId14, stuff = "soľ", quantity = 1.0, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId14, stuff = "paprika červená mletá", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId14, stuff = "korenie čierne mleté", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId14, stuff = "korenie na pečené zemiaky", quantity = 1.0, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId14, stuff = "vňať petržlenová", quantity = 1.0, unit = "hrsť"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId14, stuff = "olej", quantity = 2.0, unit = "PL"))
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId11,
+                            step = 1,
+                            description = context.getString(R.string.dvanastejedlopopis1)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId11,
+                            step = 2,
+                            description = context.getString(R.string.dvanastejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId11,
+                            step = 3,
+                            description = context.getString(R.string.dvanastejedlopopis3)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId11,
+                            step = 4,
+                            description = context.getString(R.string.dvanastejedlopopis4)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId11,
+                            step = 5,
+                            description = context.getString(R.string.dvanastejedlopopis5)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId11,
+                            step = 6,
+                            description = context.getString(R.string.dvanastejedlopopis6)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId11,
+                            step = 7,
+                            description = context.getString(R.string.dvanastejedlopopis7)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId11,
+                            step = 8,
+                            description = context.getString(R.string.dvanastejedlopopis8)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId11,
+                            step = 9,
+                            description = context.getString(R.string.dvanastejedlopopis9)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId11,
+                            step = 10,
+                            description = context.getString(R.string.dvanastejedlopopis10)
+                        )
+                    )
 
-                    db.processDao().insert(FoodProcess(food = foodId14, step = 1, description = "Predvarené ošúpané zemiaky nakrájame na šestiny a spolu s väčšími kúskami tekvice uložíme na plech."))
-                    db.processDao().insert(FoodProcess(food = foodId14, step = 2, description = "Pokvapkáme olejom, osolíme, okoreníme a pridáme petržlen."))
-                    db.processDao().insert(FoodProcess(food = foodId14, step = 3, description = "Pečieme vo vyhriatej rúre na 180 °C približne 40 minút."))
+
+                    /* -------------- 13. Mrkvový koláč bez lepku (foodId12 = 13) -------------- */
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience1),
+                            quantity = 140.0,
+                            unit = context.getString(R.string.trinastejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience2),
+                            quantity = 4.0,
+                            unit = context.getString(R.string.trinastejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience3),
+                            quantity = 30.0,
+                            unit = context.getString(R.string.trinastejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience4),
+                            quantity = 160.0,
+                            unit = context.getString(R.string.trinastejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience5),
+                            quantity = 60.0,
+                            unit = context.getString(R.string.trinastejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience6),
+                            quantity = 120.0,
+                            unit = context.getString(R.string.trinastejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience7),
+                            quantity = 85.0,
+                            unit = context.getString(R.string.trinastejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience8),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.trinastejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience9),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.trinastejedlojednotka9)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience10),
+                            quantity = 300.0,
+                            unit = context.getString(R.string.trinastejedlojednotka10)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience11),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.trinastejedlojednotka11)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience12),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.trinastejedlojednotka12)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId12,
+                            stuff = context.getString(R.string.trinastejedloingredience13),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.trinastejedlojednotka13)
+                        )
+                    )
+
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId12,
+                            step = 1,
+                            description = context.getString(R.string.trinastejedlopopis1)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId12,
+                            step = 2,
+                            description = context.getString(R.string.trinastejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId12,
+                            step = 3,
+                            description = context.getString(R.string.trinastejedlopopis3)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId12,
+                            step = 4,
+                            description = context.getString(R.string.trinastejedlopopis4)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId12,
+                            step = 5,
+                            description = context.getString(R.string.trinastejedlopopis5)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId12,
+                            step = 6,
+                            description = context.getString(R.string.trinastejedlopopis6)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId12,
+                            step = 7,
+                            description = context.getString(R.string.trinastejedlopopis7)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId12,
+                            step = 8,
+                            description = context.getString(R.string.trinastejedlopopis8)
+                        )
+                    )
+
+
+                    /* -------------- 14. Orechovo‑vanilkové rezy (foodId13 = 14) -------------- */
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience1),
+                            quantity = 12.0,
+                            unit = context.getString(R.string.strnastejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience2),
+                            quantity = 9.0,
+                            unit = context.getString(R.string.strnastejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience3),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.strnastejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience4),
+                            quantity = 12.0,
+                            unit = context.getString(R.string.strnastejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience5),
+                            quantity = 10.0,
+                            unit = context.getString(R.string.strnastejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience6),
+                            quantity = 15.0,
+                            unit = context.getString(R.string.strnastejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience7),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.strnastejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience8),
+                            quantity = 5.0,
+                            unit = context.getString(R.string.strnastejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience9),
+                            quantity = 1000.0,
+                            unit = context.getString(R.string.strnastejedlojednotka9)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience10),
+                            quantity = 4.0,
+                            unit = context.getString(R.string.strnastejedlojednotka10)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience11),
+                            quantity = 500.0,
+                            unit = context.getString(R.string.strnastejedlojednotka11)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience12),
+                            quantity = 50.0,
+                            unit = context.getString(R.string.strnastejedlojednotka12)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience13),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.strnastejedlojednotka13)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience14),
+                            quantity = 200.0,
+                            unit = context.getString(R.string.strnastejedlojednotka14)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience15),
+                            quantity = 80.0,
+                            unit = context.getString(R.string.strnastejedlojednotka15)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId13,
+                            stuff = context.getString(R.string.strnastejedloingredience16),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.strnastejedlojednotka16)
+                        )
+                    )
+
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId13,
+                            step = 1,
+                            description = context.getString(R.string.strnastejedlopopis1)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId13,
+                            step = 2,
+                            description = context.getString(R.string.strnastejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId13,
+                            step = 3,
+                            description = context.getString(R.string.strnastejedlopopis3)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId13,
+                            step = 4,
+                            description = context.getString(R.string.strnastejedlopopis4)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId13,
+                            step = 5,
+                            description = context.getString(R.string.strnastejedlopopis5)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId13,
+                            step = 6,
+                            description = context.getString(R.string.strnastejedlopopis6)
+                        )
+                    )
+
+
+                    /* ------------- 15. Zemiaky pečené s tekvicou (foodId14 = 15) ------------- */
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId14,
+                            stuff = context.getString(R.string.patnastejedloingredience1),
+                            quantity = 600.0,
+                            unit = context.getString(R.string.patnastejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId14,
+                            stuff = context.getString(R.string.patnastejedloingredience2),
+                            quantity = 400.0,
+                            unit = context.getString(R.string.patnastejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId14,
+                            stuff = context.getString(R.string.patnastejedloingredience3),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.patnastejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId14,
+                            stuff = context.getString(R.string.patnastejedloingredience4),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.patnastejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId14,
+                            stuff = context.getString(R.string.patnastejedloingredience5),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.patnastejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId14,
+                            stuff = context.getString(R.string.patnastejedloingredience6),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.patnastejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId14,
+                            stuff = context.getString(R.string.patnastejedloingredience7),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.patnastejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId14,
+                            stuff = context.getString(R.string.patnastejedloingredience8),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.patnastejedlojednotka8)
+                        )
+                    )
+
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId14,
+                            step = 1,
+                            description = context.getString(R.string.patnastejedlopopis1)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId14,
+                            step = 2,
+                            description = context.getString(R.string.patnastejedlopopis2)
+                        )
+                    )
+                    db.processDao().insert(
+                        FoodProcess(
+                            food = foodId14,
+                            step = 3,
+                            description = context.getString(R.string.patnastejedlopopis3)
+                        )
+                    )
 
                     //15
-                    val bitmap15 = BitmapFactory.decodeResource(context.resources, R.drawable.porshrozienkami)
-                    var quality15 = 90
-                    var byteArray15: ByteArray
-
-                    do {
-                        val stream15 = ByteArrayOutputStream()
-                        bitmap15.compress(Bitmap.CompressFormat.JPEG, quality15, stream15)
-                        byteArray15 = stream15.toByteArray()
-                        quality15 -= 5
-                    } while (byteArray15.size > 500_000 && quality15 > 10)
-
-                    val foodId15 = 16
-
-                    db.foodDao().insert(Food(
-                        name = "Pór s hrozienkami ako príloha",
-                        typeId = 5,
-                        cookingTime = 15,
-                        preparingTime = 10,
-                        portions = 2,
-                        calories = 130,
-                        description = "Sladko-slaná príloha z duseného póru, cesnaku a hrozienok.",
-                        image = byteArray15
-                    ))
-
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId15, stuff = "pór", quantity = 2.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId15, stuff = "olej", quantity = 1.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId15, stuff = "cesnak", quantity = 2.0, unit = "strúčiky"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId15, stuff = "hrozienka", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId15, stuff = "soľ", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId15, stuff = "ocot balzamikový", quantity = 1.0, unit = "čl"))
-
-                    db.processDao().insert(FoodProcess(food = foodId15, step = 1, description = "Pór nakrájame na kolieska a sparíme."))
-                    db.processDao().insert(FoodProcess(food = foodId15, step = 2, description = "Na oleji opečieme cesnak, pridáme pór, hrozienka, dusíme."))
-                    db.processDao().insert(FoodProcess(food = foodId15, step = 3, description = "Dochutíme soľou a balzamikovým octom."))
-
-                    //16
-                    val bitmap16 = BitmapFactory.decodeResource(context.resources, R.drawable.zemiakysuhormai)
-                    var quality16 = 90
-                    var byteArray16: ByteArray
-
-                    do {
-                        val stream16 = ByteArrayOutputStream()
-                        bitmap16.compress(Bitmap.CompressFormat.JPEG, quality16, stream16)
-                        byteArray16 = stream16.toByteArray()
-                        quality16 -= 5
-                    } while (byteArray16.size > 500_000 && quality16 > 10)
-
-                    val foodId16 = 17
-
-                    db.foodDao().insert(Food(
-                        name = "Zemiaky s kyslými uhorkami",
-                        typeId = 5,
-                        cookingTime = 20,
-                        preparingTime = 10,
-                        portions = 3,
-                        calories = 160,
-                        description = "Teplá príloha z varených zemiakov, kyslých uhoriek a cibule.",
-                        image = byteArray16
-                    ))
-
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId16, stuff = "zemiaky", quantity = 500.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId16, stuff = "uhorky kyslé", quantity = 3.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId16, stuff = "cibuľa", quantity = 1.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId16, stuff = "olej", quantity = 1.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId16, stuff = "soľ", quantity = 0.5, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId16, stuff = "korenie čierne mleté", quantity = 0.3, unit = "čl"))
-
-                    db.processDao().insert(FoodProcess(food = foodId16, step = 1, description = "Uvarené zemiaky nakrájame na kolieska."))
-                    db.processDao().insert(FoodProcess(food = foodId16, step = 2, description = "Na oleji speníme cibuľu, pridáme zemiaky, premiešame."))
-                    db.processDao().insert(FoodProcess(food = foodId16, step = 3, description = "Dochutíme korením a vmiešame nakrájané uhorky."))
-
-
-                    //17
-                    val bitmap17 = BitmapFactory.decodeResource(context.resources, R.drawable.mojorocho)
-                    var quality17 = 90
-                    var byteArray17: ByteArray
-
-                    do {
-                        val stream17 = ByteArrayOutputStream()
-                        bitmap17.compress(Bitmap.CompressFormat.JPEG, quality17, stream17)
-                        byteArray17 = stream17.toByteArray()
-                        quality17 -= 5
-                    } while (byteArray17.size > 500_000 && quality17 > 10)
-
-                    val foodId17 = 18
-
-                    db.foodDao().insert(Food(
-                        name = "Omáčka Mojo Rocho",
-                        typeId = 5,
-                        cookingTime = 0,
-                        preparingTime = 10,
-                        portions = 6,
-                        calories = 90,
-                        description = "Tradičná pikantná červená omáčka z Kanárskych ostrovov, ideálna k zemiakom alebo grilovanému mäsu.",
-                        image = byteArray17
-                    ))
-
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId17, stuff = "červená paprika mletá", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId17, stuff = "cesnak", quantity = 3.0, unit = "strúčiky"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId17, stuff = "soľ", quantity = 1.0, unit = "čl"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId17, stuff = "ocot vínny", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId17, stuff = "olej olivový", quantity = 100.0, unit = "ml"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId17, stuff = "rímska rasca", quantity = 0.3, unit = "čl"))
-
-                    db.processDao().insert(FoodProcess(food = foodId17, step = 1, description = "V mažiari roztlačíme cesnak, papriku, soľ a rascu."))
-                    db.processDao().insert(FoodProcess(food = foodId17, step = 2, description = "Prilejeme ocot a pomaly vmiešavame olivový olej."))
-                    db.processDao().insert(FoodProcess(food = foodId17, step = 3, description = "Podávame k zemiakom, mäsu alebo rybám."))
-
-
-                    //18
-                    val bitmap18 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.zapekanecestoviny
+                    /* ------------------------- 16. Pór s hrozienkami ------------------------- */
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId15,
+                            stuff = context.getString(R.string.sestnastejedloingredience1),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.sestnastejedlojednotka1)
+                        )
                     )
-
-                    var quality18 = 90
-                    var byteArray18: ByteArray
-
-                    do {
-                        val stream18 = ByteArrayOutputStream()
-                        bitmap18.compress(Bitmap.CompressFormat.JPEG, quality18, stream18)
-                        byteArray18 = stream18.toByteArray()
-                        quality18 -= 5
-                    } while (byteArray18.size > 500_000 && quality18 > 10)
-
-                    val foodId18 = 19
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Zapekané cestoviny so syrom a semienkami",
-                            typeId = 3,
-                            cookingTime = 25,
-                            preparingTime = 20,
-                            portions = 4,
-                            calories = 450,
-                            description = "Chrumkavé zapekané cestoviny s tekvicou, čerstvým syrom, čedarom a posypané semienkami a mandľami.",
-                            image = byteArray18
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId15,
+                            stuff = context.getString(R.string.sestnastejedloingredience2),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.sestnastejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId15,
+                            stuff = context.getString(R.string.sestnastejedloingredience3),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.sestnastejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId15,
+                            stuff = context.getString(R.string.sestnastejedloingredience4),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.sestnastejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId15,
+                            stuff = context.getString(R.string.sestnastejedloingredience5),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.sestnastejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId15,
+                            stuff = context.getString(R.string.sestnastejedloingredience6),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.sestnastejedlojednotka6)
                         )
                     )
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId18, stuff = "cestoviny", quantity = 400.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId18, stuff = "tekvica", quantity = 200.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId18, stuff = "syr čerstvý", quantity = 150.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId18, stuff = "olej olivový", quantity = 1.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId18, stuff = "soľ", quantity = 1.0, unit = "podľa chuti"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId18, stuff = "korenie čierne mleté", quantity = 1.0, unit = "podľa chuti"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId18, stuff = "semienka (ľanové a slnečnicové)", quantity = 2.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId18, stuff = "mandle nasekané", quantity = 1.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId18, stuff = "čedar", quantity = 80.0, unit = "g"))
-
-                    db.processDao().insert(FoodProcess(food = foodId18, step = 1, description = "Cestoviny uvaríme al dente v osolenej vode."))
-                    db.processDao().insert(FoodProcess(food = foodId18, step = 2, description = "Tekvicu nakrájame na malé kúsky a opečieme na olivovom oleji dozlatista."))
-                    db.processDao().insert(FoodProcess(food = foodId18, step = 3, description = "K tekvici pridáme scedené cestoviny, čerstvý syr a premiešame. Dochutíme soľou a korením."))
-                    db.processDao().insert(FoodProcess(food = foodId18, step = 4, description = "Zmes preložíme do zapekacej misy, posypeme semienkami, nasekanými mandľami a nastrúhaným čedarom."))
-                    db.processDao().insert(FoodProcess(food = foodId18, step = 5, description = "Pečieme v rúre vyhriatej na 200 °C približne 25 minút."))
+                    db.processDao().insert(FoodProcess(food = foodId15, step = 1, description = context.getString(R.string.sestnastejedlopopis1)))
+                    db.processDao().insert(FoodProcess(food = foodId15, step = 2, description = context.getString(R.string.sestnastejedlopopis2)))
+                    db.processDao().insert(FoodProcess(food = foodId15, step = 3, description = context.getString(R.string.sestnastejedlopopis3)))
 
 
-                    //20
 
-                    val bitmap19 = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.brownies
+                    /* ---------------------- 17. Zemiaky s kyslými uhorkami ---------------------- */
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId16,
+                            stuff = context.getString(R.string.sedemnastejedloingredience1),
+                            quantity = 500.0,
+                            unit = context.getString(R.string.sedemnastejedlojednotka1)
+                        )
                     )
-
-                    var quality19 = 90
-                    var byteArray19: ByteArray
-
-                    do {
-                        val stream19 = ByteArrayOutputStream()
-                        bitmap19.compress(Bitmap.CompressFormat.JPEG, quality19, stream19)
-                        byteArray19 = stream19.toByteArray()
-                        quality19 -= 5
-                    } while (byteArray19.size > 500_000 && quality19 > 10)
-
-                    val foodId19 = 20
-
-                    db.foodDao().insert(
-                        Food(
-                            name = "Čokoládové brownie",
-                            typeId = 4,
-                            cookingTime = 30,
-                            preparingTime = 15,
-                            portions = 12,
-                            calories = 450,
-                            description = "Vynikajúci a jednoduchý koláč zo zámoria, ktorý sa veľmi rýchlo udomácnil aj v našich kuchyniach. Je fantasticky vláčny a hriešne čokoládový.",
-                            image = byteArray19
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId16,
+                            stuff = context.getString(R.string.sedemnastejedloingredience2),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.sedemnastejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId16,
+                            stuff = context.getString(R.string.sedemnastejedloingredience3),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.sedemnastejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId16,
+                            stuff = context.getString(R.string.sedemnastejedloingredience4),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.sedemnastejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId16,
+                            stuff = context.getString(R.string.sedemnastejedloingredience5),
+                            quantity = 0.5,
+                            unit = context.getString(R.string.sedemnastejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId16,
+                            stuff = context.getString(R.string.sedemnastejedloingredience6),
+                            quantity = 0.3,
+                            unit = context.getString(R.string.sedemnastejedlojednotka6)
                         )
                     )
 
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId19, stuff = "horká čokoláda (aspoň 70% kakaa)", quantity = 200.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId19, stuff = "maslo", quantity = 200.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId19, stuff = "soľ", quantity = 1.0, unit = "štipka"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId19, stuff = "cukor", quantity = 200.0, unit = "g"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId19, stuff = "vajce", quantity = 3.0, unit = "ks"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId19, stuff = "hladká múka", quantity = 3.0, unit = "PL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId19, stuff = "kypriaci prášok", quantity = 1.0, unit = "KL"))
-                    db.foodStuffDao().insertFoodStuff(FoodStuff(food = foodId19, stuff = "kakao", quantity = 2.0, unit = "PL"))
-
-                    db.processDao().insert(FoodProcess(food = foodId19, step = 1, description = "Čokoládu spolu s maslom rozpustíme vo vodnom kúpeli."))
-                    db.processDao().insert(FoodProcess(food = foodId19, step = 2, description = "Keď je hmota tekutá a lesklá, odložíme ju bokom, aby trochu vychladla."))
-                    db.processDao().insert(FoodProcess(food = foodId19, step = 3, description = "Rúru rozohrejeme na 180°C."))
-                    db.processDao().insert(FoodProcess(food = foodId19, step = 4, description = "Vo väčšej miske spolu vyšľaháme celé vajcia s cukrom do peny."))
-                    db.processDao().insert(FoodProcess(food = foodId19, step = 5, description = "Potom do misky preosejeme múku, kypriaci prášok a kakao a zľahka zapracujeme tak, aby sme stratili čo najmenej vzduchu."))
-                    db.processDao().insert(FoodProcess(food = foodId19, step = 6, description = "Proces opatrného zamiešania opakujeme aj s čokoládovo-maslovou zmesou."))
-                    db.processDao().insert(FoodProcess(food = foodId19, step = 7, description = "Vymiešané cesto nalejeme do hlbšieho plechu (20x20 cm), ktorý sme vystlali papierom na pečenie."))
-                    db.processDao().insert(FoodProcess(food = foodId19, step = 8, description = "Brownies pečieme v rúre vyhriatej na 180°C zhruba 30 minút."))
-                    db.processDao().insert(FoodProcess(food = foodId19, step = 9, description = "Okraje by mali byť pevné a stred by sa mal ešte jemne triasť. Necháme vychladnúť a krájame na štvorce."
-                    ))
+                    db.processDao().insert(FoodProcess(food = foodId16, step = 1, description = context.getString(R.string.sedemnastejedlopopis1)))
+                    db.processDao().insert(FoodProcess(food = foodId16, step = 2, description = context.getString(R.string.sedemnastejedlopopis2)))
+                    db.processDao().insert(FoodProcess(food = foodId16, step = 3, description = context.getString(R.string.sedemnastejedlopopis3)))
 
 
-                            Log.d(
+
+                    /* --------------------------- 18. Mojo Rocho omáčka --------------------------- */
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId17,
+                            stuff = context.getString(R.string.osemnastejedloingredience1),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.osemnastejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId17,
+                            stuff = context.getString(R.string.osemnastejedloingredience2),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.osemnastejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId17,
+                            stuff = context.getString(R.string.osemnastejedloingredience3),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.osemnastejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId17,
+                            stuff = context.getString(R.string.osemnastejedloingredience4),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.osemnastejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId17,
+                            stuff = context.getString(R.string.osemnastejedloingredience5),
+                            quantity = 100.0,
+                            unit = context.getString(R.string.osemnastejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId17,
+                            stuff = context.getString(R.string.osemnastejedloingredience6),
+                            quantity = 0.3,
+                            unit = context.getString(R.string.osemnastejedlojednotka6)
+                        )
+                    )
+
+                    db.processDao().insert(FoodProcess(food = foodId17, step = 1, description = context.getString(R.string.osemnastejedlopopis1)))
+                    db.processDao().insert(FoodProcess(food = foodId17, step = 2, description = context.getString(R.string.osemnastejedlopopis2)))
+                    db.processDao().insert(FoodProcess(food = foodId17, step = 3, description = context.getString(R.string.osemnastejedlopopis3)))
+
+
+
+                    /* -------------------- 19. Zapekané cestoviny so syrom -------------------- */
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId18,
+                            stuff = context.getString(R.string.devatnastejedloingredience1),
+                            quantity = 400.0,
+                            unit = context.getString(R.string.devatnastejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId18,
+                            stuff = context.getString(R.string.devatnastejedloingredience2),
+                            quantity = 200.0,
+                            unit = context.getString(R.string.devatnastejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId18,
+                            stuff = context.getString(R.string.devatnastejedloingredience3),
+                            quantity = 150.0,
+                            unit = context.getString(R.string.devatnastejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId18,
+                            stuff = context.getString(R.string.devatnastejedloingredience4),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.devatnastejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId18,
+                            stuff = context.getString(R.string.devatnastejedloingredience5),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.devatnastejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId18,
+                            stuff = context.getString(R.string.devatnastejedloingredience6),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.devatnastejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId18,
+                            stuff = context.getString(R.string.devatnastejedloingredience7),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.devatnastejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId18,
+                            stuff = context.getString(R.string.devatnastejedloingredience8),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.devatnastejedlojednotka8)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId18,
+                            stuff = context.getString(R.string.devatnastejedloingredience9),
+                            quantity = 80.0,
+                            unit = context.getString(R.string.devatnastejedlojednotka9)
+                        )
+                    )
+
+                    db.processDao().insert(FoodProcess(food = foodId18, step = 1, description = context.getString(R.string.devatnastejedlopopis1)))
+                    db.processDao().insert(FoodProcess(food = foodId18, step = 2, description = context.getString(R.string.devatnastejedlopopis2)))
+                    db.processDao().insert(FoodProcess(food = foodId18, step = 3, description = context.getString(R.string.devatnastejedlopopis3)))
+                    db.processDao().insert(FoodProcess(food = foodId18, step = 4, description = context.getString(R.string.devatnastejedlopopis4)))
+                    db.processDao().insert(FoodProcess(food = foodId18, step = 5, description = context.getString(R.string.devatnastejedlopopis5)))
+
+
+
+                    /* ---------------------- 20. Čokoládové brownie ---------------------- */
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId19,
+                            stuff = context.getString(R.string.dvadsatejedloingredience1),
+                            quantity = 200.0,
+                            unit = context.getString(R.string.dvadsatejedlojednotka1)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId19,
+                            stuff = context.getString(R.string.dvadsatejedloingredience2),
+                            quantity = 200.0,
+                            unit = context.getString(R.string.dvadsatejedlojednotka2)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId19,
+                            stuff = context.getString(R.string.dvadsatejedloingredience3),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.dvadsatejedlojednotka3)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId19,
+                            stuff = context.getString(R.string.dvadsatejedloingredience4),
+                            quantity = 200.0,
+                            unit = context.getString(R.string.dvadsatejedlojednotka4)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId19,
+                            stuff = context.getString(R.string.dvadsatejedloingredience5),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.dvadsatejedlojednotka5)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId19,
+                            stuff = context.getString(R.string.dvadsatejedloingredience6),
+                            quantity = 3.0,
+                            unit = context.getString(R.string.dvadsatejedlojednotka6)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId19,
+                            stuff = context.getString(R.string.dvadsatejedloingredience7),
+                            quantity = 1.0,
+                            unit = context.getString(R.string.dvadsatejedlojednotka7)
+                        )
+                    )
+                    db.foodStuffDao().insertFoodStuff(
+                        FoodStuff(
+                            food = foodId19,
+                            stuff = context.getString(R.string.dvadsatejedloingredience8),
+                            quantity = 2.0,
+                            unit = context.getString(R.string.dvadsatejedlojednotka8)
+                        )
+                    )
+
+                    db.processDao().insert(FoodProcess(food = foodId19, step = 1, description = context.getString(R.string.dvadsatejedlopopis1)))
+                    db.processDao().insert(FoodProcess(food = foodId19, step = 2, description = context.getString(R.string.dvadsatejedlopopis2)))
+                    db.processDao().insert(FoodProcess(food = foodId19, step = 3, description = context.getString(R.string.dvadsatejedlopopis3)))
+                    db.processDao().insert(FoodProcess(food = foodId19, step = 4, description = context.getString(R.string.dvadsatejedlopopis4)))
+                    db.processDao().insert(FoodProcess(food = foodId19, step = 5, description = context.getString(R.string.dvadsatejedlopopis5)))
+                    db.processDao().insert(FoodProcess(food = foodId19, step = 6, description = context.getString(R.string.dvadsatejedlopopis6)))
+                    db.processDao().insert(FoodProcess(food = foodId19, step = 7, description = context.getString(R.string.dvadsatejedlopopis7)))
+                    db.processDao().insert(FoodProcess(food = foodId19, step = 8, description = context.getString(R.string.dvadsatejedlopopis8)))
+                    db.processDao().insert(FoodProcess(food = foodId19, step = 9, description = context.getString(R.string.dvadsatejedlopopis9)))
+
+
+
+                    Log.d(
                         "DB_INIT",
                         "FoodType už obsahuje ${existing.size} záznamov – nevkladám nič."
                     )

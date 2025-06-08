@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VAMZ_Tison</string>
+    <string name="app_name">Online kuchárka</string>
     <string name="BottomMenuDomov">Domov</string>
     <string name="BottomMenuIconDomov">Domov</string>
     <string name="BottomMenuKosik">Košík</string>
@@ -14,4 +14,761 @@
     <string name="polievka">Polievka</string>
     <string name="predjedlo">Predjedlo</string>
     <string name="hlavn_jedlo">Hlavné jedlo</string>
+    <string name="kateg_ria">Kategória: %1$s</string>
+    <string name="ingrediencie">Ingrediencie: %1$s</string>
+    <string name="menu">Menu</string>
+    <string name="nena_li_sa_iadne_v_sledky">Nenašli sa žiadne výsledky</string>
+    <string name="zobrazi_al_ie">Zobraziť ďalšie</string>
+    <string name="filtrovanie">Filtrovanie</string>
+    <string name="kateg_ria1">Kategória</string>
+    <string name="zobrazi_menej">Zobraziť menej</string>
+    <string name="zobrazi_viac">Zobraziť viac</string>
+    <string name="ingrediencie1">Ingrediencie</string>
+    <string name="zobrazi_menej1">Zobraziť menej</string>
+    <string name="zobrazi_viac1">Zobraziť viac</string>
+    <string name="filtrova">Filtrovať</string>
+    <string name="recepty">Recepty</string>
+    <string name="moment_lne_nem_te_iadne_ob_ben_jedlo">Momentálne nemáte žiadne obľúbené jedlo</string>
+    <string name="ob_ben_recepty">Obľúbené recepty</string>
+    <string name="prida_do_n_kupn_ho_zoznamu">Pridať do nákupného\nzoznamu</string>
+    <string name="zvo_te_zoznam">Zvoľte zoznam</string>
+    <string name="vyberte_ingrediencie">Vyberte ingrediencie</string>
+    <string name="zru_i">Zrušiť</string>
+    <string name="ok">OK</string>
+    <string name="ako_postupova">Ako postupovať...</string>
+    <string name="prida_do_n_kupn_ho_zoznamu1">Pridať do nákupného zoznamu</string>
+    <string name="budeme_potrebova">Budeme potrebovať...</string>
+    <string name="portion">portion</string>
+    <string name="caloriescalculator">caloriescalculator</string>
+    <string name="min">%1$s min</string>
+    <string name="min1">%1$s min</string>
+    <string name="porci">%1$s porcií</string>
+    <string name="kcal">%1$s kcal</string>
+    <string name="ob_ben">Obľúbené</string>
+    <string name="sp">Späť</string>
+    <string name="dezert">Dezert</string>
+    <string name="pr_loha">Príloha</string>
+    <string name="n_kupn_zoznam">Nákupný zoznam</string>
+    <string name="spat">Späť</string>
+    <string name="zoznam">Zoznam</string>
+    <string name="nov_polo_ka">Nová položka</string>
+    <string name="pridat">Pridať</string>
+    <string name="zmazat_polozku">Zmazať položku</string>
+    <string name="pridat1">Pridať</string>
+    <string name="n_kupn_zoznamy1">Nákupné zoznamy</string>
+    <string name="zatia_nem_te_gradle_n_kupn_zoznamy">Zatiaľ nemáte gradle nákupné zoznamy.</string>
+    <string name="zmazat">Zmazať</string>
+    <string name="vyzva">Zadajte názov zoznamu</string>
+    <string name="nazov">Názov zoznamu</string>
+    <string name="add">Pridať</string>
+    <string name="cancel">Zrušiť</string>
+    <string name="talianska_paradajkov_polievka">Talianska paradajková polievka</string>
+    <string name="parpolievka">Talianska paradajková polievka si zaslúži miesto na stole pre svoju jednoduchosť, výraznú chuť z čerstvých surovín.</string>
+    <string name="paradajkovapolievkaingredience1">paradajky drvené</string>
+    <string name="paradajkovapolievkaingredience2">korenie talianske</string>
+    <string name="paradajkovapolievkaingredience3">olej</string>
+    <string name="paradajkovapolievkaingredience4">cibuľka jarná</string>
+    <string name="paradajkovapolievkaingredience5">voda</string>
+    <string name="paradajkovapolievkaingredience6">soľ</string>
+    <string name="paradajkovapolievkaingredience7">jogurt biely</string>
+    <string name="paradajkovapolievkaingredience8">korenie čierne mleté</string>
+    <string name="paradajkovapolievkaingredience9">omáčka sójová</string>
+    <string name="paradajkovapolievkaingredience10">vločky ovsené</string>
+
+    <string name="paradajkovapolievkapopis1">Na horúcom oleji orestujeme nakrájanú cibuľku, potom drvené paradajky. Zalejeme vodou, osolíme, okoreníme talianskym korením, vsypeme vločky a občas premiešavame.</string>
+    <string name="paradajkovapolievkapopis2">Keď je všetko uvarené, môžeme rozmixovať. Vrátime na oheň a podľa vlastnej chuti pridáme cukor, sójovú omáčku, mleté čierne korenie a necháme prevrieť.</string>
+    <string name="paradajkovapolievkapopis3">Biely jogurt na zjemnenie si do polievky dáme až na tanieri. Kto chce, môže si nastrúhať aj tvrdý syr.</string>
+    <string name="unit_gram">g</string>
+    <string name="unit_milliliter">ml</string>
+    <string name="unit_teaspoon">čl</string>
+    <string name="unit_tablespoon">PL</string>
+    <string name="unit_piece">ks</string>
+
+        <!-- Ingrediencie -->
+        <string name="druhejedloingredience1">brokolica</string>
+        <string name="druhejedloingredience2">zemiaky</string>
+        <string name="druhejedloingredience3">smotana na varenie</string>
+        <string name="druhejedloingredience4">cesnak</string>
+        <string name="druhejedloingredience5">cibuľa</string>
+        <string name="druhejedloingredience6">bujón zeleninový</string>
+        <string name="druhejedloingredience7">soľ</string>
+        <string name="druhejedloingredience8">korenie čierne mleté</string>
+        <string name="druhejedloingredience9">olej</string>
+        <string name="druhejedloingredience10">guľôčky do polievky</string>
+
+        <!-- Popis krokov -->
+        <string name="druhejedlopopis1">Vezmeme si polovicu brokolice, umyjeme ju a rozdelíme na ružičky. Ošúpeme, nakrájame cibuľu na drobno a zemiaky na malé kocky.</string>
+        <string name="druhejedlopopis2">Cibuľu orestujeme na oleji. Pridáme zemiaky a ružičky brokolice. Smažíme 5–10 minút, troška môžeme podliať vodou.</string>
+        <string name="druhejedlopopis3">Pridáme pretlačený cesnak a smažíme všetko spolu. Zalejeme vodou, cca 1 liter. Pridáme soľ, čierne korenie, zeleninový bujón.</string>
+        <string name="druhejedlopopis4">Varíme do zmäknutia zemiakov a brokolice. Keď je všetko mäkké, rozmixujeme všetko ponorným mixérom.</string>
+        <string name="druhejedlopopis5">Pridáme smotanu na varenie a necháme ešte prevariť. Dochutíme podľa potreby a odstavíme zo sporáka.</string>
+        <string name="druhejedlopopis6">Podávame s kúpenými guľôčkami do polievky. Dobrú chuť.</string>
+
+        <!-- Jednotky -->
+        <string name="druhejedlojednotka1">g</string>
+        <string name="druhejedlojednotka2">g</string>
+        <string name="druhejedlojednotka3">g</string>
+        <string name="druhejedlojednotka4">strúčiky</string>
+        <string name="druhejedlojednotka5">ks</string>
+        <string name="druhejedlojednotka6">ks</string>
+        <string name="druhejedlojednotka7">čl</string>
+        <string name="druhejedlojednotka8">čl</string>
+        <string name="druhejedlojednotka9">PL</string>
+        <string name="druhejedlojednotka10">g</string>
+
+    <!-- Ingrediencie -->
+    <string name="tretiejedloingredience1">šošovica</string>
+    <string name="tretiejedloingredience2">mrkva</string>
+    <string name="tretiejedloingredience3">cibuľa</string>
+    <string name="tretiejedloingredience4">maslo</string>
+    <string name="tretiejedloingredience5">múka hladká</string>
+    <string name="tretiejedloingredience6">cesnak</string>
+    <string name="tretiejedloingredience7">bobkový list</string>
+    <string name="tretiejedloingredience8">paprika červená sladká mletá</string>
+    <string name="tretiejedloingredience9">korenie čierne mleté</string>
+    <string name="tretiejedloingredience10">soľ</string>
+    <string name="tretiejedloingredience11">vývar zeleninový</string>
+    <string name="tretiejedloingredience12">majorán</string>
+    <string name="tretiejedloingredience13">párky</string>
+
+    <!-- Jednotky -->
+    <string name="tretiejedlojednotka1">g</string>
+    <string name="tretiejedlojednotka2">ks</string>
+    <string name="tretiejedlojednotka3">ks</string>
+    <string name="tretiejedlojednotka4">PL</string>
+    <string name="tretiejedlojednotka5">PL</string>
+    <string name="tretiejedlojednotka6">strúčiky</string>
+    <string name="tretiejedlojednotka7">ks</string>
+    <string name="tretiejedlojednotka8">čl</string>
+    <string name="tretiejedlojednotka9">čl</string>
+    <string name="tretiejedlojednotka10">čl</string>
+    <string name="tretiejedlojednotka11">ml</string>
+    <string name="tretiejedlojednotka12">čl</string>
+    <string name="tretiejedlojednotka13">ks</string>
+
+    <!-- Popis prípravy -->
+    <string name="tretiejedlopopis1">Šošovicu prepláchneme a namočíme na hodinu do vody. Cibuľu nakrájame nadrobno a orestujeme na masle do sklovita. Pridáme múku a pripravíme zápražku. Do hotovej zápražky pridáme mletú červenú papriku, dávame pozor, aby neprihorela.</string>
+    <string name="tretiejedlopopis2">Zápražku pomaly zalievame vývarom a miešame metličkou, aby nevznikli hrudky. Pridáme namočenú šošovicu, nakrájanú mrkvu, bobkový list, čierne korenie a 2 strúčiky cesnaku. Varíme, občas premiešame.</string>
+    <string name="tretiejedlopopis3">Keď je šošovica mäkká, osolíme, pridáme majoránku, nakrájané párky a zvyšné 2 strúčiky cesnaku. Chvíľu povaríme a odstavíme.</string>
+
+    <!-- Ingrediencie -->
+    <string name="stvrtejedloingredience1">kuracie prsia</string>
+    <string name="stvrtejedloingredience2">soľ</string>
+    <string name="stvrtejedloingredience3">korenie čierne mleté</string>
+    <string name="stvrtejedloingredience4">škrob kukuričný</string>
+    <string name="stvrtejedloingredience5">múka hladká</string>
+    <string name="stvrtejedloingredience6">olej rastlinný</string>
+    <string name="stvrtejedloingredience7">zázvor čerstvý</string>
+    <string name="stvrtejedloingredience8">cesnak</string>
+    <string name="stvrtejedloingredience9">broskyne v náleve</string>
+    <string name="stvrtejedloingredience10">omáčka sójová</string>
+    <string name="stvrtejedloingredience11">džem broskyňový</string>
+    <string name="stvrtejedloingredience12">vývar zeleninový</string>
+    <string name="stvrtejedloingredience13">nálev z broskýň</string>
+    <string name="stvrtejedloingredience14">čili (voliteľné)</string>
+    <string name="stvrtejedloingredience15">cibuľka jarná</string>
+    <string name="stvrtejedloingredience16">sezam</string>
+    <string name="stvrtejedloingredience17">ryža jazmínová</string>
+    <string name="stvrtejedloingredience18">voda</string>
+    <string name="stvrtejedloingredience19">list bobkový</string>
+
+    <!-- Jednotky -->
+    <string name="stvrtejedlojednotka1">g</string>
+    <string name="stvrtejedlojednotka2">čl</string>
+    <string name="stvrtejedlojednotka3">čl</string>
+    <string name="stvrtejedlojednotka4">PL</string>
+    <string name="stvrtejedlojednotka5">PL</string>
+    <string name="stvrtejedlojednotka6">PL</string>
+    <string name="stvrtejedlojednotka7">cm</string>
+    <string name="stvrtejedlojednotka8">strúčiky</string>
+    <string name="stvrtejedlojednotka9">ks</string>
+    <string name="stvrtejedlojednotka10">PL</string>
+    <string name="stvrtejedlojednotka11">PL</string>
+    <string name="stvrtejedlojednotka12">ml</string>
+    <string name="stvrtejedlojednotka13">ml</string>
+    <string name="stvrtejedlojednotka14">čl</string>
+    <string name="stvrtejedlojednotka15">ks</string>
+    <string name="stvrtejedlojednotka16">PL</string>
+    <string name="stvrtejedlojednotka17">hrnček</string>
+    <string name="stvrtejedlojednotka18">hrnček</string>
+    <string name="stvrtejedlojednotka19">ks</string>
+
+    <!-- Popisy krokov -->
+    <string name="stvrtejedlopopis1">Kuracie prsia nakrájame na kocky, osolíme, okoreníme a obalíme v zmesi škrobu a múky.</string>
+    <string name="stvrtejedlopopis2">Na panvici rozohrejeme olej a mäso opečieme dozlatista. Opečené mäso odložíme bokom.</string>
+    <string name="stvrtejedlopopis3">Na tej istej panvici orestujeme nastrúhaný zázvor a pretlačený cesnak. Pridáme na plátky nakrájané broskyne, sójovú omáčku, džem, vývar a nálev z broskýň.</string>
+    <string name="stvrtejedlopopis4">Omáčku krátko povaríme, vrátime mäso do panvice a necháme niekoľko minút variť, kým omáčka nezhustne a mäso nebude obalené lesklou glazúrou.</string>
+    <string name="stvrtejedlopopis5">Ryžu dôkladne prepláchneme a necháme odkvapkať.</string>
+    <string name="stvrtejedlopopis6">V hrnci vhodnom do rúry rozohrejeme olej, pridáme ryžu a krátko opečieme. Zalejeme vodou, pridáme soľ a bobkový list.</string>
+    <string name="stvrtejedlopopis7">Varíme, kým sa voda takmer neodparí. Potom hrniec prikryjeme a vložíme do predhriatej rúry na 180 °C na 12 minút.</string>
+    <string name="stvrtejedlopopis8">Podávame glazované kura s ryžou, posypané nasekanou jarnou cibuľkou a sezamom.</string>
+
+    <!-- ▸ 5. Kuracie plátky v marináde -->
+    <string name="piatejedloingredience1">kuracie prsia</string>
+    <string name="piatejedloingredience2">vajce</string>
+    <string name="piatejedloingredience3">korenie karí</string>
+    <string name="piatejedloingredience4">korenie biele mleté</string>
+    <string name="piatejedloingredience5">omáčka worcesterská</string>
+    <string name="piatejedloingredience6">soľ</string>
+    <string name="piatejedloingredience7">olej</string>
+
+    <string name="piatejedlojednotka1">plátky</string>
+    <string name="piatejedlojednotka2">ks</string>
+    <string name="piatejedlojednotka3">čl</string>
+    <string name="piatejedlojednotka4">čl</string>
+    <string name="piatejedlojednotka5">čl</string>
+    <string name="piatejedlojednotka6">čl</string>
+    <string name="piatejedlojednotka7">PL</string>
+
+    <string name="piatejedlopopis1">Všetky prísady na marinádu dáme do misky a prešľaháme.</string>
+    <string name="piatejedlopopis2">Do tejto marinády vložíme plátky mäsa a necháme marinovať 2–3 hodiny.</string>
+    <string name="piatejedlopopis3">Potom ich na oleji na panvici opekáme z oboch strán asi po 3 minúty. Dlhšie netreba.</string>
+    <string name="piatejedlopopis4">Podávame s ryžou (môžeme preliať trochou výpeku) a zeleninovým šalátom.</string>
+
+    <!-- ▸ 6. Pečené bataty plnené fazuľou -->
+    <string name="siestejedloingredience1">bataty</string>
+    <string name="siestejedloingredience2">fazuľa sterilizovaná</string>
+    <string name="siestejedloingredience3">paradajky lúpané krájané</string>
+    <string name="siestejedloingredience4">olej</string>
+    <string name="siestejedloingredience5">cibuľa</string>
+    <string name="siestejedloingredience6">cesnak</string>
+    <string name="siestejedloingredience7">smotana kyslá</string>
+    <string name="siestejedloingredience8">špenát baby</string>
+    <string name="siestejedloingredience9">vňať petržlenová</string>
+    <string name="siestejedloingredience10">paprička jalapeno</string>
+    <string name="siestejedloingredience11">soľ</string>
+    <string name="siestejedloingredience12">korenie čierne mleté</string>
+
+    <string name="siestejedlojednotka1">ks</string>
+    <string name="siestejedlojednotka2">g</string>
+    <string name="siestejedlojednotka3">g</string>
+    <string name="siestejedlojednotka4">PL</string>
+    <string name="siestejedlojednotka5">ks</string>
+    <string name="siestejedlojednotka6">strúčiky</string>
+    <string name="siestejedlojednotka7">PL</string>
+    <string name="siestejedlojednotka8">hrsť</string>
+    <string name="siestejedlojednotka9">hrsť</string>
+    <string name="siestejedlojednotka10">ks</string>
+    <string name="siestejedlojednotka11">čl</string>
+    <string name="siestejedlojednotka12">čl</string>
+
+    <string name="siestejedlopopis1">Umyté bataty položíme na plech, pokvapkáme 1 PL oleja a osolíme. Pečieme pri 220 °C ≈ 40 minút do mäkka.</string>
+    <string name="siestejedlopopis2">Medzitým orestujeme cibuľu a cesnak na zvyšnom oleji, pridáme paradajky a prepláchnutú fazuľu. Osolíme, okoreníme a varíme do zhustnutia.</string>
+    <string name="siestejedlopopis3">Bataty rozkrojíme, naplníme fazuľovou zmesou, pridáme kyslú smotanu, špenát, petržlenovú vňať a kolieska jalapena.</string>
+
+    <!-- ▸ 7. Pasta alla Norma -->
+    <string name="siedmejedloingredience1">baklažán</string>
+    <string name="siedmejedloingredience2">soľ</string>
+    <string name="siedmejedloingredience3">cesnak</string>
+    <string name="siedmejedloingredience4">tymian</string>
+    <string name="siedmejedloingredience5">olej olivový</string>
+    <string name="siedmejedloingredience6">passata paradajková</string>
+    <string name="siedmejedloingredience7">korenie čierne mleté</string>
+    <string name="siedmejedloingredience8">cukor</string>
+    <string name="siedmejedloingredience9">vločky čili</string>
+    <string name="siedmejedloingredience10">bazalka</string>
+    <string name="siedmejedloingredience11">cestoviny rigatoni alebo penne</string>
+    <string name="siedmejedloingredience12">ricotta salata alebo pecorino</string>
+
+    <string name="siedmejedlojednotka1">g</string>
+    <string name="siedmejedlojednotka2">čl</string>
+    <string name="siedmejedlojednotka3">strúčiky</string>
+    <string name="siedmejedlojednotka4">vetvičky</string>
+    <string name="siedmejedlojednotka5">PL</string>
+    <string name="siedmejedlojednotka6">g</string>
+    <string name="siedmejedlojednotka7">čl</string>
+    <string name="siedmejedlojednotka8">čl</string>
+    <string name="siedmejedlojednotka9">čl</string>
+    <string name="siedmejedlojednotka10">zväzok</string>
+    <string name="siedmejedlojednotka11">g</string>
+    <string name="siedmejedlojednotka12">g</string>
+
+    <string name="siedmejedlopopis1">Baklažány umyjeme … necháme asi 20 minút pustiť šťavu.</string>
+    <string name="siedmejedlopopis2">Cesnak a tymian krátko restujeme na olivovom oleji.</string>
+    <string name="siedmejedlopopis3">Pridáme soľ, korenie, cukor, čili a bazalku … varíme 20–25 min.</string>
+    <string name="siedmejedlopopis4">Baklažán opečieme do chrumkava … necháme odkvapkať.</string>
+    <string name="siedmejedlopopis5">Baklažán pridáme do omáčky a dochutíme.</string>
+    <string name="siedmejedlopopis6">Cestoviny uvaríme al dente, premiešame s omáčkou, posypeme syrom a bazalkou.</string>
+
+
+    <!-- ▸ 8. Sicílska caponata -->
+    <string name="osmejedloingredience1">baklažán</string>
+    <string name="osmejedloingredience2">zeler stonkový</string>
+    <string name="osmejedloingredience3">cibuľa červená</string>
+    <string name="osmejedloingredience4">cesnak</string>
+    <string name="osmejedloingredience5">paradajky koktailové</string>
+    <string name="osmejedloingredience6">olivy čierne</string>
+    <string name="osmejedloingredience7">kapary</string>
+    <string name="osmejedloingredience8">bazalka</string>
+    <string name="osmejedloingredience9">ocot vínny</string>
+    <string name="osmejedloingredience10">cukor</string>
+    <string name="osmejedloingredience11">oriešky píniové</string>
+    <string name="osmejedloingredience12">olej olivový</string>
+    <string name="osmejedloingredience13">korenie čierne mleté</string>
+    <string name="osmejedloingredience14">soľ</string>
+
+    <string name="osmejedlojednotka1">g</string>
+    <string name="osmejedlojednotka2">stonky</string>
+    <string name="osmejedlojednotka3">ks</string>
+    <string name="osmejedlojednotka4">strúčiky</string>
+    <string name="osmejedlojednotka5">g</string>
+    <string name="osmejedlojednotka6">PL</string>
+    <string name="osmejedlojednotka7">PL</string>
+    <string name="osmejedlojednotka8">hrnček</string>
+    <string name="osmejedlojednotka9">PL</string>
+    <string name="osmejedlojednotka10">PL</string>
+    <string name="osmejedlojednotka11">PL</string>
+    <string name="osmejedlojednotka12">PL</string>
+    <string name="osmejedlojednotka13">čl</string>
+    <string name="osmejedlojednotka14">čl</string>
+
+    <string name="osmejedlopopis1">Zeler, cibuľu, cesnak, baklažán a paradajky nakrájame …</string>
+    <string name="osmejedlopopis2">Baklažán opečieme, potom dusíme so zeleninou 5 minút.</string>
+    <string name="osmejedlopopis3">Pridáme olivy, kapary, bazalku, ocot, cukor … varíme 15 minút, podávame s píniami.</string>
+
+
+    <!-- ▸ 9. Kačacia pečeň s čatní -->
+    <string name="deviatejedloingredience1">pečeň kačacia</string>
+    <string name="deviatejedloingredience2">korenie čierne mleté</string>
+    <string name="deviatejedloingredience3">soľ</string>
+    <string name="deviatejedloingredience4">cibuľa červená</string>
+    <string name="deviatejedloingredience5">ocot balzamikový</string>
+    <string name="deviatejedloingredience6">víno červené</string>
+    <string name="deviatejedloingredience7">omáčka worcesterská</string>
+    <string name="deviatejedloingredience8">med</string>
+    <string name="deviatejedloingredience9">olej</string>
+    <string name="deviatejedloingredience10">bageta</string>
+    <string name="deviatejedloingredience11">poľníček</string>
+
+    <string name="deviatejedlojednotka1">g</string>
+    <string name="deviatejedlojednotka2">čl</string>
+    <string name="deviatejedlojednotka3">čl</string>
+    <string name="deviatejedlojednotka4">ks</string>
+    <string name="deviatejedlojednotka5">ml</string>
+    <string name="deviatejedlojednotka6">ml</string>
+    <string name="deviatejedlojednotka7">PL</string>
+    <string name="deviatejedlojednotka8">g</string>
+    <string name="deviatejedlojednotka9">PL</string>
+    <string name="deviatejedlojednotka10">ks</string>
+    <string name="deviatejedlojednotka11">hrsť</string>
+
+    <string name="deviatejedlopopis1">Pečeň prudko opečieme 2 minúty z každej strany, osolíme a okoreníme.</string>
+    <string name="deviatejedlopopis2">Cibuľu restujeme, pridáme ocot, víno, med, worcester … varíme na čatní.</string>
+    <string name="deviatejedlopopis3">Bagetu opečieme, podávame s pečeňou, čatní a poľníčkom.</string>
+
+
+        <!-- ▸ 10. Zapekané figy s medom (foodId9 = 10) -->
+        <string name="desiatejedloingredience1">figy čerstvé</string>
+        <string name="desiatejedloingredience2">syr kozí (Lučina)</string>
+        <string name="desiatejedloingredience3">med</string>
+        <string name="desiatejedloingredience4">pistácie</string>
+        <string name="desiatejedloingredience5">soľ</string>
+        <string name="desiatejedloingredience6">korenie čierne mleté</string>
+
+        <string name="desiatejedlopopis1">Čerstvé figy umyjeme, osušíme a narežeme do kríža alebo prerežeme po dĺžke na polovicu. Uložíme ich na plech vystlaný papierom na pečenie.</string>
+        <string name="desiatejedlopopis2">Do každej figy vložíme trošku kozieho syra, posypeme nasekanými pistáciami, pokvapkáme medom a zľahka ochutíme soľou a čiernym korením.</string>
+        <string name="desiatejedlopopis3">V rúre s funkciou gril zapekáme na najvyššom stupni približne 5 – 8 minút.</string>
+        <string name="desiatejedlopopis4">Podávame s nasucho opečeným domácim kváskovým chlebom.</string>
+
+
+
+        <!-- ▸ 11. Výborný tvarožník (foodId10 = 11) -->
+        <string name="jedenastejedloingredience1">tvaroh tučný hrudkovitý</string>
+        <string name="jedenastejedloingredience2">vajcia</string>
+        <string name="jedenastejedloingredience3">cukor kryštálový jemný</string>
+        <string name="jedenastejedloingredience4">cukor vanilkový</string>
+        <string name="jedenastejedloingredience5">krupica detská</string>
+        <string name="jedenastejedloingredience6">kôra citrónová nastrúhaná</string>
+        <string name="jedenastejedloingredience7">soľ</string>
+        <string name="jedenastejedloingredience8">smotana kyslá 16 %</string>
+        <string name="jedenastejedloingredience9">hrozienka</string>
+        <string name="jedenastejedloingredience10">cukor práškový</string>
+
+        <string name="jedenastejedlopopis1">Hrozienka zalejeme vriacou vodou a necháme 5 – 10 minút napučať.</string>
+        <string name="jedenastejedlopopis2">Oddelíme žĺtky od bielkov a z bielkov vyšľaháme tuhý sneh so štipkou soli.</string>
+        <string name="jedenastejedlopopis3">V miske vymiešame tvaroh, žĺtky, soľ, cukry, krupicu, smotanu a citrónovú kôru.</string>
+        <string name="jedenastejedlopopis4">Primiešame hrozienka a opatrne aj sneh z bielkov.</string>
+        <string name="jedenastejedlopopis5">Cesto rozotrieme do formy 21 × 21 cm vystlanej papierom na pečenie.</string>
+        <string name="jedenastejedlopopis6">Pečieme pri 175 – 180 °C približne 35 minút.</string>
+        <string name="jedenastejedlopopis7">Po vychladnutí posypeme práškovým cukrom a podávame.</string>
+
+
+
+        <!-- ▸ 12. Citrónovo‑makové makrónky (foodId11 = 12) -->
+        <string name="dvanastejedloingredience1">mandľová múka</string>
+        <string name="dvanastejedloingredience2">mak mletý</string>
+        <string name="dvanastejedloingredience3">cukor práškový</string>
+        <string name="dvanastejedloingredience4">cukor kryštálový</string>
+        <string name="dvanastejedloingredience5">voda</string>
+        <string name="dvanastejedloingredience6">bielky</string>
+        <string name="dvanastejedloingredience7">soľ</string>
+        <string name="dvanastejedloingredience8">mascarpone</string>
+        <string name="dvanastejedloingredience9">čokoláda biela</string>
+        <string name="dvanastejedloingredience10">lemon curd</string>
+        <string name="dvanastejedloingredience11">žĺtky</string>
+        <string name="dvanastejedloingredience12">cukor krupicový</string>
+        <string name="dvanastejedloingredience13">šťava citrónová</string>
+        <string name="dvanastejedloingredience14">maslo</string>
+        <string name="dvanastejedloingredience15">kôra citrónová</string>
+
+        <string name="dvanastejedlopopis1">Pripravíme lemon curd: všetky suroviny nad parou šľaháme do zhustnutia.</string>
+        <string name="dvanastejedlopopis2">Mandľovú múku, práškový cukor a mak preosejeme, vmiešame 35 g bielka.</string>
+        <string name="dvanastejedlopopis3">Kryštálový cukor varíme s vodou na 116 °C.</string>
+        <string name="dvanastejedlopopis4">Druhý bielok so štipkou soli vyšľaháme na penu a zašľaháme horúci sirup.</string>
+        <string name="dvanastejedlopopis5">Sneh na trikrát vmiešame do mandľovej pasty (macaronage).</string>
+        <string name="dvanastejedlopopis6">Cesto naplníme do vrecka a nastriekame na podložku.</string>
+        <string name="dvanastejedlopopis7">Pečieme pri 140 °C (ventilátor) ~ 18 minút.</string>
+        <string name="dvanastejedlopopis8">Plnka: roztopíme bielu čokoládu, vychladenú vyšľaháme s mascarpone.</string>
+        <string name="dvanastejedlopopis9">Primiešame lemon curd, necháme krém stuhnúť a naplníme makrónky.</string>
+        <string name="dvanastejedlopopis10">Ozdobíme bielou čokoládou, lyofilizovanými malinami a makom.</string>
+
+
+
+        <!-- ▸ 13. Mrkvový koláč bez lepku (foodId12 = 13) -->
+        <string name="trinastejedloingredience1">múka bezgluténová Promix PK</string>
+        <string name="trinastejedloingredience2">vajcia</string>
+        <string name="trinastejedloingredience3">orechy vlašské</string>
+        <string name="trinastejedloingredience4">jogurt grécky biely</string>
+        <string name="trinastejedloingredience5">pyré jablkové</string>
+        <string name="trinastejedloingredience6">mrkva</string>
+        <string name="trinastejedloingredience7">cukor trstinový</string>
+        <string name="trinastejedloingredience8">škorica mletá</string>
+        <string name="trinastejedloingredience9">prášok kypriaci bez lepku</string>
+        <string name="trinastejedloingredience10">smotana kyslá</string>
+        <string name="trinastejedloingredience11">med</string>
+        <string name="trinastejedloingredience12">kôra pomarančová</string>
+        <string name="trinastejedloingredience13">mäta</string>
+
+        <string name="trinastejedlopopis1">Vajcia s trstinovým cukrom vyšľaháme do peny, pridáme jogurt a pyré.</string>
+        <string name="trinastejedlopopis2">Vmiešame postrúhanú mrkvu a nasekané orechy.</string>
+        <string name="trinastejedlopopis3">Zapracujeme múku so škoricou a kypriacim práškom.</string>
+        <string name="trinastejedlopopis4">Cesto vylejeme na plech 25 × 30 cm s papierom na pečenie.</string>
+        <string name="trinastejedlopopis5">Pečieme pri 180 °C ~ 25 – 30 minút.</string>
+        <string name="trinastejedlopopis6">Po vychladnutí potrieme kyslou smotanou s medom.</string>
+        <string name="trinastejedlopopis7">Koláč necháme v chladničke stuhnúť.</string>
+        <string name="trinastejedlopopis8">Pred podávaním posypeme orechmi, pomarančovou kôrou a ozdobíme mätou.</string>
+
+
+
+        <!-- ▸ 14. Orechovo‑vanilkové rezy (foodId13 = 14) -->
+        <string name="strnastejedloingredience1">vajce</string>
+        <string name="strnastejedloingredience2">cukor kryštálový</string>
+        <string name="strnastejedloingredience3">cukor vanilkový</string>
+        <string name="strnastejedloingredience4">olej</string>
+        <string name="strnastejedloingredience5">voda</string>
+        <string name="strnastejedloingredience6">múka polohrubá</string>
+        <string name="strnastejedloingredience7">prášok do pečiva</string>
+        <string name="strnastejedloingredience8">orechy mleté</string>
+        <string name="strnastejedloingredience9">mlieko</string>
+        <string name="strnastejedloingredience10">Zlatý klas</string>
+        <string name="strnastejedloingredience11">maslo</string>
+        <string name="strnastejedloingredience12">likér vaječný</string>
+        <string name="strnastejedloingredience13">džem čučoriedkový</string>
+        <string name="strnastejedloingredience14">čokoláda</string>
+        <string name="strnastejedloingredience15">Cera</string>
+        <string name="strnastejedloingredience16">orechy na ozdobu</string>
+
+        <string name="strnastejedlopopis1">Upečieme dva vanilkové piškótové pláty podľa receptu.</string>
+        <string name="strnastejedlopopis2">Upečieme orechový plát rovnakým postupom.</string>
+        <string name="strnastejedlopopis3">Uvaríme puding z mlieka a Zlatého klasu, vychladíme a zašľaháme maslo a likér.</string>
+        <string name="strnastejedlopopis4">Skladáme: vanilkový plát → krém → orechový plát natretý džemom → krém → vanilkový plát.</string>
+        <string name="strnastejedlopopis5">Vrch potrieme tenkou vrstvou krému, zalejeme čokoládovou polevou (čokoláda + Cera).</string>
+        <string name="strnastejedlopopis6">Po stuhnutí krájame horúcim nožom a zdobíme orechmi.</string>
+
+
+
+        <!-- ▸ 15. Zemiaky pečené s tekvicou (foodId14 = 15) -->
+        <string name="patnastejedloingredience1">zemiaky</string>
+        <string name="patnastejedloingredience2">tekvica hokkaido</string>
+        <string name="patnastejedloingredience3">soľ</string>
+        <string name="patnastejedloingredience4">paprika červená mletá</string>
+        <string name="patnastejedloingredience5">korenie čierne mleté</string>
+        <string name="patnastejedloingredience6">korenie na pečené zemiaky</string>
+        <string name="patnastejedloingredience7">vňať petržlenová</string>
+        <string name="patnastejedloingredience8">olej</string>
+
+        <string name="patnastejedlopopis1">Predvarené zemiaky nakrájame na šestiny, tekvicu na väčšie kúsky a uložíme na plech.</string>
+        <string name="patnastejedlopopis2">Pokvapkáme olejom, osolíme, okoreníme a pridáme petržlenovú vňať.</string>
+        <string name="patnastejedlopopis3">Pečieme pri 180 °C približne 40 minút do zlatista.</string>
+
+
+    <!-- ▸ 10. Zapekané figy -->
+    <string name="desiatejedlojednotka1">ks</string>  <!-- figy -->
+    <string name="desiatejedlojednotka2">g</string>   <!-- kozí syr -->
+    <string name="desiatejedlojednotka3">PL</string>  <!-- med -->
+    <string name="desiatejedlojednotka4">PL</string>  <!-- pistácie -->
+    <string name="desiatejedlojednotka5">čl</string>  <!-- soľ -->
+    <string name="desiatejedlojednotka6">čl</string>  <!-- čierne korenie -->
+
+
+    <!-- ▸ 11. Výborný tvarožník -->
+    <string name="jedenastejedlojednotka1">g</string>
+    <string name="jedenastejedlojednotka2">ks</string>
+    <string name="jedenastejedlojednotka3">PL</string>
+    <string name="jedenastejedlojednotka4">KL</string>
+    <string name="jedenastejedlojednotka5">PL</string>
+    <string name="jedenastejedlojednotka6">ks</string>
+    <string name="jedenastejedlojednotka7">čl</string>
+    <string name="jedenastejedlojednotka8">PL</string>
+    <string name="jedenastejedlojednotka9">PL</string>
+    <string name="jedenastejedlojednotka10">PL</string>
+
+
+    <!-- ▸ 12. Citrónovo‑makové makrónky -->
+    <string name="dvanastejedlojednotka1">g</string>
+    <string name="dvanastejedlojednotka2">g</string>
+    <string name="dvanastejedlojednotka3">g</string>
+    <string name="dvanastejedlojednotka4">g</string>
+    <string name="dvanastejedlojednotka5">g</string>
+    <string name="dvanastejedlojednotka6">g</string>
+    <string name="dvanastejedlojednotka7">čl</string>
+    <string name="dvanastejedlojednotka8">g</string>
+    <string name="dvanastejedlojednotka9">g</string>
+    <string name="dvanastejedlojednotka10">PL</string>
+    <string name="dvanastejedlojednotka11">ks</string>
+    <string name="dvanastejedlojednotka12">g</string>
+    <string name="dvanastejedlojednotka13">ml</string>
+    <string name="dvanastejedlojednotka14">g</string>
+    <string name="dvanastejedlojednotka15">ks</string>
+
+
+    <!-- ▸ 13. Mrkvový koláč bez lepku -->
+    <string name="trinastejedlojednotka1">g</string>
+    <string name="trinastejedlojednotka2">ks</string>
+    <string name="trinastejedlojednotka3">g</string>
+    <string name="trinastejedlojednotka4">g</string>
+    <string name="trinastejedlojednotka5">g</string>
+    <string name="trinastejedlojednotka6">g</string>
+    <string name="trinastejedlojednotka7">g</string>
+    <string name="trinastejedlojednotka8">čl</string>
+    <string name="trinastejedlojednotka9">čl</string>
+    <string name="trinastejedlojednotka10">g</string>
+    <string name="trinastejedlojednotka11">PL</string>
+    <string name="trinastejedlojednotka12">ks</string>
+    <string name="trinastejedlojednotka13">hrsť</string>
+
+
+    <!-- ▸ 14. Orechovo‑vanilkové rezy -->
+    <string name="strnastejedlojednotka1">ks</string>
+    <string name="strnastejedlojednotka2">PL</string>
+    <string name="strnastejedlojednotka3">bal</string>
+    <string name="strnastejedlojednotka4">PL</string>
+    <string name="strnastejedlojednotka5">PL</string>
+    <string name="strnastejedlojednotka6">PL</string>
+    <string name="strnastejedlojednotka7">ČL</string>
+    <string name="strnastejedlojednotka8">PL</string>
+    <string name="strnastejedlojednotka9">ml</string>
+    <string name="strnastejedlojednotka10">bal</string>
+    <string name="strnastejedlojednotka11">g</string>
+    <string name="strnastejedlojednotka12">ml</string>
+    <string name="strnastejedlojednotka13">podľa potreby</string>
+    <string name="strnastejedlojednotka14">g</string>
+    <string name="strnastejedlojednotka15">g</string>
+    <string name="strnastejedlojednotka16">podľa potreby</string>
+
+
+    <!-- ▸ 15. Zemiaky pečené s tekvicou -->
+    <string name="patnastejedlojednotka1">g</string>
+    <string name="patnastejedlojednotka2">g</string>
+    <string name="patnastejedlojednotka3">čl</string>
+    <string name="patnastejedlojednotka4">čl</string>
+    <string name="patnastejedlojednotka5">čl</string>
+    <string name="patnastejedlojednotka6">čl</string>
+    <string name="patnastejedlojednotka7">hrsť</string>
+    <string name="patnastejedlojednotka8">PL</string>
+    <!-- ▸ 16. Pór s hrozienkami (foodId15 = 16) -->
+    <string name="sestnastejedloingredience1">pór</string>
+    <string name="sestnastejedloingredience2">olej</string>
+    <string name="sestnastejedloingredience3">cesnak</string>
+    <string name="sestnastejedloingredience4">hrozienka</string>
+    <string name="sestnastejedloingredience5">soľ</string>
+    <string name="sestnastejedloingredience6">ocot balzamikový</string>
+
+    <string name="sestnastejedlojednotka1">ks</string>
+    <string name="sestnastejedlojednotka2">PL</string>
+    <string name="sestnastejedlojednotka3">strúčiky</string>
+    <string name="sestnastejedlojednotka4">PL</string>
+    <string name="sestnastejedlojednotka5">čl</string>
+    <string name="sestnastejedlojednotka6">čl</string>
+
+    <string name="sestnastejedlopopis1">Pór nakrájame na kolieska a sparíme.</string>
+    <string name="sestnastejedlopopis2">Na oleji opečieme cesnak, pridáme pór a hrozienka, krátko podusíme.</string>
+    <string name="sestnastejedlopopis3">Dochutíme soľou a balzamikovým octom.</string>
+
+
+
+    <!-- ▸ 17. Zemiaky s kyslými uhorkami (foodId16 = 17) -->
+    <string name="sedemnastejedloingredience1">zemiaky</string>
+    <string name="sedemnastejedloingredience2">uhorky kyslé</string>
+    <string name="sedemnastejedloingredience3">cibuľa</string>
+    <string name="sedemnastejedloingredience4">olej</string>
+    <string name="sedemnastejedloingredience5">soľ</string>
+    <string name="sedemnastejedloingredience6">korenie čierne mleté</string>
+
+    <string name="sedemnastejedlojednotka1">g</string>
+    <string name="sedemnastejedlojednotka2">ks</string>
+    <string name="sedemnastejedlojednotka3">ks</string>
+    <string name="sedemnastejedlojednotka4">PL</string>
+    <string name="sedemnastejedlojednotka5">čl</string>
+    <string name="sedemnastejedlojednotka6">čl</string>
+
+    <string name="sedemnastejedlopopis1">Uvarené zemiaky nakrájame na kolieska.</string>
+    <string name="sedemnastejedlopopis2">Na oleji speníme cibuľu, pridáme zemiaky a premiešame.</string>
+    <string name="sedemnastejedlopopis3">Dochutíme korením a vmiešame nakrájané uhorky.</string>
+
+
+
+    <!-- ▸ 18. Mojo Rocho (foodId17 = 18) -->
+    <string name="osemnastejedloingredience1">paprika červená mletá</string>
+    <string name="osemnastejedloingredience2">cesnak</string>
+    <string name="osemnastejedloingredience3">soľ</string>
+    <string name="osemnastejedloingredience4">ocot vínny</string>
+    <string name="osemnastejedloingredience5">olej olivový</string>
+    <string name="osemnastejedloingredience6">rímska rasca</string>
+
+    <string name="osemnastejedlojednotka1">PL</string>
+    <string name="osemnastejedlojednotka2">strúčiky</string>
+    <string name="osemnastejedlojednotka3">čl</string>
+    <string name="osemnastejedlojednotka4">PL</string>
+    <string name="osemnastejedlojednotka5">ml</string>
+    <string name="osemnastejedlojednotka6">čl</string>
+
+    <string name="osemnastejedlopopis1">V mažiari roztlačíme cesnak, mletú papriku, soľ a rascu.</string>
+    <string name="osemnastejedlopopis2">Prilejeme ocot a pomaly vmiešavame olivový olej, kým nevznikne emulzia.</string>
+    <string name="osemnastejedlopopis3">Podávame k zemiakom, mäsu alebo rybám.</string>
+
+
+
+    <!-- ▸ 19. Zapekané cestoviny so syrom (foodId18 = 19) -->
+    <string name="devatnastejedloingredience1">cestoviny</string>
+    <string name="devatnastejedloingredience2">tekvica</string>
+    <string name="devatnastejedloingredience3">syr čerstvý</string>
+    <string name="devatnastejedloingredience4">olej olivový</string>
+    <string name="devatnastejedloingredience5">soľ</string>
+    <string name="devatnastejedloingredience6">korenie čierne mleté</string>
+    <string name="devatnastejedloingredience7">semienka (ľanové a slnečnicové)</string>
+    <string name="devatnastejedloingredience8">mandle nasekané</string>
+    <string name="devatnastejedloingredience9">čedar</string>
+
+    <string name="devatnastejedlojednotka1">g</string>
+    <string name="devatnastejedlojednotka2">g</string>
+    <string name="devatnastejedlojednotka3">g</string>
+    <string name="devatnastejedlojednotka4">PL</string>
+    <string name="devatnastejedlojednotka5">podľa chuti</string>
+    <string name="devatnastejedlojednotka6">podľa chuti</string>
+    <string name="devatnastejedlojednotka7">PL</string>
+    <string name="devatnastejedlojednotka8">PL</string>
+    <string name="devatnastejedlojednotka9">g</string>
+
+    <string name="devatnastejedlopopis1">Cestoviny uvaríme al dente v osolenej vode.</string>
+    <string name="devatnastejedlopopis2">Tekvicu nakrájame na malé kúsky, opečieme na olivovom oleji.</string>
+    <string name="devatnastejedlopopis3">Pridáme cestoviny, čerstvý syr, osolíme a okoreníme.</string>
+    <string name="devatnastejedlopopis4">Presunieme do zapekacej misy, posypeme semienkami, mandľami a čedarom.</string>
+    <string name="devatnastejedlopopis5">Pečieme pri 200 °C asi 25 minút, kým vrch nezhnedne.</string>
+
+
+
+    <!-- ▸ 20. Čokoládové brownie (foodId19 = 20) -->
+    <string name="dvadsatejedloingredience1">čokoláda horká (≥ 70 % kakaa)</string>
+    <string name="dvadsatejedloingredience2">maslo</string>
+    <string name="dvadsatejedloingredience3">soľ</string>
+    <string name="dvadsatejedloingredience4">cukor</string>
+    <string name="dvadsatejedloingredience5">vajce</string>
+    <string name="dvadsatejedloingredience6">múka hladká</string>
+    <string name="dvadsatejedloingredience7">kypriaci prášok</string>
+    <string name="dvadsatejedloingredience8">kakao</string>
+
+    <string name="dvadsatejedlojednotka1">g</string>
+    <string name="dvadsatejedlojednotka2">g</string>
+    <string name="dvadsatejedlojednotka3">štipka</string>
+    <string name="dvadsatejedlojednotka4">g</string>
+    <string name="dvadsatejedlojednotka5">ks</string>
+    <string name="dvadsatejedlojednotka6">PL</string>
+    <string name="dvadsatejedlojednotka7">KL</string>
+    <string name="dvadsatejedlojednotka8">PL</string>
+
+    <string name="dvadsatejedlopopis1">Čokoládu a maslo rozpustíme vo vodnom kúpeli.</string>
+    <string name="dvadsatejedlopopis2">Necháme mierne vychladnúť.</string>
+    <string name="dvadsatejedlopopis3">Rúru rozohrejeme na 180 °C.</string>
+    <string name="dvadsatejedlopopis4">Vajcia s cukrom vyšľaháme do peny.</string>
+    <string name="dvadsatejedlopopis5">Prisypeme múku, kypriaci prášok a kakao, jemne zamiešame.</string>
+    <string name="dvadsatejedlopopis6">Vmiešame čokoládovo‑maslovú zmes.</string>
+    <string name="dvadsatejedlopopis7">Cesto nalejeme do formy 20 × 20 cm s papierom na pečenie.</string>
+    <string name="dvadsatejedlopopis8">Pečieme pri 180 °C asi 30 minút – okraje pevné, stred jemne trasľavý.</string>
+    <string name="dvadsatejedlopopis9">Necháme vychladnúť, nakrájame na štvorce.</string>
+
+
+        <!-- ▸ 16. Pór s hrozienkami -->
+        <string name="sestnastejedlonazov">Pór s hrozienkami ako príloha</string>
+        <string name="sestnastejedlopopis">Sladko‑slaný pór s cesnakom a hrozienkami.</string>
+
+        <!-- ▸ 17. Zemiaky s kyslými uhorkami -->
+        <string name="sedemnastejedlonazov">Zemiaky s kyslými uhorkami</string>
+        <string name="sedemnastejedlopopis">Teplá príloha zo zemiakov, cibule a nakladaných uhoriek.</string>
+
+        <!-- ▸ 18. Omáčka Mojo Rocho -->
+        <string name="osemnastejedlonazov">Omáčka Mojo Rocho</string>
+        <string name="osemnastejedlopopis">Pikantná kanárska červená omáčka k zemiakom, mäsu či rybám.</string>
+
+        <!-- ▸ 19. Zapekané cestoviny so syrom -->
+        <string name="devatnastejedlonazov">Zapekané cestoviny so syrom a semienkami</string>
+        <string name="devatnastejedlopopis">Chrumkavé cestoviny s tekvicou, čerstvým syrom, čedarom a semienkami.</string>
+
+        <!-- ▸ 20. Čokoládové brownie -->
+        <string name="dvadsatejedlonazov">Čokoládové brownie</string>
+        <string name="dvadsatejedlopopis">Vláčne brownie z 70 % čokolády – hriešne čokoládové.</string>
+    <!-- ▸ 2. Brokolicová polievka s guľôčkami -->
+    <string name="druhejjedlonazov">Brokolicová polievka s guľôčkami</string>
+    <string name="druhejjedlopopis">Výborná krémová brokolicová polievka, inú už nerobím.</string>
+
+    <!-- ▸ 3. Šošovicová polievka s párkom -->
+    <string name="tretiejedlonazov">Šošovicová polievka s párkom</string>
+    <string name="tretiejedlopopis">Klasická hustá šošovicová polievka s párkom – ideálna na chladné dni.</string>
+
+    <!-- ▸ 4. Glazované kura s broskyňou a zázvorom -->
+    <string name="stvrtejjedlonazov">Glazované kura s broskyňou a zázvorom</string>
+    <string name="stvrtejjedlopopis">Rýchle ázijské kura s kombináciou sladkých broskýň a pikantného zázvoru.</string>
+
+    <!-- ▸ 5. Kuracie plátky v marináde -->
+    <string name="piatejedlonazov">Kuracie plátky v marináde</string>
+    <string name="piatejedlopopis">Rýchle kuracie plátky marinované vo vajíčku, korení a worcesterskej omáčke.</string>
+
+    <!-- ▸ 6. Pečené bataty plnené fazuľou -->
+    <string name="siestejedlonazov">Pečené bataty plnené fazuľou</string>
+    <string name="siestejedlopopis">Sladké bataty s fazuľou v paradajkovej omáčke – výživná a chutná kombinácia.</string>
+
+    <!-- ▸ 7. Pasta alla Norma -->
+    <string name="siedmejedlonazov">Pasta alla Norma</string>
+    <string name="siedmejedlopopis">Sicílska klasika pomenovaná po opere Norma od Vinzenza Belliniho.</string>
+
+    <!-- ▸ 8. Sicílska caponata -->
+    <string name="osmejedlonazov">Sicílska caponata</string>
+    <string name="osmejedlopopis">Tradičné sicílske zeleninové predjedlo, podávané aj ako príloha k mäsu či rybám.</string>
+
+    <!-- ▸ 9. Kačacia pečeň s cibuľovým čatní -->
+    <string name="deviatejedlonazov">Kačacia pečeň s cibuľovým čatní</string>
+    <string name="deviatejedlopopis">Bohatá kačacia pečeň doplnená výrazným sladkokyslým cibuľovým čatní.</string>
+
+    <!-- ▸ 10. Zapekané figy s kozím syrom -->
+    <string name="desiatejedlonazov">Zapekané figy s medom, pistáciami a kozím syrom</string>
+    <string name="desiatejedlopopis">Figy plnené kozím syrom, pistáciami a pokvapkané medom – rýchle a efektné.</string>
+
+    <!-- ▸ 11. Výborný tvarožník -->
+    <string name="jedenastejedlonazov">Výborný tvarožník</string>
+    <string name="jedenastejedlopopis">Jemný, šťavnatý tvarohový koláč, ktorý zmizne rýchlosťou blesku.</string>
+
+    <!-- ▸ 12. Citrónovo‑makové makrónky -->
+    <string name="dvanastejedlonazov">Citrónovo‑makové makrónky</string>
+    <string name="dvanastejedlopopis">Makrónky s jemnou citrónovou plnkou a makovým korpusom, pripravované talianskou metódou.</string>
+
+    <!-- ▸ 13. Mrkvový koláč bez lepku -->
+    <string name="trinastejedlonazov">Mrkvový koláč bez lepku so smotanou a orechmi</string>
+    <string name="trinastejedlopopis">Bezlepkový mrkvový koláč s jogurtom, orechmi a smotanovým krémom.</string>
+
+    <!-- ▸ 14. Orechovo‑vanilkové rezy -->
+    <string name="strnastejedlonazov">Orechovo‑vanilkové rezy</string>
+    <string name="strnastejedlopopis">Slávnostné rezy z orechových a vanilkových plátov plnené krémom a džemom, zakončené čokoládovou polevou.</string>
+
+
+
 </resources>

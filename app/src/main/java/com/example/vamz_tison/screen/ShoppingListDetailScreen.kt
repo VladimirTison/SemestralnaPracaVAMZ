@@ -7,20 +7,32 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.vamz_tison.R
 import com.example.vamz_tison.database.ListItems
 import com.example.vamz_tison.viewmodel.ShoppingListDetailViewModel
 
+/**
+ * Obrazovka detailu nákupného zoznamu.
+ *
+ * Zobrazuje názov zoznamu, umožňuje pridanie novej položky a prepína stav položiek (kúpené/nekúpené).
+ * Používateľ môže tiež jednotlivé položky vymazať.
+ *
+ * @param listId ID zoznamu, ktorý sa má načítať.
+ * @param viewModel ViewModel pre manipuláciu s dátami zoznamu.
+ * @param onClose Callback, ktorý sa zavolá pri kliknutí na tlačidlo späť.
+ */
 @Composable
 fun ShoppingListDetailScreen(
     listId: Int,
@@ -30,6 +42,7 @@ fun ShoppingListDetailScreen(
     val uiState by viewModel.uiState.collectAsState()
     var newItemText by rememberSaveable { mutableStateOf("") }
 
+    // Načítanie položiek pri otvorení obrazovky
     LaunchedEffect(listId) {
         viewModel.loadListWithItems(listId)
     }
@@ -39,7 +52,7 @@ fun ShoppingListDetailScreen(
             .fillMaxSize()
             .padding(bottom = 16.dp)
     ) {
-        // Header
+        // Hlavička obrazovky s názvom zoznamu
         item {
             Box(
                 modifier = Modifier
@@ -49,7 +62,8 @@ fun ShoppingListDetailScreen(
                         shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp)
                     )
                     .padding(
-                        top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() + 16.dp,
+                        top = WindowInsets.statusBars.asPaddingValues()
+                            .calculateTopPadding() + 16.dp,
                         start = 16.dp,
                         end = 16.dp,
                         bottom = 24.dp
@@ -58,16 +72,14 @@ fun ShoppingListDetailScreen(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButton(onClick = onClose) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Späť",
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.spat),
                             tint = Color.White
                         )
                     }
-
                     Spacer(modifier = Modifier.width(4.dp))
-
                     Text(
-                        text = uiState.shoppinglist?.name ?: "Zoznam",
+                        text = uiState.shoppinglist?.name ?: stringResource(R.string.zoznam),
                         fontSize = 28.sp,
                         color = Color.White,
                         fontWeight = FontWeight.Bold
@@ -76,7 +88,7 @@ fun ShoppingListDetailScreen(
             }
         }
 
-        // Input na novú položku
+        // Pole pre pridanie novej položky
         item {
             Row(
                 modifier = Modifier
@@ -87,7 +99,7 @@ fun ShoppingListDetailScreen(
                 OutlinedTextField(
                     value = newItemText,
                     onValueChange = { newItemText = it },
-                    placeholder = { Text("Nová položka") },
+                    placeholder = { Text(stringResource(R.string.nov_polo_ka)) },
                     modifier = Modifier
                         .weight(1f)
                         .padding(end = 8.dp),
@@ -98,7 +110,6 @@ fun ShoppingListDetailScreen(
                         cursorColor = Color(0xFF5D3A1A)
                     )
                 )
-
                 Button(
                     onClick = {
                         if (newItemText.isNotBlank()) {
@@ -116,12 +127,12 @@ fun ShoppingListDetailScreen(
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF5D3A1A)),
                     shape = RoundedCornerShape(20.dp)
                 ) {
-                    Text("Pridať", color = Color.White)
+                    Text(stringResource(R.string.pridat), color = Color.White)
                 }
             }
         }
 
-        // Zoznam položiek
+        // Zobrazenie jednotlivých položiek zoznamu
         items(uiState.items) { item ->
             var isChecked by remember { mutableStateOf(item.activestate) }
 
@@ -147,9 +158,7 @@ fun ShoppingListDetailScreen(
                             uncheckedColor = Color.Gray
                         )
                     )
-
                     Spacer(modifier = Modifier.width(8.dp))
-
                     Text(
                         text = item.name,
                         fontSize = 16.sp,
@@ -159,7 +168,6 @@ fun ShoppingListDetailScreen(
                         modifier = Modifier.weight(1f)
                     )
                 }
-
                 IconButton(
                     onClick = { viewModel.removeItem(item) },
                     modifier = Modifier
@@ -168,7 +176,7 @@ fun ShoppingListDetailScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = "Zmazať položku",
+                        contentDescription = stringResource(R.string.zmazat_polozku),
                         tint = Color.Gray
                     )
                 }

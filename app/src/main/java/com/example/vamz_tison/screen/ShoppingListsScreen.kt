@@ -15,18 +15,22 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.vamz_tison.database.AppDatabase
-import com.example.vamz_tison.database.AppRepository
+import com.example.vamz_tison.R
 import com.example.vamz_tison.database.ShoppingList
 import com.example.vamz_tison.viewmodel.ShoppingListDetailViewModel
 import com.example.vamz_tison.viewmodel.ShoppingListViewModel
 
+/**
+ * Hlavná obrazovka zobrazujúca zoznam všetkých nákupných zoznamov.
+ * Umožňuje pridávať, mazať a vybrať zoznam pre zobrazenie detailov.
+ *
+ * @param viewModel ViewModel obsahuje stav zoznamov a logiku pre ich správu.
+ */
 @Composable
 fun ShoppingListsScreen(
     viewModel: ShoppingListViewModel = viewModel()
@@ -35,6 +39,8 @@ fun ShoppingListsScreen(
     var showDialog by remember { mutableStateOf(false) }
     var newListTitle by remember { mutableStateOf("") }
     var selectedListId by rememberSaveable { mutableStateOf<Int?>(null) }
+
+    // Ak je vybraný zoznam, zobrazí sa detailná obrazovka zoznamu
     selectedListId?.let { id ->
         val detailViewModel = remember {
             ShoppingListDetailViewModel(repository = viewModel.repository)
@@ -53,7 +59,7 @@ fun ShoppingListsScreen(
                 onClick = { showDialog = true },
                 backgroundColor = Color(0xFF5D3A1A)
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Pridať", tint = Color.White)
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.pridat1), tint = Color.White)
             }
         }
     ) { padding ->
@@ -62,7 +68,7 @@ fun ShoppingListsScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            // Horný header
+            // Horný panel s názvom
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -71,14 +77,14 @@ fun ShoppingListsScreen(
                         shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp)
                     )
                     .padding(
-                        top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() + 16.dp,
+                        top = 16.dp,
                         start = 16.dp,
                         end = 16.dp,
                         bottom = 24.dp
                     )
             ) {
                 Text(
-                    text = "Nákupné zoznamy",
+                    text = stringResource(R.string.n_kupn_zoznamy1),
                     fontSize = 28.sp,
                     color = Color.White,
                     fontWeight = FontWeight.Bold
@@ -87,6 +93,7 @@ fun ShoppingListsScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
+            // Zoznam nákupných zoznamov alebo prázdne hlásenie
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -101,7 +108,7 @@ fun ShoppingListsScreen(
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = "Zatiaľ nemáte žiadne nákupné zoznamy.",
+                                text = stringResource(R.string.zatia_nem_te_gradle_n_kupn_zoznamy),
                                 color = Color.Gray,
                                 fontSize = 16.sp
                             )
@@ -145,7 +152,7 @@ fun ShoppingListsScreen(
                                     }) {
                                         Icon(
                                             imageVector = Icons.Default.Close,
-                                            contentDescription = "Zmazať",
+                                            contentDescription = stringResource(R.string.zmazat),
                                             tint = Color.Gray
                                         )
                                     }
@@ -153,6 +160,7 @@ fun ShoppingListsScreen(
 
                                 Spacer(modifier = Modifier.height(8.dp))
 
+                                // Vizualizácia progresu nakúpených položiek
                                 LinearProgressIndicator(
                                     progress = progress,
                                     modifier = Modifier
@@ -179,7 +187,7 @@ fun ShoppingListsScreen(
             }
         }
 
-        // AlertDialog (pridanie nového zoznamu)
+        // Dialóg pre pridanie nového zoznamu
         if (showDialog) {
             AlertDialog(
                 onDismissRequest = {
@@ -193,7 +201,7 @@ fun ShoppingListsScreen(
                             .padding(top = 16.dp)
                     ) {
                         Text(
-                            text = "Zadajte názov zoznamu",
+                            text = stringResource(R.string.vyzva),
                             fontSize = 18.sp
                         )
 
@@ -202,7 +210,7 @@ fun ShoppingListsScreen(
                         OutlinedTextField(
                             value = newListTitle,
                             onValueChange = { newListTitle = it },
-                            placeholder = { Text("Názov zoznamu") },
+                            placeholder = { Text(stringResource(R.string.nazov)) },
                             modifier = Modifier.fillMaxWidth(),
                             colors = TextFieldDefaults.outlinedTextFieldColors(
                                 focusedBorderColor = Color(0xFF5D3A1A),
@@ -220,7 +228,7 @@ fun ShoppingListsScreen(
                             showDialog = false
                         }
                     }) {
-                        Text("Pridať", color = Color(0xFF5D3A1A))
+                        Text(stringResource(R.string.add), color = Color(0xFF5D3A1A))
                     }
                 },
                 dismissButton = {
@@ -228,7 +236,7 @@ fun ShoppingListsScreen(
                         showDialog = false
                         newListTitle = ""
                     }) {
-                        Text("Zrušiť", color = Color.Gray)
+                        Text(stringResource(R.string.cancel), color = Color.Gray)
                     }
                 },
                 shape = RoundedCornerShape(16.dp)

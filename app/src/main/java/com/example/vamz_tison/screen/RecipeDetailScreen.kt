@@ -1,30 +1,17 @@
+package com.example.vamz_tison.screen
+
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Checkbox
-import androidx.compose.material.CheckboxDefaults
-import androidx.compose.material.Divider
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,13 +27,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.zIndex
 import com.example.vamz_tison.R
-import com.example.vamz_tison.components.FooterSection
 import com.example.vamz_tison.database.FoodStuff
 import com.example.vamz_tison.database.ListItems
 import com.example.vamz_tison.database.ShoppingList
 import com.example.vamz_tison.viewmodel.RecipeDetailViewModel
+import java.util.Locale
+
+/**
+ * Zobrazenie detailu receptu vrátane titulného obrázka, kategórie, názvu, štatistík (čas, porcie, kalórie),
+ * popisu, zoznamu ingrediencií a postupu prípravy. Umožňuje označiť recept ako obľúbený
+ * a pridať vybrané ingrediencie do zvoleného nákupného zoznamu.
+ *
+ * @param id ID receptu, ktorý sa má zobraziť.
+ * @param viewModel ViewModel obsahujúci dáta a logiku súvisiacu s receptom.
+ * @param onBack Callback funkcia, ktorá sa zavolá po stlačení tlačidla „späť“.
+ */
 
 @Composable
 fun RecipeImageScreen(
@@ -64,7 +60,7 @@ fun RecipeImageScreen(
 
     if (showAddDialog) {
         AddToShoppingListDialog(
-            onDismiss = { showAddDialog = false},
+            onDismiss = { showAddDialog = false },
             uiState.shoppingList,
             uiState.ingredients,
             viewModel
@@ -87,7 +83,7 @@ fun RecipeImageScreen(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        // titulny obrazok
+        // Zobrazenie titulneho obrazku receptu
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -102,7 +98,7 @@ fun RecipeImageScreen(
                 )
             }
 
-            //ikonka spat
+            // Zobrazenie tlacidla spat
             IconButton(
                 onClick = { onBack() },
                 modifier = Modifier
@@ -115,14 +111,13 @@ fun RecipeImageScreen(
                     .size(48.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "Späť",
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = stringResource(R.string.sp),
                     tint = Color(0xFF5D3A1A)
                 )
             }
 
-
-            // tlacidlo oblubene
+            // Zobrazenie ikonky obľúbeného receptu
             IconButton(
                 onClick = { viewModel.toggleFavorite() },
                 modifier = Modifier
@@ -138,13 +133,13 @@ fun RecipeImageScreen(
                     painter = painterResource(
                         id = if (uiState.favoriteFood != null) R.drawable.like else R.drawable.unlike
                     ),
-                    contentDescription = "Obľúbené",
+                    contentDescription = stringResource(R.string.ob_ben),
                     modifier = Modifier.size(30.dp)
                 )
             }
         }
 
-        // cely blok  bOX
+        // Zobrazenie detailov receptu
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
@@ -154,6 +149,7 @@ fun RecipeImageScreen(
             elevation = 8.dp
         ) {
             Column(modifier = Modifier.padding(24.dp)) {
+                // Kategoria receptu
                 Text(
                     text = uiState.category,
                     color = Color(0xFFC58A42),
@@ -163,6 +159,7 @@ fun RecipeImageScreen(
 
                 Spacer(modifier = Modifier.height(4.dp))
 
+                // Nazov receptu
                 Text(
                     text = uiState.food?.name ?: "",
                     color = Color(0xFF6A3A00),
@@ -183,16 +180,22 @@ fun RecipeImageScreen(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // Zobrazenie statistik receptu (cas, porcie, kalorie)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    StatColumn(stringResource(R.string.cookingtime), "${uiState.food?.cookingTime ?: "-"} min")
-                    StatColumn(stringResource(R.string.bake), "${uiState.food?.preparingTime ?: "-"} min")
-                    StatColumn("portion", "${uiState.food?.portions ?: "-"} porcií")
-                    StatColumn("caloriescalculator", "${uiState.food?.calories ?: "-"} kcal")
+                    StatColumn(stringResource(R.string.cookingtime),
+                        stringResource(R.string.min, uiState.food?.cookingTime ?: "-"))
+                    StatColumn(stringResource(R.string.bake),
+                        stringResource(R.string.min1, uiState.food?.preparingTime ?: "-"))
+                    StatColumn(stringResource(R.string.portion),
+                        stringResource(R.string.porci, uiState.food?.portions ?: "-"))
+                    StatColumn(stringResource(R.string.caloriescalculator),
+                        stringResource(R.string.kcal, uiState.food?.calories ?: "-"))
                 }
 
+                // Zobrazenie popisu receptu
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -209,8 +212,9 @@ fun RecipeImageScreen(
 
                 Spacer(modifier = Modifier.height(12.dp))
 
+                // Nadpis ingrediencii
                 Text(
-                    text = "Budeme potrebovať...",
+                    text = stringResource(R.string.budeme_potrebova),
                     color = Color(0xFF6A3A00),
                     fontWeight = FontWeight.Bold,
                     fontSize = 27.sp
@@ -218,6 +222,7 @@ fun RecipeImageScreen(
 
                 Spacer(modifier = Modifier.height(12.dp))
 
+                // Zobrazenie zoznamu ingrediencii
                 uiState.ingredients.forEach { ingredient ->
                     val quantityText = if (ingredient.quantity % 1.0 == 0.0) {
                         ingredient.quantity.toInt().toString()
@@ -249,7 +254,7 @@ fun RecipeImageScreen(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-
+                // Tlacidlo na pridanie ingrediencii do nakupneho zoznamu
                 Button(
                     onClick = { showAddDialog = true },
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFC58A42)),
@@ -259,18 +264,18 @@ fun RecipeImageScreen(
                         .height(48.dp)
                 ) {
                     Text(
-                        text = "Pridať do nákupného zoznamu",
+                        text = stringResource(R.string.prida_do_n_kupn_ho_zoznamu1),
                         color = Color.White,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
                     )
                 }
 
-
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // Nadpis postupu receptu
                 Text(
-                    text = "Ako postupovať...",
+                    text = stringResource(R.string.ako_postupova),
                     color = Color(0xFF6A3A00),
                     fontWeight = FontWeight.Bold,
                     fontSize = 27.sp
@@ -278,6 +283,7 @@ fun RecipeImageScreen(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // Zobrazenie jednotlivych krokov pripravy receptu
                 uiState.process.sortedBy { it.step }.forEach { step ->
                     Row(
                         modifier = Modifier
@@ -286,7 +292,7 @@ fun RecipeImageScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = String.format("%02d", step.step),
+                            text = String.format(Locale.getDefault(), "%02d", step.step),
                             fontWeight = FontWeight.Bold,
                             fontSize = 30.sp,
                             color = Color(0xFFC58A42),
@@ -304,35 +310,49 @@ fun RecipeImageScreen(
                     }
                 }
             }
-
         }
     }
 }
 
-    @Composable
-    fun StatColumn(iconName: String, text: String) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Image(
-                painter = painterResource(
-                    id = when (iconName) {
-                        "cookingtime" -> R.drawable.cookingtime
-                        "bake" -> R.drawable.bake
-                        "portion" -> R.drawable.portion
-                        else -> R.drawable.caloriescalculator
-                    }
-                ),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-            Text(
-                text = text,
-                color = Color(0xFF6A3A00),
-                fontWeight = FontWeight.Bold,
-                fontSize = 14.sp
-            )
-        }
-    }
 
+/**
+ * Pomocná funkcia pre zobrazenie jednej štatistiky receptu (čas, porcie, kalórie) s ikonou a textom.
+ *
+ * @param iconName Názov ikony, ktorý určuje jej typ.
+ * @param text Text popisujúci konkrétnu štatistiku.
+ */
+@Composable
+fun StatColumn(iconName: String, text: String) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(
+            painter = painterResource(
+                id = when (iconName) {
+                    "cookingtime" -> R.drawable.cookingtime
+                    "bake" -> R.drawable.bake
+                    "portion" -> R.drawable.portion
+                    else -> R.drawable.caloriescalculator
+                }
+            ),
+            contentDescription = null,
+            modifier = Modifier.size(24.dp)
+        )
+        Text(
+            text = text,
+            color = Color(0xFF6A3A00),
+            fontWeight = FontWeight.Bold,
+            fontSize = 14.sp
+        )
+    }
+}
+
+/**
+ * Zobrazenie dialógového okna na pridanie ingrediencií receptu do zvoleného nákupného zoznamu.
+ *
+ * @param onDismiss Callback pre zatvorenie dialógu.
+ * @param shoppingLists Zoznam dostupných nákupných zoznamov.
+ * @param ingrediences Zoznam ingrediencií, ktoré možno pridať.
+ * @param viewModel ViewModel na spracovanie ukladania položiek.
+ */
 @Composable
 fun AddToShoppingListDialog(
     onDismiss: () -> Unit,
@@ -342,7 +362,7 @@ fun AddToShoppingListDialog(
 ) {
     var expanded by remember { mutableStateOf(false) }
     var selectedList by remember { mutableStateOf(shoppingLists.first()) }
-    val dropdownWidth = remember { mutableStateOf(0) }
+    val dropdownWidth = remember { mutableIntStateOf(0) }
     val selectedItems = remember { mutableStateMapOf<Int, Boolean>() }
 
     val brown = Color(0xFF6A3A00)
@@ -363,7 +383,7 @@ fun AddToShoppingListDialog(
                     .padding(20.dp)
             ) {
                 Text(
-                    text = "Pridať do nákupného\nzoznamu",
+                    text = stringResource(R.string.prida_do_n_kupn_ho_zoznamu),
                     fontSize = 22.sp,
                     fontWeight = FontWeight.ExtraBold,
                     color = brown,
@@ -374,7 +394,7 @@ fun AddToShoppingListDialog(
                 )
 
                 Text(
-                    "Zvoľte zoznam",
+                    stringResource(R.string.zvo_te_zoznam),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 16.sp,
                     color = brown
@@ -385,7 +405,7 @@ fun AddToShoppingListDialog(
                         .fillMaxWidth()
                         .padding(top = 8.dp)
                         .onGloballyPositioned {
-                            dropdownWidth.value = it.size.width
+                            dropdownWidth.intValue = it.size.width
                         }
                 ) {
                     Box(
@@ -402,7 +422,7 @@ fun AddToShoppingListDialog(
                         expanded = expanded,
                         onDismissRequest = { expanded = false },
                         modifier = Modifier
-                            .width(with(LocalDensity.current) { dropdownWidth.value.toDp() })
+                            .width(with(LocalDensity.current) { dropdownWidth.intValue.toDp() })
                             .align(Alignment.TopStart)
                     ) {
                         shoppingLists.forEachIndexed { index, list ->
@@ -422,7 +442,7 @@ fun AddToShoppingListDialog(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    "Vyberte ingrediencie",
+                    stringResource(R.string.vyberte_ingrediencie),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 16.sp,
                     color = brown
@@ -471,7 +491,7 @@ fun AddToShoppingListDialog(
                         border = BorderStroke(1.dp, brown),
                         modifier = Modifier.defaultMinSize(minWidth = 100.dp)
                     ) {
-                        Text("Zrušiť", color = brown, fontWeight = FontWeight.SemiBold)
+                        Text(stringResource(R.string.zru_i), color = brown, fontWeight = FontWeight.SemiBold)
                     }
 
                     Spacer(modifier = Modifier.width(12.dp))
@@ -499,7 +519,7 @@ fun AddToShoppingListDialog(
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier.defaultMinSize(minWidth = 100.dp)
                     ) {
-                        Text("OK", fontWeight = FontWeight.Bold, color = Color.White)
+                        Text(stringResource(R.string.ok), fontWeight = FontWeight.Bold, color = Color.White)
                     }
                 }
             }

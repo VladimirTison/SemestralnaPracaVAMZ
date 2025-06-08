@@ -96,7 +96,6 @@ fun MainMenu(repository: AppRepository) {
             when (selectedScreen) {
                 "home" -> HomeScreen(                                //Domovská obrazovka
                     viewModel = homeViewModel,
-                    viewModelRecepis = allRecipesViewModel,
                     onCategorySelected = { categoryId ->
                         selectedCategoryId = categoryId
                         selectedScreen = "explore"
