@@ -110,7 +110,7 @@ fun HomeScreen(
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp))
                         .background(Color(0xFFA9713B))
-                        .padding(top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() + 16.dp, start = 16.dp, end = 16.dp, bottom = 24.dp)
+                        .padding(top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() + 55.dp, start = 16.dp, end = 16.dp, bottom = 24.dp)
                 ) {
                     Text("Online kuchárka", fontSize = 28.sp, fontWeight = FontWeight.Bold, color = Color.White)
                 }

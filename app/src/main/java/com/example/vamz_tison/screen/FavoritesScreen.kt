@@ -64,7 +64,7 @@ fun FavoritesScreen(viewModel: FavoritesViewModel = viewModel()) {
                     )
                     .padding(
                         top = WindowInsets.statusBars.asPaddingValues()
-                            .calculateTopPadding() + 16.dp,
+                            .calculateTopPadding() + 55.dp,
                         start = 16.dp,
                         end = 16.dp,
                         bottom = 24.dp

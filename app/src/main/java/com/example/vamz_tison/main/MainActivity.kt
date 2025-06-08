@@ -15,6 +15,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.example.vamz_tison.ui.theme.VAMZ_TisonTheme
 import com.example.vamz_tison.components.BottomMenuBar
 import com.example.vamz_tison.database.AppDatabase
@@ -34,8 +37,14 @@ import com.example.vamz_tison.viewmodel.ShoppingListViewModel
  **/
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            hide(WindowInsetsCompat.Type.statusBars())   //skryje len vrchný panel
+            systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            // používateľ ho vie dočasne stiahnuť gestom
+        }
 
+        super.onCreate(savedInstanceState)
         val db = AppDatabase.getInstance(applicationContext)
         DatabaseInitializer.initFoodTypes(applicationContext, db)
         val repository = AppRepository(db)

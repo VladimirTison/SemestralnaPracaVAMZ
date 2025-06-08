@@ -77,7 +77,7 @@ fun ShoppingListsScreen(
                         shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp)
                     )
                     .padding(
-                        top = 16.dp,
+                        top = 55.dp,
                         start = 16.dp,
                         end = 16.dp,
                         bottom = 24.dp
