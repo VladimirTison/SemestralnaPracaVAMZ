@@ -203,7 +203,7 @@
     <string name="stvrtejedlopopis7">Varíme, kým sa voda takmer neodparí. Potom hrniec prikryjeme a vložíme do predhriatej rúry na 180 °C na 12 minút.</string>
     <string name="stvrtejedlopopis8">Podávame glazované kura s ryžou, posypané nasekanou jarnou cibuľkou a sezamom.</string>
 
-    <!-- ▸ 5. Kuracie plátky v marináde -->
+    <!-- ▸ 5. Kuracie plátky v marináde -->
     <string name="piatejedloingredience1">kuracie prsia</string>
     <string name="piatejedloingredience2">vajce</string>
     <string name="piatejedloingredience3">korenie karí</string>
@@ -221,9 +221,9 @@
     <string name="piatejedlojednotka7">PL</string>
 
     <string name="piatejedlopopis1">Všetky prísady na marinádu dáme do misky a prešľaháme.</string>
-    <string name="piatejedlopopis2">Do tejto marinády vložíme plátky mäsa a necháme marinovať 2–3 hodiny.</string>
-    <string name="piatejedlopopis3">Potom ich na oleji na panvici opekáme z oboch strán asi po 3 minúty. Dlhšie netreba.</string>
-    <string name="piatejedlopopis4">Podávame s ryžou (môžeme preliať trochou výpeku) a zeleninovým šalátom.</string>
+    <string name="piatejedlopopis2">Do tejto marinády vložíme plátky mäsa a necháme marinovať 2–3 hodiny.</string>
+    <string name="piatejedlopopis3">Potom ich na oleji na panvici opekáme z oboch strán asi po 3 minúty. Dlhšie netreba.</string>
+    <string name="piatejedlopopis4">Podávame s ryžou (môžeme preliať trochou výpeku) a zeleninovým šalátom.</string>
 
     <!-- ▸ 6. Pečené bataty plnené fazuľou -->
     <string name="siestejedloingredience1">bataty</string>
@@ -252,8 +252,8 @@
     <string name="siestejedlojednotka11">čl</string>
     <string name="siestejedlojednotka12">čl</string>
 
-    <string name="siestejedlopopis1">Umyté bataty položíme na plech, pokvapkáme 1 PL oleja a osolíme. Pečieme pri 220 °C ≈ 40 minút do mäkka.</string>
-    <string name="siestejedlopopis2">Medzitým orestujeme cibuľu a cesnak na zvyšnom oleji, pridáme paradajky a prepláchnutú fazuľu. Osolíme, okoreníme a varíme do zhustnutia.</string>
+    <string name="siestejedlopopis1">Umyté bataty položíme na plech, pokvapkáme 1 PL oleja a osolíme. Pečieme pri 220 °C ≈ 40 minút do mäkka.</string>
+    <string name="siestejedlopopis2">Medzitým orestujeme cibuľu a cesnak na zvyšnom oleji, pridáme paradajky a prepláchnutú fazuľu. Osolíme, okoreníme a varíme do zhustnutia.</string>
     <string name="siestejedlopopis3">Bataty rozkrojíme, naplníme fazuľovou zmesou, pridáme kyslú smotanu, špenát, petržlenovú vňať a kolieska jalapena.</string>
 
     <!-- ▸ 7. Pasta alla Norma -->
@@ -357,139 +357,139 @@
     <string name="deviatejedlopopis3">Bagetu opečieme, podávame s pečeňou, čatní a poľníčkom.</string>
 
 
-        <!-- ▸ 10. Zapekané figy s medom (foodId9 = 10) -->
-        <string name="desiatejedloingredience1">figy čerstvé</string>
-        <string name="desiatejedloingredience2">syr kozí (Lučina)</string>
-        <string name="desiatejedloingredience3">med</string>
-        <string name="desiatejedloingredience4">pistácie</string>
-        <string name="desiatejedloingredience5">soľ</string>
-        <string name="desiatejedloingredience6">korenie čierne mleté</string>
+    <!-- ▸ 10. Zapekané figy s medom (foodId9 = 10) -->
+    <string name="desiatejedloingredience1">figy čerstvé</string>
+    <string name="desiatejedloingredience2">syr kozí (Lučina)</string>
+    <string name="desiatejedloingredience3">med</string>
+    <string name="desiatejedloingredience4">pistácie</string>
+    <string name="desiatejedloingredience5">soľ</string>
+    <string name="desiatejedloingredience6">korenie čierne mleté</string>
 
-        <string name="desiatejedlopopis1">Čerstvé figy umyjeme, osušíme a narežeme do kríža alebo prerežeme po dĺžke na polovicu. Uložíme ich na plech vystlaný papierom na pečenie.</string>
-        <string name="desiatejedlopopis2">Do každej figy vložíme trošku kozieho syra, posypeme nasekanými pistáciami, pokvapkáme medom a zľahka ochutíme soľou a čiernym korením.</string>
-        <string name="desiatejedlopopis3">V rúre s funkciou gril zapekáme na najvyššom stupni približne 5 – 8 minút.</string>
-        <string name="desiatejedlopopis4">Podávame s nasucho opečeným domácim kváskovým chlebom.</string>
-
-
-
-        <!-- ▸ 11. Výborný tvarožník (foodId10 = 11) -->
-        <string name="jedenastejedloingredience1">tvaroh tučný hrudkovitý</string>
-        <string name="jedenastejedloingredience2">vajcia</string>
-        <string name="jedenastejedloingredience3">cukor kryštálový jemný</string>
-        <string name="jedenastejedloingredience4">cukor vanilkový</string>
-        <string name="jedenastejedloingredience5">krupica detská</string>
-        <string name="jedenastejedloingredience6">kôra citrónová nastrúhaná</string>
-        <string name="jedenastejedloingredience7">soľ</string>
-        <string name="jedenastejedloingredience8">smotana kyslá 16 %</string>
-        <string name="jedenastejedloingredience9">hrozienka</string>
-        <string name="jedenastejedloingredience10">cukor práškový</string>
-
-        <string name="jedenastejedlopopis1">Hrozienka zalejeme vriacou vodou a necháme 5 – 10 minút napučať.</string>
-        <string name="jedenastejedlopopis2">Oddelíme žĺtky od bielkov a z bielkov vyšľaháme tuhý sneh so štipkou soli.</string>
-        <string name="jedenastejedlopopis3">V miske vymiešame tvaroh, žĺtky, soľ, cukry, krupicu, smotanu a citrónovú kôru.</string>
-        <string name="jedenastejedlopopis4">Primiešame hrozienka a opatrne aj sneh z bielkov.</string>
-        <string name="jedenastejedlopopis5">Cesto rozotrieme do formy 21 × 21 cm vystlanej papierom na pečenie.</string>
-        <string name="jedenastejedlopopis6">Pečieme pri 175 – 180 °C približne 35 minút.</string>
-        <string name="jedenastejedlopopis7">Po vychladnutí posypeme práškovým cukrom a podávame.</string>
+    <string name="desiatejedlopopis1">Čerstvé figy umyjeme, osušíme a narežeme do kríža alebo prerežeme po dĺžke na polovicu. Uložíme ich na plech vystlaný papierom na pečenie.</string>
+    <string name="desiatejedlopopis2">Do každej figy vložíme trošku kozieho syra, posypeme nasekanými pistáciami, pokvapkáme medom a zľahka ochutíme soľou a čiernym korením.</string>
+    <string name="desiatejedlopopis3">V rúre s funkciou gril zapekáme na najvyššom stupni približne 5 – 8 minút.</string>
+    <string name="desiatejedlopopis4">Podávame s nasucho opečeným domácim kváskovým chlebom.</string>
 
 
 
-        <!-- ▸ 12. Citrónovo‑makové makrónky (foodId11 = 12) -->
-        <string name="dvanastejedloingredience1">mandľová múka</string>
-        <string name="dvanastejedloingredience2">mak mletý</string>
-        <string name="dvanastejedloingredience3">cukor práškový</string>
-        <string name="dvanastejedloingredience4">cukor kryštálový</string>
-        <string name="dvanastejedloingredience5">voda</string>
-        <string name="dvanastejedloingredience6">bielky</string>
-        <string name="dvanastejedloingredience7">soľ</string>
-        <string name="dvanastejedloingredience8">mascarpone</string>
-        <string name="dvanastejedloingredience9">čokoláda biela</string>
-        <string name="dvanastejedloingredience10">lemon curd</string>
-        <string name="dvanastejedloingredience11">žĺtky</string>
-        <string name="dvanastejedloingredience12">cukor krupicový</string>
-        <string name="dvanastejedloingredience13">šťava citrónová</string>
-        <string name="dvanastejedloingredience14">maslo</string>
-        <string name="dvanastejedloingredience15">kôra citrónová</string>
+    <!-- ▸ 11. Výborný tvarožník (foodId10 = 11) -->
+    <string name="jedenastejedloingredience1">tvaroh tučný hrudkovitý</string>
+    <string name="jedenastejedloingredience2">vajcia</string>
+    <string name="jedenastejedloingredience3">cukor kryštálový jemný</string>
+    <string name="jedenastejedloingredience4">cukor vanilkový</string>
+    <string name="jedenastejedloingredience5">krupica detská</string>
+    <string name="jedenastejedloingredience6">kôra citrónová nastrúhaná</string>
+    <string name="jedenastejedloingredience7">soľ</string>
+    <string name="jedenastejedloingredience8">smotana kyslá 16 %</string>
+    <string name="jedenastejedloingredience9">hrozienka</string>
+    <string name="jedenastejedloingredience10">cukor práškový</string>
 
-        <string name="dvanastejedlopopis1">Pripravíme lemon curd: všetky suroviny nad parou šľaháme do zhustnutia.</string>
-        <string name="dvanastejedlopopis2">Mandľovú múku, práškový cukor a mak preosejeme, vmiešame 35 g bielka.</string>
-        <string name="dvanastejedlopopis3">Kryštálový cukor varíme s vodou na 116 °C.</string>
-        <string name="dvanastejedlopopis4">Druhý bielok so štipkou soli vyšľaháme na penu a zašľaháme horúci sirup.</string>
-        <string name="dvanastejedlopopis5">Sneh na trikrát vmiešame do mandľovej pasty (macaronage).</string>
-        <string name="dvanastejedlopopis6">Cesto naplníme do vrecka a nastriekame na podložku.</string>
-        <string name="dvanastejedlopopis7">Pečieme pri 140 °C (ventilátor) ~ 18 minút.</string>
-        <string name="dvanastejedlopopis8">Plnka: roztopíme bielu čokoládu, vychladenú vyšľaháme s mascarpone.</string>
-        <string name="dvanastejedlopopis9">Primiešame lemon curd, necháme krém stuhnúť a naplníme makrónky.</string>
-        <string name="dvanastejedlopopis10">Ozdobíme bielou čokoládou, lyofilizovanými malinami a makom.</string>
+    <string name="jedenastejedlopopis1">Hrozienka zalejeme vriacou vodou a necháme 5 – 10 minút napučať.</string>
+    <string name="jedenastejedlopopis2">Oddelíme žĺtky od bielkov a z bielkov vyšľaháme tuhý sneh so štipkou soli.</string>
+    <string name="jedenastejedlopopis3">V miske vymiešame tvaroh, žĺtky, soľ, cukry, krupicu, smotanu a citrónovú kôru.</string>
+    <string name="jedenastejedlopopis4">Primiešame hrozienka a opatrne aj sneh z bielkov.</string>
+    <string name="jedenastejedlopopis5">Cesto rozotrieme do formy 21 × 21 cm vystlanej papierom na pečenie.</string>
+    <string name="jedenastejedlopopis6">Pečieme pri 175 – 180 °C približne 35 minút.</string>
+    <string name="jedenastejedlopopis7">Po vychladnutí posypeme práškovým cukrom a podávame.</string>
 
 
 
-        <!-- ▸ 13. Mrkvový koláč bez lepku (foodId12 = 13) -->
-        <string name="trinastejedloingredience1">múka bezgluténová Promix PK</string>
-        <string name="trinastejedloingredience2">vajcia</string>
-        <string name="trinastejedloingredience3">orechy vlašské</string>
-        <string name="trinastejedloingredience4">jogurt grécky biely</string>
-        <string name="trinastejedloingredience5">pyré jablkové</string>
-        <string name="trinastejedloingredience6">mrkva</string>
-        <string name="trinastejedloingredience7">cukor trstinový</string>
-        <string name="trinastejedloingredience8">škorica mletá</string>
-        <string name="trinastejedloingredience9">prášok kypriaci bez lepku</string>
-        <string name="trinastejedloingredience10">smotana kyslá</string>
-        <string name="trinastejedloingredience11">med</string>
-        <string name="trinastejedloingredience12">kôra pomarančová</string>
-        <string name="trinastejedloingredience13">mäta</string>
+    <!-- ▸ 12. Citrónovo‑makové makrónky (foodId11 = 12) -->
+    <string name="dvanastejedloingredience1">mandľová múka</string>
+    <string name="dvanastejedloingredience2">mak mletý</string>
+    <string name="dvanastejedloingredience3">cukor práškový</string>
+    <string name="dvanastejedloingredience4">cukor kryštálový</string>
+    <string name="dvanastejedloingredience5">voda</string>
+    <string name="dvanastejedloingredience6">bielky</string>
+    <string name="dvanastejedloingredience7">soľ</string>
+    <string name="dvanastejedloingredience8">mascarpone</string>
+    <string name="dvanastejedloingredience9">čokoláda biela</string>
+    <string name="dvanastejedloingredience10">lemon curd</string>
+    <string name="dvanastejedloingredience11">žĺtky</string>
+    <string name="dvanastejedloingredience12">cukor krupicový</string>
+    <string name="dvanastejedloingredience13">šťava citrónová</string>
+    <string name="dvanastejedloingredience14">maslo</string>
+    <string name="dvanastejedloingredience15">kôra citrónová</string>
 
-        <string name="trinastejedlopopis1">Vajcia s trstinovým cukrom vyšľaháme do peny, pridáme jogurt a pyré.</string>
-        <string name="trinastejedlopopis2">Vmiešame postrúhanú mrkvu a nasekané orechy.</string>
-        <string name="trinastejedlopopis3">Zapracujeme múku so škoricou a kypriacim práškom.</string>
-        <string name="trinastejedlopopis4">Cesto vylejeme na plech 25 × 30 cm s papierom na pečenie.</string>
-        <string name="trinastejedlopopis5">Pečieme pri 180 °C ~ 25 – 30 minút.</string>
-        <string name="trinastejedlopopis6">Po vychladnutí potrieme kyslou smotanou s medom.</string>
-        <string name="trinastejedlopopis7">Koláč necháme v chladničke stuhnúť.</string>
-        <string name="trinastejedlopopis8">Pred podávaním posypeme orechmi, pomarančovou kôrou a ozdobíme mätou.</string>
-
-
-
-        <!-- ▸ 14. Orechovo‑vanilkové rezy (foodId13 = 14) -->
-        <string name="strnastejedloingredience1">vajce</string>
-        <string name="strnastejedloingredience2">cukor kryštálový</string>
-        <string name="strnastejedloingredience3">cukor vanilkový</string>
-        <string name="strnastejedloingredience4">olej</string>
-        <string name="strnastejedloingredience5">voda</string>
-        <string name="strnastejedloingredience6">múka polohrubá</string>
-        <string name="strnastejedloingredience7">prášok do pečiva</string>
-        <string name="strnastejedloingredience8">orechy mleté</string>
-        <string name="strnastejedloingredience9">mlieko</string>
-        <string name="strnastejedloingredience10">Zlatý klas</string>
-        <string name="strnastejedloingredience11">maslo</string>
-        <string name="strnastejedloingredience12">likér vaječný</string>
-        <string name="strnastejedloingredience13">džem čučoriedkový</string>
-        <string name="strnastejedloingredience14">čokoláda</string>
-        <string name="strnastejedloingredience15">Cera</string>
-        <string name="strnastejedloingredience16">orechy na ozdobu</string>
-
-        <string name="strnastejedlopopis1">Upečieme dva vanilkové piškótové pláty podľa receptu.</string>
-        <string name="strnastejedlopopis2">Upečieme orechový plát rovnakým postupom.</string>
-        <string name="strnastejedlopopis3">Uvaríme puding z mlieka a Zlatého klasu, vychladíme a zašľaháme maslo a likér.</string>
-        <string name="strnastejedlopopis4">Skladáme: vanilkový plát → krém → orechový plát natretý džemom → krém → vanilkový plát.</string>
-        <string name="strnastejedlopopis5">Vrch potrieme tenkou vrstvou krému, zalejeme čokoládovou polevou (čokoláda + Cera).</string>
-        <string name="strnastejedlopopis6">Po stuhnutí krájame horúcim nožom a zdobíme orechmi.</string>
+    <string name="dvanastejedlopopis1">Pripravíme lemon curd: všetky suroviny nad parou šľaháme do zhustnutia.</string>
+    <string name="dvanastejedlopopis2">Mandľovú múku, práškový cukor a mak preosejeme, vmiešame 35 g bielka.</string>
+    <string name="dvanastejedlopopis3">Kryštálový cukor varíme s vodou na 116 °C.</string>
+    <string name="dvanastejedlopopis4">Druhý bielok so štipkou soli vyšľaháme na penu a zašľaháme horúci sirup.</string>
+    <string name="dvanastejedlopopis5">Sneh na trikrát vmiešame do mandľovej pasty (macaronage).</string>
+    <string name="dvanastejedlopopis6">Cesto naplníme do vrecka a nastriekame na podložku.</string>
+    <string name="dvanastejedlopopis7">Pečieme pri 140 °C (ventilátor) ~ 18 minút.</string>
+    <string name="dvanastejedlopopis8">Plnka: roztopíme bielu čokoládu, vychladenú vyšľaháme s mascarpone.</string>
+    <string name="dvanastejedlopopis9">Primiešame lemon curd, necháme krém stuhnúť a naplníme makrónky.</string>
+    <string name="dvanastejedlopopis10">Ozdobíme bielou čokoládou, lyofilizovanými malinami a makom.</string>
 
 
 
-        <!-- ▸ 15. Zemiaky pečené s tekvicou (foodId14 = 15) -->
-        <string name="patnastejedloingredience1">zemiaky</string>
-        <string name="patnastejedloingredience2">tekvica hokkaido</string>
-        <string name="patnastejedloingredience3">soľ</string>
-        <string name="patnastejedloingredience4">paprika červená mletá</string>
-        <string name="patnastejedloingredience5">korenie čierne mleté</string>
-        <string name="patnastejedloingredience6">korenie na pečené zemiaky</string>
-        <string name="patnastejedloingredience7">vňať petržlenová</string>
-        <string name="patnastejedloingredience8">olej</string>
+    <!-- ▸ 13. Mrkvový koláč bez lepku (foodId12 = 13) -->
+    <string name="trinastejedloingredience1">múka bezgluténová Promix PK</string>
+    <string name="trinastejedloingredience2">vajcia</string>
+    <string name="trinastejedloingredience3">orechy vlašské</string>
+    <string name="trinastejedloingredience4">jogurt grécky biely</string>
+    <string name="trinastejedloingredience5">pyré jablkové</string>
+    <string name="trinastejedloingredience6">mrkva</string>
+    <string name="trinastejedloingredience7">cukor trstinový</string>
+    <string name="trinastejedloingredience8">škorica mletá</string>
+    <string name="trinastejedloingredience9">prášok kypriaci bez lepku</string>
+    <string name="trinastejedloingredience10">smotana kyslá</string>
+    <string name="trinastejedloingredience11">med</string>
+    <string name="trinastejedloingredience12">kôra pomarančová</string>
+    <string name="trinastejedloingredience13">mäta</string>
 
-        <string name="patnastejedlopopis1">Predvarené zemiaky nakrájame na šestiny, tekvicu na väčšie kúsky a uložíme na plech.</string>
-        <string name="patnastejedlopopis2">Pokvapkáme olejom, osolíme, okoreníme a pridáme petržlenovú vňať.</string>
-        <string name="patnastejedlopopis3">Pečieme pri 180 °C približne 40 minút do zlatista.</string>
+    <string name="trinastejedlopopis1">Vajcia s trstinovým cukrom vyšľaháme do peny, pridáme jogurt a pyré.</string>
+    <string name="trinastejedlopopis2">Vmiešame postrúhanú mrkvu a nasekané orechy.</string>
+    <string name="trinastejedlopopis3">Zapracujeme múku so škoricou a kypriacim práškom.</string>
+    <string name="trinastejedlopopis4">Cesto vylejeme na plech 25 × 30 cm s papierom na pečenie.</string>
+    <string name="trinastejedlopopis5">Pečieme pri 180 °C ~ 25 – 30 minút.</string>
+    <string name="trinastejedlopopis6">Po vychladnutí potrieme kyslou smotanou s medom.</string>
+    <string name="trinastejedlopopis7">Koláč necháme v chladničke stuhnúť.</string>
+    <string name="trinastejedlopopis8">Pred podávaním posypeme orechmi, pomarančovou kôrou a ozdobíme mätou.</string>
+
+
+
+    <!-- ▸ 14. Orechovo‑vanilkové rezy (foodId13 = 14) -->
+    <string name="strnastejedloingredience1">vajce</string>
+    <string name="strnastejedloingredience2">cukor kryštálový</string>
+    <string name="strnastejedloingredience3">cukor vanilkový</string>
+    <string name="strnastejedloingredience4">olej</string>
+    <string name="strnastejedloingredience5">voda</string>
+    <string name="strnastejedloingredience6">múka polohrubá</string>
+    <string name="strnastejedloingredience7">prášok do pečiva</string>
+    <string name="strnastejedloingredience8">orechy mleté</string>
+    <string name="strnastejedloingredience9">mlieko</string>
+    <string name="strnastejedloingredience10">Zlatý klas</string>
+    <string name="strnastejedloingredience11">maslo</string>
+    <string name="strnastejedloingredience12">likér vaječný</string>
+    <string name="strnastejedloingredience13">džem čučoriedkový</string>
+    <string name="strnastejedloingredience14">čokoláda</string>
+    <string name="strnastejedloingredience15">Cera</string>
+    <string name="strnastejedloingredience16">orechy na ozdobu</string>
+
+    <string name="strnastejedlopopis1">Upečieme dva vanilkové piškótové pláty podľa receptu.</string>
+    <string name="strnastejedlopopis2">Upečieme orechový plát rovnakým postupom.</string>
+    <string name="strnastejedlopopis3">Uvaríme puding z mlieka a Zlatého klasu, vychladíme a zašľaháme maslo a likér.</string>
+    <string name="strnastejedlopopis4">Skladáme: vanilkový plát → krém → orechový plát natretý džemom → krém → vanilkový plát.</string>
+    <string name="strnastejedlopopis5">Vrch potrieme tenkou vrstvou krému, zalejeme čokoládovou polevou (čokoláda + Cera).</string>
+    <string name="strnastejedlopopis6">Po stuhnutí krájame horúcim nožom a zdobíme orechmi.</string>
+
+
+
+    <!-- ▸ 15. Zemiaky pečené s tekvicou (foodId14 = 15) -->
+    <string name="patnastejedloingredience1">zemiaky</string>
+    <string name="patnastejedloingredience2">tekvica hokkaido</string>
+    <string name="patnastejedloingredience3">soľ</string>
+    <string name="patnastejedloingredience4">paprika červená mletá</string>
+    <string name="patnastejedloingredience5">korenie čierne mleté</string>
+    <string name="patnastejedloingredience6">korenie na pečené zemiaky</string>
+    <string name="patnastejedloingredience7">vňať petržlenová</string>
+    <string name="patnastejedloingredience8">olej</string>
+
+    <string name="patnastejedlopopis1">Predvarené zemiaky nakrájame na šestiny, tekvicu na väčšie kúsky a uložíme na plech.</string>
+    <string name="patnastejedlopopis2">Pokvapkáme olejom, osolíme, okoreníme a pridáme petržlenovú vňať.</string>
+    <string name="patnastejedlopopis3">Pečieme pri 180 °C približne 40 minút do zlatista.</string>
 
 
     <!-- ▸ 10. Zapekané figy -->
@@ -698,25 +698,25 @@
     <string name="dvadsatejedlopopis9">Necháme vychladnúť, nakrájame na štvorce.</string>
 
 
-        <!-- ▸ 16. Pór s hrozienkami -->
-        <string name="sestnastejedlonazov">Pór s hrozienkami ako príloha</string>
-        <string name="sestnastejedlopopis">Sladko‑slaný pór s cesnakom a hrozienkami.</string>
+    <!-- ▸ 16. Pór s hrozienkami -->
+    <string name="sestnastejedlonazov">Pór s hrozienkami ako príloha</string>
+    <string name="sestnastejedlopopis">Sladko‑slaný pór s cesnakom a hrozienkami.</string>
 
-        <!-- ▸ 17. Zemiaky s kyslými uhorkami -->
-        <string name="sedemnastejedlonazov">Zemiaky s kyslými uhorkami</string>
-        <string name="sedemnastejedlopopis">Teplá príloha zo zemiakov, cibule a nakladaných uhoriek.</string>
+    <!-- ▸ 17. Zemiaky s kyslými uhorkami -->
+    <string name="sedemnastejedlonazov">Zemiaky s kyslými uhorkami</string>
+    <string name="sedemnastejedlopopis">Teplá príloha zo zemiakov, cibule a nakladaných uhoriek.</string>
 
-        <!-- ▸ 18. Omáčka Mojo Rocho -->
-        <string name="osemnastejedlonazov">Omáčka Mojo Rocho</string>
-        <string name="osemnastejedlopopis">Pikantná kanárska červená omáčka k zemiakom, mäsu či rybám.</string>
+    <!-- ▸ 18. Omáčka Mojo Rocho -->
+    <string name="osemnastejedlonazov">Omáčka Mojo Rocho</string>
+    <string name="osemnastejedlopopis">Pikantná kanárska červená omáčka k zemiakom, mäsu či rybám.</string>
 
-        <!-- ▸ 19. Zapekané cestoviny so syrom -->
-        <string name="devatnastejedlonazov">Zapekané cestoviny so syrom a semienkami</string>
-        <string name="devatnastejedlopopis">Chrumkavé cestoviny s tekvicou, čerstvým syrom, čedarom a semienkami.</string>
+    <!-- ▸ 19. Zapekané cestoviny so syrom -->
+    <string name="devatnastejedlonazov">Zapekané cestoviny so syrom a semienkami</string>
+    <string name="devatnastejedlopopis">Chrumkavé cestoviny s tekvicou, čerstvým syrom, čedarom a semienkami.</string>
 
-        <!-- ▸ 20. Čokoládové brownie -->
-        <string name="dvadsatejedlonazov">Čokoládové brownie</string>
-        <string name="dvadsatejedlopopis">Vláčne brownie z 70 % čokolády – hriešne čokoládové.</string>
+    <!-- ▸ 20. Čokoládové brownie -->
+    <string name="dvadsatejedlonazov">Čokoládové brownie</string>
+    <string name="dvadsatejedlopopis">Vláčne brownie z 70 % čokolády – hriešne čokoládové.</string>
     <!-- ▸ 2. Brokolicová polievka s guľôčkami -->
     <string name="druhejjedlonazov">Brokolicová polievka s guľôčkami</string>
     <string name="druhejjedlopopis">Výborná krémová brokolicová polievka, inú už nerobím.</string>
@@ -762,12 +762,12 @@
     <string name="dvanastejedlopopis">Makrónky s jemnou citrónovou plnkou a makovým korpusom, pripravované talianskou metódou.</string>
 
     <!-- ▸ 13. Mrkvový koláč bez lepku -->
-    <string name="trinastejedlonazov">Mrkvový koláč bez lepku so smotanou a orechmi</string>
+    <string name="trinastejedlonazov">Mrkvový koláč bez lepku so smotanou a orechmi</string>
     <string name="trinastejedlopopis">Bezlepkový mrkvový koláč s jogurtom, orechmi a smotanovým krémom.</string>
 
     <!-- ▸ 14. Orechovo‑vanilkové rezy -->
     <string name="strnastejedlonazov">Orechovo‑vanilkové rezy</string>
-    <string name="strnastejedlopopis">Slávnostné rezy z orechových a vanilkových plátov plnené krémom a džemom, zakončené čokoládovou polevou.</string>
+    <string name="strnastejedlopopis">Slávnostné rezy z orechových a vanilkových plátov plnené krémom a džemom, zakončené čokoládovou polevou.</string>
 
 
 
