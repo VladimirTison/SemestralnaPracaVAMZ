@@ -1,24 +1,40 @@
 package com.example.vamz_tison.database
 
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-// TABUĽKA: druhy jedla
+
+/**
+ * Tabuľka reprezentujúca typ jedla.
+ *
+ * @property id Primárny kľúč.
+ * @property name Názov typu jedla.
+ */
 @Entity(tableName = "food_type")
 data class FoodType(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    @NonNull
     @ColumnInfo(name = "type_name")
     val name: String
 )
 
-// TABUĽKA: jedlo
+/**
+ * Tabuľka reprezentujúca recept.
+ *
+ * @property id Primárny kľúč.
+ * @property name Meno jedla.
+ * @property typeId ID typu jedla (cudzí kľúč).
+ * @property cookingTime Čas varenia v minútach.
+ * @property preparingTime Čas prípravy v minútach.
+ * @property portions Počet porcií.
+ * @property calories Kalorická hodnota jedla.
+ * @property description Stručný popis jedla.
+ * @property image Obrázok jedla vo forme bajtového poľa.
+ */
 @Entity(
     tableName = "food",
     foreignKeys = [
@@ -35,102 +51,145 @@ data class Food(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    @NonNull
-    @ColumnInfo(name = "Meno_jedla")
+    @ColumnInfo(name = "meno_jedla")
     val name: String,
 
     @ColumnInfo(name = "type_id")
     val typeId: Int,
 
-    @NonNull
-    @ColumnInfo(name = "Cas_varenia")
+    @ColumnInfo(name = "cas_varenia")
     val cookingTime: Int,
 
-    @NonNull
-    @ColumnInfo(name = "Cas_pripravy")
+    @ColumnInfo(name = "cas_pripravy")
     val preparingTime: Int,
 
-    @NonNull
-    @ColumnInfo(name = "Porcie")
+    @ColumnInfo(name = "porcie")
     val portions: Int,
 
-    @NonNull
-    @ColumnInfo(name = "Kalorie")
+    @ColumnInfo(name = "kalorie")
         val calories: Int,
 
-    @NonNull
-    @ColumnInfo(name = "Jednoduchy_popis")
+    @ColumnInfo(name = "jednoduchy_popis")
     val description: String,
 
-    @ColumnInfo(name = "TileImage", typeAffinity = ColumnInfo.BLOB)
+    @ColumnInfo(name = "tileImage", typeAffinity = ColumnInfo.BLOB)
     val image: ByteArray? = null
-)
+) {
+    //andoid studio si to samo vygenerovalo
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
 
-// TABUĽKA: jedlo–surovina
+        other as Food
+
+        if (id != other.id) return false
+        if (typeId != other.typeId) return false
+        if (cookingTime != other.cookingTime) return false
+        if (preparingTime != other.preparingTime) return false
+        if (portions != other.portions) return false
+        if (calories != other.calories) return false
+        if (name != other.name) return false
+        if (description != other.description) return false
+        if (image != null) {
+            if (other.image == null) return false
+            if (!image.contentEquals(other.image)) return false
+        } else if (other.image != null) return false
+
+        return true
+    }
+    //andoid studio si to samo vygenerovalo
+    override fun hashCode(): Int {
+        var result = id
+        result = 31 * result + typeId
+        result = 31 * result + cookingTime
+        result = 31 * result + preparingTime
+        result = 31 * result + portions
+        result = 31 * result + calories
+        result = 31 * result + name.hashCode()
+        result = 31 * result + description.hashCode()
+        result = 31 * result + (image?.contentHashCode() ?: 0)
+        return result
+    }
+}
+
+/**
+ * Tabuľka reprezentujúca surovinu patriacu k jedlu.
+ *
+ * @property id Primárny kľúč.
+ * @property food ID jedla, ku ktorému surovina patrí.
+ * @property stuff Názov suroviny.
+ * @property quantity Množstvo.
+ * @property unit Jednotka.
+ */
 @Entity(
     tableName = "foodStuff",
     foreignKeys = [
         ForeignKey(
             entity = Food::class,
             parentColumns = ["id"],
-            childColumns = ["Id_jedlo"],
+            childColumns = ["id_jedlo"],
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [Index(value = ["Id_jedlo"])]
+    indices = [Index(value = ["id_jedlo"])]
 )
 data class FoodStuff(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    @NonNull
-    @ColumnInfo(name = "Id_jedlo")
+    @ColumnInfo(name = "id_jedlo")
     val food: Int,
 
-    @NonNull
-    @ColumnInfo(name = "Surovina")
+    @ColumnInfo(name = "surovina")
     val stuff: String,
 
-    @NonNull
-    @ColumnInfo(name = "Mnozstvo")
+    @ColumnInfo(name = "mnozstvo")
     val quantity: Double,
 
-    @NonNull
-    @ColumnInfo(name = "Jednotka")
+    @ColumnInfo(name = "jednotka")
     val unit: String
 )
 
-// TABUĽKA: kroky postupu pre recept (FoodProcess)
+/**
+ * Tabuľka reprezentujúca krok postupu pri varení konkrétneho jedla.
+ *
+ * @property id Primárny kľúč.
+ * @property food ID jedla, ku ktorému krok patrí.
+ * @property description Popis kroku.
+ * @property step Číslo kroku v poradí.
+ */
 @Entity(
     tableName = "process",
     foreignKeys = [
         ForeignKey(
             entity = Food::class,
             parentColumns = ["id"],
-            childColumns = ["Id_jedlo"],
+            childColumns = ["id_jedlo"],
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [Index(value = ["Id_jedlo"])]
+    indices = [Index(value = ["id_jedlo"])]
 )
 data class FoodProcess(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    @NonNull
-    @ColumnInfo(name = "Id_jedlo")
+    @ColumnInfo(name = "id_jedlo")
     val food: Int,
 
-    @NonNull
-    @ColumnInfo(name = "Popis")
+    @ColumnInfo(name = "popis")
     val description: String,
 
-    @NonNull
-    @ColumnInfo(name = "Krok")
+    @ColumnInfo(name = "krok")
     val step: Int
 )
 
-// TABUĽKA: obľúbené jedlo
+/**
+ * Entita reprezentujúca obľúbené jedlá používateľa.
+ *
+ * @property id Primárny kľúč.
+ * @property food ID jedla, ktoré je obľúbené.
+ */
 @Entity(
     tableName = "favoritefood",
     foreignKeys = [
@@ -144,64 +203,112 @@ data class FoodProcess(
     indices = [Index(value = ["jedlo"])]
 )
 data class FavoriteFood(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
 
     @ColumnInfo(name = "jedlo")
     val food: Int
 )
 
 
-
-// TABUĽKA: nákupný zoznam
+/**
+ * Tabuľka reprezentujúca nákupný zoznam.
+ *
+ * @property id Primárny kľúč.
+ * @property name Názov nákupného zoznamu.
+ */
 @Entity(tableName = "list")
 data class ShoppingList(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    @NonNull
-    @ColumnInfo(name = "Meno_zoznamu")
+    @ColumnInfo(name = "meno_zoznamu")
     val name: String
 )
 
-// TABUĽKA: položky v nákupnom zozname
+/**
+ * Tabuľka reprezentujúca položku v nákupnom zozname.
+ *
+ * @property id Primárny kľúč.
+ * @property name Názov položky.
+ * @property list ID nákupného zoznamu (cudzí kľúč).
+ * @property activestate Stav kúpenia (true = kúpené, false = ešte nie).
+ */
 @Entity(
     tableName = "items",
     foreignKeys = [
         ForeignKey(
             entity = ShoppingList::class,
             parentColumns = ["id"],
-            childColumns = ["Id_zoznamu"],
+            childColumns = ["id_zoznamu"],
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [Index(value = ["Id_zoznamu"])]
+    indices = [Index(value = ["id_zoznamu"])]
 )
 data class ListItems(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    @NonNull
-    @ColumnInfo(name = "Meno_polozky")
+    @ColumnInfo(name = "meno_polozky")
     val name: String,
 
-    @NonNull
-    @ColumnInfo(name = "Id_zoznamu")
+    @ColumnInfo(name = "id_zoznamu")
     val list: Int,
 
-    @NonNull
-    @ColumnInfo(name = "Stav")
+    @ColumnInfo(name = "stav")
     val activestate: Boolean
 )
 
+/**
+ * Dátová trieda slúžiaca na štatistiku v nákupnom zozname.
+ *
+ * @property foodId ID jedla.
+ * @property boughtCount Počet kúpených položiek.
+ * @property totalCount Celkový počet položiek pre dané jedlo.
+ */
 data class FoodItemStats(
-    val food_id: Int,
-    val bought_count: Int,
-    val total_count: Int
+    val foodId: Int,
+    val boughtCount: Int,
+    val totalCount: Int
 )
 
+/**
+ * Zjednodušené zobrazenie jedla na UI účely (napr. pre karty receptov).
+ *
+ * @property id ID jedla.
+ * @property image Voliteľný obrázok vo forme bajtového poľa.
+ * @property name Názov jedla.
+ * @property category Kategória jedla.
+ */
 data class FoodView(
     val id: Int,
     val image: ByteArray? = null,
     val name: String,
     val category: String
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as FoodView
+
+        if (id != other.id) return false
+        if (image != null) {
+            if (other.image == null) return false
+            if (!image.contentEquals(other.image)) return false
+        } else if (other.image != null) return false
+        if (name != other.name) return false
+        if (category != other.category) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id
+        result = 31 * result + (image?.contentHashCode() ?: 0)
+        result = 31 * result + name.hashCode()
+        result = 31 * result + category.hashCode()
+        return result
+    }
+}

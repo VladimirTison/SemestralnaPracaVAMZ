@@ -1,36 +1,51 @@
 package com.example.vamz_tison.viewmodel
 
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vamz_tison.database.AppRepository
-import com.example.vamz_tison.database.Food
 import com.example.vamz_tison.database.FoodType
 import com.example.vamz_tison.database.FoodView
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
+/**
+ * Údaje reprezentujúce stav obrazovky so všetkými receptami.
+ *
+ * @property foods Zoznam zobrazených jedál.
+ * @property ingredience Zoznam dostupných ingrediencií na filtrovanie.
+ * @property category Zoznam typov jedál.
+ */
 data class AllRecipiesUiState(
     val foods: List<FoodView> = emptyList(),
     val ingredience: List<String> = emptyList(),
     val category: List<FoodType> = emptyList()
 )
 
+/**
+ * ViewModel pre obrazovku všetkých receptov.
+ * Zodpovedá za načítanie dát a aplikovanie filtrov podľa typu a surovín.
+ *
+ * @property repository pristup k poziadavkam na databazu.
+ */
 class AllRecipiesViewModel(
     val repository: AppRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AllRecipiesUiState())
     val uiState: StateFlow<AllRecipiesUiState> = _uiState.asStateFlow()
-    private val _currentLimit = mutableStateOf(10)
+    private val _currentLimit = mutableIntStateOf(10)
     val currentLimit: State<Int> = _currentLimit
 
-    fun loadFiltredRecepies() {
+    /**
+     * Načíta všetky recepty bez aplikovaných filtrov.
+     * Kombinuje všetky potrebné dáta pre zobrazenie.
+     */
+    private fun loadFiltredRecepies() {
         viewModelScope.launch {
             combine(
                 repository.getAllFoodTypes(),
@@ -48,10 +63,19 @@ class AllRecipiesViewModel(
         }
     }
 
+    /**
+     * Zvýši počet zobrazených receptov.
+     */
     fun loadMore() {
-        _currentLimit.value += 10
+        _currentLimit.intValue += 10
     }
 
+    /**
+     * Aplikuje filter podľa typu receptu a/alebo zoznamu ingrediencií.
+     *
+     * @param selectedTypeId ID vybraného typu jedla (alebo null).
+     * @param selectedIngredients Zoznam vybraných ingrediencií (môže byť prázdny).
+     */
     fun applyFilter(
         selectedTypeId: Int?,
         selectedIngredients: List<String>
@@ -76,7 +100,7 @@ class AllRecipiesViewModel(
                     _uiState.value = uiStateCombined
                 }
             }
-        } else if (selectedTypeId == null && !selectedIngredients.isEmpty()) {
+        } else if (selectedTypeId == null && selectedIngredients.isNotEmpty()) {
             viewModelScope.launch {
                 combine(
                     repository.getAllFoodTypes(),
@@ -92,7 +116,7 @@ class AllRecipiesViewModel(
                     _uiState.value = uiStateCombined
                 }
             }
-        } else if (selectedTypeId != null && !selectedIngredients.isEmpty()) {
+        } else if (selectedTypeId != null && selectedIngredients.isNotEmpty()) {
             viewModelScope.launch {
                 combine(
                     repository.getAllFoodTypes(),
@@ -109,7 +133,6 @@ class AllRecipiesViewModel(
                 }
             }
         }
-
     }
 }
 

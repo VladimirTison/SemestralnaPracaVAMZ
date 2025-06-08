@@ -2,11 +2,19 @@ package com.example.vamz_tison.database
 
 import android.content.Context
 import androidx.room.*
-import androidx.sqlite.db.SupportSQLiteDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.vamz_tison.R
 
+/**
+ * Hlavná Room databáza aplikácie.
+ *
+ * @property foodTypeDao DAO pre typy jedál.
+ * @property foodDao DAO pre jedlá.
+ * @property foodStuffDao DAO pre suroviny.
+ * @property processDao DAO pre kroky postupu.
+ * @property shoppingListDao DAO pre nákupné zoznamy.
+ * @property listItemsDao DAO pre položky v nákupnom zozname.
+ * @property favoriteFoodDao DAO pre obľúbené jedlá.
+ */
 @Database(
     entities = [
         FoodType::class,
@@ -33,18 +41,22 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
-
+        /**
+         * Vráti singleton inštanciu databázy.
+         * Ak ešte neexistuje, vytvorí sa nová.
+         *
+         * @param context Kontext aplikácie.
+         * @return Inštancia databázy.
+         */
         fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
 
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "vamz_tison_db_v2"
+                    context.getString(R.string.databaseName)
                 )
-                    .fallbackToDestructiveMigration()
                     .build()
-
                 instance.openHelper.writableDatabase
                 INSTANCE = instance
                 instance

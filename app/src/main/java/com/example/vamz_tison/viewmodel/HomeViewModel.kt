@@ -11,13 +11,26 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
+/**
+ * Dátová trieda reprezentujúca stav domovskej obrazovky aplikácie.
+ *
+ * @property foods Všetky dostupné recepty.
+ * @property favorites Zoznam obľúbených receptov.
+ * @property category Zoznam typov jedál (kategórií).
+ */
 data class HomeUiState(
     val foods: List<FoodView> = emptyList(),
     val favorites: List<FoodView> = emptyList(),
     val category: List<FoodType> = emptyList()
 )
 
-
+/**
+ * ViewModel pre domovskú obrazovku aplikácie.
+ *
+ * Zabezpečuje načítanie základných údajov ako recepty, obľúbené jedlá a kategórie
+ *
+ * @property repository pristup k poziadavkam na databazu.
+ */
 class HomeViewModel(
     val repository: AppRepository
 ) : ViewModel() {
@@ -25,6 +38,12 @@ class HomeViewModel(
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
+    /**
+     * Načíta údaje potrebné pre domovskú obrazovku:
+     * - všetky recepty
+     * - obľúbené recepty
+     * - kategórie jedál
+     */
         fun loadHomeScreenBackground() {
             viewModelScope.launch {
                 val foods = repository.getAllFoodView().first()
@@ -38,6 +57,5 @@ class HomeViewModel(
                 )
             }
         }
-
     }
 

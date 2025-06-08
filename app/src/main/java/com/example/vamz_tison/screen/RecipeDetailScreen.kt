@@ -34,6 +34,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -186,8 +187,8 @@ fun RecipeImageScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    StatColumn("cookingtime", "${uiState.food?.cookingTime ?: "-"} min")
-                    StatColumn("bake", "${uiState.food?.preparingTime ?: "-"} min")
+                    StatColumn(stringResource(R.string.cookingtime), "${uiState.food?.cookingTime ?: "-"} min")
+                    StatColumn(stringResource(R.string.bake), "${uiState.food?.preparingTime ?: "-"} min")
                     StatColumn("portion", "${uiState.food?.portions ?: "-"} porcií")
                     StatColumn("caloriescalculator", "${uiState.food?.calories ?: "-"} kcal")
                 }

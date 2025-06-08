@@ -109,9 +109,9 @@ fun ShoppingListsScreen(
                     }
                 } else {
                     items(uiState.lists) { list ->
-                        val stats = uiState.liststatus.find { it.food_id == list.id }
-                        val bought = stats?.bought_count ?: 0
-                        val total = stats?.total_count ?: 0
+                        val stats = uiState.liststatus.find { it.foodId == list.id }
+                        val bought = stats?.boughtCount ?: 0
+                        val total = stats?.totalCount ?: 0
                         val progress = if (total > 0) bought.toFloat() / total else 0f
 
                         Card(

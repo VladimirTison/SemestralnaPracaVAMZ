@@ -17,9 +17,9 @@ object DatabaseInitializer {
             try {
                 val existing = db.foodTypeDao().getAll().first()
                 if (existing.isEmpty()) {
-                    db.foodTypeDao().insert(FoodType(name = "Polievka"))
-                    db.foodTypeDao().insert(FoodType(name = "Predjedlo"))
-                    db.foodTypeDao().insert(FoodType(name = "Hlavné jedlo"))
+                    db.foodTypeDao().insert(FoodType(name = context.getString(R.string.polievka)))
+                    db.foodTypeDao().insert(FoodType(name = context.getString(R.string.predjedlo)))
+                    db.foodTypeDao().insert(FoodType(name = context.getString(R.string.hlavn_jedlo)))
                     db.foodTypeDao().insert(FoodType(name = "Dezert"))
                     db.foodTypeDao().insert(FoodType(name = "Príloha"))
                     db.shoppingListDao().insert(ShoppingList(name = "Nákupný zoznam"))

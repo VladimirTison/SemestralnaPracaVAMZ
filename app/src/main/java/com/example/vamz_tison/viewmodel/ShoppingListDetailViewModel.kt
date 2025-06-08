@@ -13,11 +13,26 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
+/**
+ * UI stav pre detail nákupného zoznamu.
+ *
+ * @property shoppinglist Vybraný nákupný zoznam.
+ * @property items Položky priradené k tomuto zoznamu.
+ */
 data class ShoppingListDetailUiState(
     val shoppinglist: ShoppingList? = null,
     val items: List<ListItems> = emptyList()
 )
 
+
+/**
+ * ViewModel pre obrazovku s detailom nákupného zoznamu.
+ *
+ * Zodpovedá za načítanie konkrétneho zoznamu a jeho položiek,
+ * ako aj za manipuláciu s položkami (pridanie, odstránenie, zmena stavu).
+ *
+ * @property repository pristup k poziadavkam na databazu.
+ */
 class ShoppingListDetailViewModel(
     private val repository: AppRepository
 ) : ViewModel() {
@@ -25,6 +40,11 @@ class ShoppingListDetailViewModel(
     private val _uiState = MutableStateFlow(ShoppingListDetailUiState())
     val uiState: StateFlow<ShoppingListDetailUiState> = _uiState.asStateFlow()
 
+    /**
+     * Načíta konkrétny nákupný zoznam a jeho položky na základe ID.
+     *
+     * @param listId ID nákupného zoznamu.
+     */
     fun loadListWithItems(listId: Int) {
         val listFlow = repository.getShoppingListById(listId)
         val itemsFlow = repository.getItemsByListId(listId)
@@ -40,6 +60,12 @@ class ShoppingListDetailViewModel(
             }
         }
     }
+
+    /**
+     * Pridá novú položku do nákupného zoznamu.
+     *
+     * @param item Nová položka typu.
+     */
     fun addItem(item: ListItems) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -50,6 +76,11 @@ class ShoppingListDetailViewModel(
         }
     }
 
+    /**
+     * Odstráni existujúcu položku z nákupného zoznamu.
+     *
+     * @param item Položka, ktorá sa má odstrániť
+     */
     fun removeItem(item: ListItems) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -60,6 +91,12 @@ class ShoppingListDetailViewModel(
         }
     }
 
+    /**
+     * Zmení stav položky (napr. kúpené/nekúpené).
+     *
+     * @param item Položka, ktorej stav sa má aktualizovať.
+     * @param newState Nový stav (true = kúpené, false = nekúpené).
+     */
     fun updateItemState(item: ListItems, newState: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -70,5 +107,4 @@ class ShoppingListDetailViewModel(
             }
         }
     }
-
 }

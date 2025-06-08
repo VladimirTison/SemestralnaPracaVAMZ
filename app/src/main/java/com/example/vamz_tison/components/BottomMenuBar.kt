@@ -3,8 +3,7 @@ package com.example.vamz_tison.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
+import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
@@ -14,16 +13,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.vamz_tison.R
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.ui.graphics.vector.ImageVector
 
+/**
+ * Zobrazí spodnú navigačnú lištu aplikácie s ikonami pre jednotlivé sekcie.
+ *
+ * Obsahuje štyri položky: Domov, Recepty, Košík a Obľúbené.
+ * Aktuálne zvolená sekcia je vizuálne zvýraznená.
+ * @param selected Reťazec označujúci aktuálne vybranú obrazovku.
+ * @param onItemSelected Lambda funkcia volaná pri kliknutí na položku v menu.
+ */
 @Composable
 fun BottomMenuBar(
     selected: String,
     onItemSelected: (String) -> Unit
 ) {
     Column {
-        //vrchna ciara nad menu
-        Divider(
-            color = Color(0xFFE0E0E0), // jemná sivá čiara
+        HorizontalDivider(                                //Horna ciara nad menu, namiesto devider, novsi horizontaldev
+            color = Color(0xFFE0E0E0),
             thickness = 1.dp
         )
 
@@ -42,7 +50,7 @@ fun BottomMenuBar(
                 selected = selected == "explore",
                 onClick = { onItemSelected("explore") },
                 icon = Icons.Default.Search,
-                description = "Objav"
+                description = stringResource(R.string.allrecipes)
             )
             MenuItem(
                 selected = selected == "cart",
@@ -60,14 +68,15 @@ fun BottomMenuBar(
     }
 }
 
+
 @Composable
 private fun RowScope.MenuItem(
-    selected: Boolean,
-    onClick: () -> Unit,
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
-    description: String
+    selected: Boolean,                                          //je položka vybratá
+    onClick: () -> Unit,                                        //čo sa stane po kliku
+    icon: ImageVector,                                          //ikonka položky
+    description: String                                         //popis položky
 ) {
-    val backgroundColor = if (selected) Color(0xFFEAD3B5) else Color.White
+    val backgroundColor = if (selected) Color(0xFFEAD3B5) else Color.White            //v prípade ak zakliknem položku
     val iconTint = if (selected) Color(0xFF5C3B21) else Color(0xFFA46B33)
 
     Box(

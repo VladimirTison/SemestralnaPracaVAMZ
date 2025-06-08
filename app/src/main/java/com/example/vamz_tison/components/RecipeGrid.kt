@@ -10,8 +10,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,16 +21,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.style.TextOverflow
 import android.content.res.Configuration
-import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.runtime.Composable
 
 import com.example.vamz_tison.database.FoodView
 
+/**
+ * Zobrazí mriežku receptov v dynamickej šírke.
+ *
+ * @param foods Zoznam receptov, ktoré sa majú zobraziť.
+ * @param onRecipeClick Lambda funkcia volaná po kliknutí na konkrétny recept.
+ */
 @Composable
 fun RecipeGrid(
     foods: List<FoodView>,
     onRecipeClick: (FoodView) -> Unit
 ) {
-    val columns = if (LocalConfiguration.current.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT) 2 else 3
+    val columns = if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_PORTRAIT) 2 else 3
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(columns),
@@ -51,8 +55,9 @@ fun RecipeGrid(
     }
 }
 
+//Zobrazí kartu receptu s obrázkom, kategóriou a názvom jedla.
 @Composable
-fun RecipeCard(food: FoodView, onClick: () -> Unit) {
+private fun RecipeCard(food: FoodView, onClick: () -> Unit) {
     val orientation = LocalConfiguration.current.orientation
     val maxLines = if (orientation == Configuration.ORIENTATION_PORTRAIT) 3 else 2
     Column(
@@ -63,7 +68,7 @@ fun RecipeCard(food: FoodView, onClick: () -> Unit) {
             .clickable { onClick() }
     ) {
         food.image?.let {
-            val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+            val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)                //prerobí na obrázok
             bitmap?.let { bmp ->
                 Image(
                     bitmap = bmp.asImageBitmap(),

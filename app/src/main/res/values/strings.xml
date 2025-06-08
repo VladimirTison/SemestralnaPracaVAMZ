@@ -5,4 +5,13 @@
     <string name="BottomMenuKosik">Košík</string>
     <string name="BottomMenuOblubene">Obľúbené</string>
     <string name="BottomMenuProfil">Profil</string>
+    <string name="cookingtime">cookingtime</string>
+    <string name="bake">bake</string>
+    <string name="allrecipes">Všetky recepty</string>
+    <string name="footername">Online kuchárka</string>
+    <string name="footer_secondRow">Vladimír Tisoň - semestrálna práca VAMZ</string>
+    <string name="databaseName">vamz_tison_db_v2</string>
+    <string name="polievka">Polievka</string>
+    <string name="predjedlo">Predjedlo</string>
+    <string name="hlavn_jedlo">Hlavné jedlo</string>
 </resources>

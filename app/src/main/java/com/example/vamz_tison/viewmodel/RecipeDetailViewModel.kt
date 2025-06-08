@@ -1,6 +1,5 @@
 package com.example.vamz_tison.viewmodel
 
-import android.graphics.pdf.models.ListItem
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vamz_tison.database.AppRepository
@@ -8,7 +7,6 @@ import com.example.vamz_tison.database.FavoriteFood
 import com.example.vamz_tison.database.Food
 import com.example.vamz_tison.database.FoodProcess
 import com.example.vamz_tison.database.FoodStuff
-import com.example.vamz_tison.database.FoodType
 import com.example.vamz_tison.database.ListItems
 import com.example.vamz_tison.database.ShoppingList
 import kotlinx.coroutines.CoroutineScope
@@ -18,12 +16,18 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * Dátová trieda reprezentujúca stav detailu receptu.
+ *
+ * @property food Konkrétny recept (jedlo).
+ * @property ingredients Zoznam surovín k danému jedlu.
+ * @property process Postup varenia v krokoch.
+ * @property category Názov kategórie jedla.
+ * @property shoppingList Všetky existujúce nákupné zoznamy.
+ */
 data class RecipeDetailUiState(
     val food: Food? = null,
     val ingredients: List<FoodStuff> = emptyList(),
@@ -33,13 +37,28 @@ data class RecipeDetailUiState(
     val shoppingList: List<ShoppingList> = emptyList()
 )
 
-
+/**
+ * ViewModel pre obrazovku s detailom receptu.
+ *
+ * Zabezpečuje získavanie a manipuláciu s detailnými údajmi receptu vrátane
+ * surovín, postupu, obľúbenosti a nákupných zoznamov.
+ *
+ * @property repository pristup k poziadavkam na databazu.
+ */
 class RecipeDetailViewModel(
     private val repository: AppRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(RecipeDetailUiState())
     val uiState: StateFlow<RecipeDetailUiState> = _uiState.asStateFlow()
+
+    /**
+     * Načíta všetky dáta pre detail receptu podľa ID receptu.
+     * Získava jedlo, suroviny, postup, kategóriu a obľúbenosť,
+     * a dodatočne načíta nákupné zoznamy.
+     *
+     * @param id ID receptu
+     */
     fun loadData(id: Int) {
         viewModelScope.launch {
             combine(
@@ -68,8 +87,12 @@ class RecipeDetailViewModel(
         }
     }
 
-
-    fun insertFavorite(foodId: Int) {
+    /**
+     * Vloží recept do obľúbených.
+     *
+     * @param foodId ID receptu, ktorý má byť označený ako obľúbený.
+     */
+    private fun insertFavorite(foodId: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 repository.insertFavoriteFoods(FavoriteFood(food = foodId))
@@ -79,7 +102,12 @@ class RecipeDetailViewModel(
         }
     }
 
-    fun deleteFavorite(foodId: Int) {
+    /**
+     * Odstráni recept z obľúbených.
+     *
+     * @param foodId ID receptu, ktorý má byť odstránený z obľúbených.
+     */
+    private fun deleteFavorite(foodId: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 repository.deleteFavoriteFood(FavoriteFood(food = foodId))
@@ -89,6 +117,11 @@ class RecipeDetailViewModel(
         }
     }
 
+    /**
+     * Prepína obľúbenosť receptu.
+     * Ak je už obľúbený → odstráni ho.
+     * Ak nie je → pridá do obľúbených.
+     */
     fun toggleFavorite() {
         val foodId = _uiState.value.food?.id ?: return
 
@@ -103,6 +136,11 @@ class RecipeDetailViewModel(
         }
     }
 
+    /**
+     * Vloží zoznam položiek do databázy nákupného zoznamu.
+     *
+     * @param items Zoznam položiek (ListItems), ktoré sa majú pridať.
+     */
     fun insertShoppingItems(items: List<ListItems>) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
