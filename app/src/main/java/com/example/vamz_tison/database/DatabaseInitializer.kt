@@ -43,6 +43,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 1,
                             name = context.getString(R.string.talianska_paradajkov_polievka),
                             typeId = 1,
                             cookingTime = 30,
@@ -170,6 +171,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 2,
                             name          = context.getString(R.string.druhejjedlonazov),
                             typeId        = 1,
                             cookingTime   = 30,
@@ -318,6 +320,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 3,
                             name          = context.getString(R.string.tretiejedlonazov),
                             typeId        = 1,
                             cookingTime   = 40,
@@ -343,6 +346,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 4,
                             name          = context.getString(R.string.stvrtejjedlonazov),
                             typeId        = 3,
                             cookingTime   = 30,
@@ -368,6 +372,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 5,
                             name          = context.getString(R.string.piatejedlonazov),
                             typeId        = 3,
                             cookingTime   = 6,
@@ -393,6 +398,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 6,
                             name          = context.getString(R.string.siestejedlonazov),
                             typeId        = 3,
                             cookingTime   = 40,
@@ -418,6 +424,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 7,
                             name          = context.getString(R.string.siedmejedlonazov),
                             typeId        = 3,
                             cookingTime   = 20,
@@ -443,6 +450,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 8,
                             name          = context.getString(R.string.osmejedlonazov),
                             typeId        = 2,
                             cookingTime   = 45,
@@ -468,6 +476,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 9,
                             name          = context.getString(R.string.deviatejedlonazov),
                             typeId        = 2,
                             cookingTime   = 30,
@@ -493,6 +502,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 10,
                             name          = context.getString(R.string.desiatejedlonazov),
                             typeId        = 2,
                             cookingTime   = 8,
@@ -518,6 +528,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 11,
                             name          = context.getString(R.string.jedenastejedlonazov),
                             typeId        = 4,
                             cookingTime   = 35,
@@ -543,6 +554,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 12,
                             name          = context.getString(R.string.dvanastejedlonazov),
                             typeId        = 4,
                             cookingTime   = 18,
@@ -568,6 +580,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 13,
                             name          = context.getString(R.string.trinastejedlonazov),
                             typeId        = 4,
                             cookingTime   = 30,
@@ -593,6 +606,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 14,
                             name          = context.getString(R.string.strnastejedlonazov),
                             typeId        = 4,
                             cookingTime   = 30,
@@ -620,6 +634,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 15,
                             name            = context.getString(R.string.sestnastejedlonazov),
                             typeId          = 5,
                             cookingTime     = 15,
@@ -645,6 +660,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 16,
                             name            = context.getString(R.string.sedemnastejedlonazov),
                             typeId          = 5,
                             cookingTime     = 20,
@@ -670,6 +686,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 17,
                             name            = context.getString(R.string.osemnastejedlonazov),
                             typeId          = 5,
                             cookingTime     = 0,
@@ -695,6 +712,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 18,
                             name            = context.getString(R.string.devatnastejedlonazov),
                             typeId          = 3,
                             cookingTime     = 25,
@@ -720,6 +738,7 @@ object DatabaseInitializer {
 
                     db.foodDao().insert(
                         Food(
+                            id = 19,
                             name            = context.getString(R.string.dvadsatejedlonazov),
                             typeId          = 4,
                             cookingTime     = 30,
@@ -1550,7 +1569,7 @@ val foodId7 = 8
                             description = context.getString(R.string.osmejedlopopis2)
                         )
                     )
-                    val foodId8 = 9
+                    val foodId8 = 8
                     db.processDao().insert(
                         FoodProcess(
                             food = foodId7,
@@ -1669,17 +1688,17 @@ val foodId7 = 8
                             description = context.getString(R.string.deviatejedlopopis3)
                         )
                     )
-                    val foodId9 = 10
-                    val foodId10 = 11
-                    val foodId11 = 12
-                    val foodId12 = 13
-                    val foodId13 = 14
-                    val foodId14 = 15
-                    val foodId15 = 16
-                    val foodId16 = 17
-                    val foodId17 = 18
-                    val foodId18 = 19
-                    val foodId19 = 20
+                    val foodId9 = 9
+                    val foodId10 = 10
+                    val foodId11 = 11
+                    val foodId12 = 12
+                    val foodId13 = 13
+                    val foodId14 = 14
+                    val foodId15 = 15
+                    val foodId16 = 16
+                    val foodId17 = 17
+                    val foodId18 = 18
+                    val foodId19 = 19
                     //9. jedlo
                     /* ----------------------------- 10. Zapekané figy ----------------------------- */
                     db.foodStuffDao().insertFoodStuff(
